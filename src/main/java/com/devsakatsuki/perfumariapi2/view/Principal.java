@@ -28,12 +28,14 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        menuPrincipal = new javax.swing.JMenuBar();
+        menuCliente = new javax.swing.JMenu();
+        menuProduto = new javax.swing.JMenu();
+        menuVendas = new javax.swing.JMenu();
+        menuRelatorios = new javax.swing.JMenu();
+        itemMenuRelAnalitico = new javax.swing.JMenuItem();
+        itemMenuRelSintetico = new javax.swing.JMenuItem();
+        menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Venda");
@@ -49,27 +51,34 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 345, Short.MAX_VALUE)
         );
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente.png"))); // NOI18N
-        jMenu1.setText("Cliente");
-        jMenuBar1.add(jMenu1);
+        menuCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente.png"))); // NOI18N
+        menuCliente.setText("Cliente");
+        menuPrincipal.add(menuCliente);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/produto.png"))); // NOI18N
-        jMenu2.setText("Produto");
-        jMenuBar1.add(jMenu2);
+        menuProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/produto.png"))); // NOI18N
+        menuProduto.setText("Produto");
+        menuPrincipal.add(menuProduto);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrinho.png"))); // NOI18N
-        jMenu3.setText("Vendas");
-        jMenuBar1.add(jMenu3);
+        menuVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrinho.png"))); // NOI18N
+        menuVendas.setText("Vendas");
+        menuPrincipal.add(menuVendas);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/report-icon_16.png"))); // NOI18N
-        jMenu4.setText("Relatórios");
-        jMenuBar1.add(jMenu4);
+        menuRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/report-icon_16.png"))); // NOI18N
+        menuRelatorios.setText("Relatórios");
 
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sair.png"))); // NOI18N
-        jMenu5.setText("Sair");
-        jMenuBar1.add(jMenu5);
+        itemMenuRelAnalitico.setText("Rel. Venda Sintético");
+        menuRelatorios.add(itemMenuRelAnalitico);
 
-        setJMenuBar(jMenuBar1);
+        itemMenuRelSintetico.setText("Rel. Venda Analítico");
+        menuRelatorios.add(itemMenuRelSintetico);
+
+        menuPrincipal.add(menuRelatorios);
+
+        menuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sair.png"))); // NOI18N
+        menuSair.setText("Sair");
+        menuPrincipal.add(menuSair);
+
+        setJMenuBar(menuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,12 +130,14 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem itemMenuRelAnalitico;
+    private javax.swing.JMenuItem itemMenuRelSintetico;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu menuCliente;
+    private javax.swing.JMenuBar menuPrincipal;
+    private javax.swing.JMenu menuProduto;
+    private javax.swing.JMenu menuRelatorios;
+    private javax.swing.JMenu menuSair;
+    private javax.swing.JMenu menuVendas;
     // End of variables declaration//GEN-END:variables
 }
