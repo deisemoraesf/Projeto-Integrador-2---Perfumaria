@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Pedrin
  */
-public class JVendas extends javax.swing.JFrame {
+public class JVendas extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form JVendas
@@ -55,9 +55,9 @@ public class JVendas extends javax.swing.JFrame {
         btnAddicionarProduto = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         mnuOpcoes = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -192,7 +192,7 @@ public class JVendas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rdoCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rdoBoleto, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                .addComponent(rdoBoleto, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                 .addGap(14, 14, 14))
         );
 
@@ -236,9 +236,6 @@ public class JVendas extends javax.swing.JFrame {
 
         jTextField1.setText("Usuário de Cliente");
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
         mnuOpcoes.setText("Opções");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
@@ -249,6 +246,9 @@ public class JVendas extends javax.swing.JFrame {
             }
         });
         mnuOpcoes.add(jMenuItem1);
+
+        jMenu1.setText("File");
+        mnuOpcoes.add(jMenu1);
 
         jMenuBar1.add(mnuOpcoes);
 
@@ -324,7 +324,7 @@ public class JVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JProduto paginaProduto = new JProduto();
+        JProduto2 paginaProduto = new JProduto2();
         paginaProduto.setVisible(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
