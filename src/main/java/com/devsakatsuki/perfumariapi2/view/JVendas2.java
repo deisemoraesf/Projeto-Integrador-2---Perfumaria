@@ -44,6 +44,8 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         btnAddicionarProduto = new javax.swing.JButton();
 
+        setClosable(true);
+
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setText("Cliente:");
 
