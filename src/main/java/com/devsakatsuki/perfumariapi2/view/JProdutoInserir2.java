@@ -1,6 +1,8 @@
 
 package com.devsakatsuki.perfumariapi2.view;
 
+import javax.swing.JOptionPane;
+
 public class JProdutoInserir2 extends javax.swing.JFrame {
 
     /**
@@ -162,7 +164,32 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+    
+    if (ftxtCodigo.getText().equals("")){
+        JOptionPane.showMessageDialog(null,"O campo Código é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }    
+    
+    if (txtNome.getText().equals("")){
+        JOptionPane.showMessageDialog(null,"O campo Nome é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    if (ftxtPreco.getText().equals("")){
+        JOptionPane.showMessageDialog(null,"O campo Preço é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    if (ftxtQuantidade.getText().equals("")){
+        JOptionPane.showMessageDialog(null,"O campo Quantidade é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+
+    
+   
+    
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

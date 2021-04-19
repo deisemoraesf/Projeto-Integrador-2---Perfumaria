@@ -24,41 +24,45 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCPF" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSexo" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblEstadoCivil" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblDataNascimento" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="cmbEstadoCivil" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtEndereco" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtTelefone" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
-                      <Component id="btnEmail" alignment="0" pref="201" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCPF" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSexo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEstadoCivil" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDataNascimento" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="cmbEstadoCivil" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNome" alignment="0" pref="201" max="32767" attributes="0"/>
+                          <Component id="txtEndereco" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTelefone" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="rbtnFeminino" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="rbtnMasculino" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="ftxtCPF" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                              <Component id="ftxtDataNascimento" min="-2" pref="131" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="rbtnFeminino" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="rbtnMasculino" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                      <Component id="btnSalvar" min="-2" pref="77" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="ftxtDataNascimento" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                  <Component id="ftxtCPF" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="67" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,10 +91,15 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblSexo" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
@@ -109,7 +118,10 @@
                   <Component id="ftxtDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="30" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -120,8 +132,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="CPF:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="btnEmail">
     </Component>
     <Component class="javax.swing.JLabel" name="lblEndereco">
       <Properties>
@@ -135,8 +145,12 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbtnMasculino">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Masculino"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnMasculinoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbEstadoCivil">
       <Properties>
@@ -219,6 +233,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTelefone">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCancelar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEmail">
     </Component>
   </SubComponents>
 </Form>

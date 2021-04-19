@@ -1,6 +1,8 @@
 
 package com.devsakatsuki.perfumariapi2.view;
 
+import javax.swing.JOptionPane;
+
 
 public class JClienteInserir2 extends javax.swing.JFrame {
 
@@ -22,7 +24,6 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     private void initComponents() {
 
         lblCPF = new javax.swing.JLabel();
-        btnEmail = new javax.swing.JTextField();
         lblEndereco = new javax.swing.JLabel();
         rbtnFeminino = new javax.swing.JRadioButton();
         rbtnMasculino = new javax.swing.JRadioButton();
@@ -39,6 +40,8 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         txtEndereco = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
+        btnCancelar = new javax.swing.JButton();
+        txtEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
@@ -49,7 +52,13 @@ public class JClienteInserir2 extends javax.swing.JFrame {
 
         rbtnFeminino.setText("Feminino");
 
+        rbtnMasculino.setSelected(true);
         rbtnMasculino.setText("Masculino");
+        rbtnMasculino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnMasculinoActionPerformed(evt);
+            }
+        });
 
         cmbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro(a)", "Casado(a)", "Divorciado(a)", "Viúvo(a)" }));
         cmbEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
@@ -100,40 +109,44 @@ public class JClienteInserir2 extends javax.swing.JFrame {
 
         lblNome.setText("Nome:");
 
+        btnCancelar.setText("Cancelar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNome)
-                    .addComponent(lblCPF)
-                    .addComponent(lblEndereco)
-                    .addComponent(lblTelefone)
-                    .addComponent(lblEmail)
-                    .addComponent(lblSexo)
-                    .addComponent(lblEstadoCivil)
-                    .addComponent(lblDataNascimento))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtNome)
-                        .addComponent(txtEndereco)
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(rbtnFeminino)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbtnMasculino))
-                    .addComponent(ftxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ftxtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNome)
+                            .addComponent(lblCPF)
+                            .addComponent(lblEndereco)
+                            .addComponent(lblTelefone)
+                            .addComponent(lblEmail)
+                            .addComponent(lblSexo)
+                            .addComponent(lblEstadoCivil)
+                            .addComponent(lblDataNascimento))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(txtEndereco)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rbtnFeminino)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbtnMasculino))
+                            .addComponent(ftxtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnCancelar)
+                                .addComponent(ftxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEmail)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(67, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar)
-                .addGap(164, 164, 164))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,9 +169,12 @@ public class JClienteInserir2 extends javax.swing.JFrame {
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEmail)
-                    .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblEmail)
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSexo)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -173,7 +189,9 @@ public class JClienteInserir2 extends javax.swing.JFrame {
                     .addComponent(lblDataNascimento)
                     .addComponent(ftxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnSalvar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnCancelar))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -185,7 +203,24 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbEstadoCivilActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+    if (txtNome.getText().equals("")){
+        JOptionPane.showMessageDialog(null,"O campo Nome é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    if (ftxtCPF.getText().equals("   .   .   -  ")){
+        JOptionPane.showMessageDialog(null,"O campo CPF é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    if (txtEndereco.getText().equals("")){
+        JOptionPane.showMessageDialog(null,"O campo Endereço é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    
+    
+    
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -195,6 +230,10 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     private void ftxtDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtDataNascimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ftxtDataNascimentoActionPerformed
+
+    private void rbtnMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMasculinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnMasculinoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,7 +271,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField btnEmail;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cmbEstadoCivil;
     private javax.swing.JFormattedTextField ftxtCPF;
@@ -247,6 +286,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JRadioButton rbtnFeminino;
     private javax.swing.JRadioButton rbtnMasculino;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtTelefone;
