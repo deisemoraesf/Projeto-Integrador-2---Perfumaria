@@ -28,6 +28,8 @@ public class JProduto2 extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
 
         setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Produtos");
         setPreferredSize(new java.awt.Dimension(670, 500));
 
