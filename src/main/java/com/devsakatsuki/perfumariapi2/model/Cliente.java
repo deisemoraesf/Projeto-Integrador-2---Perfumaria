@@ -18,7 +18,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int id, String nome, float cpf, String endereco, float telefone, String email, String sexo, String estadoCivil, Date dataNascimento) {
+    public Cliente(int id, String nome, float cpf, String endereco, float telefone, String email, String sexo, String estadoCivil) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -27,12 +27,12 @@ public class Cliente {
         this.email = email;
         this.sexo = sexo;
         this.estadoCivil = estadoCivil;
-        this.dataNascimento = dataNascimento;
+        //this.dataNascimento = dataNascimento;
     }
     
     
 
-    public Cliente(String nome, float cpf, String endereco, float telefone, String email, String sexo, String estadoCivil, Date dataNascimento) {
+    public Cliente(String nome, float cpf, String endereco, float telefone, String email, String sexo, String estadoCivil) {
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
@@ -40,7 +40,7 @@ public class Cliente {
         this.email = email;
         this.sexo = sexo;
         this.estadoCivil = estadoCivil;
-        this.dataNascimento = dataNascimento;
+        //this.dataNascimento = dataNascimento;
     }
 
     public int getId() {
