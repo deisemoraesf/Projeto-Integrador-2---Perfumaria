@@ -22,7 +22,7 @@ public class ClienteDAO {
     }
     
     public void inserirCliente(Cliente c) {
-        String sql="insert into (nome, cpf, endereco, telefone, email, sexo, estado_civil) values (?, ?, ?, ?, ?, ?, ?)";
+        String sql="insert into cliente(nome, cpf, endereco, telefone, email, sexo, estado_civil, data_nascimento) values (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps;
         
         try {
@@ -34,7 +34,8 @@ public class ClienteDAO {
             ps.setString(5, c.getEmail());
             ps.setString(6, c.getSexo());
             ps.setString(7, c.getEstadoCivil());
-            //ps.setDate(8, (Date) c.getDataNascimento());
+            ps.setDate(8, new java.sql.Date(c.getDataNascimento().getTime()));
+            ps.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

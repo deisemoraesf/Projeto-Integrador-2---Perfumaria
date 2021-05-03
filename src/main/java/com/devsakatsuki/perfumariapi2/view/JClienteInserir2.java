@@ -4,12 +4,12 @@ package com.devsakatsuki.perfumariapi2.view;
 import com.devsakatsuki.perfumariapi2.dao.ClienteDAO;
 import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
 import com.devsakatsuki.perfumariapi2.model.Cliente;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.awt.Component;
+import java.awt.Window;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 
 public class JClienteInserir2 extends javax.swing.JFrame {
@@ -20,6 +20,13 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     public JClienteInserir2() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        //Para campo Id ficar oculto quando for inserir cliente
+        if(txtId.getText().equals("")){
+            lblId.setVisible(false);
+            txtId.setVisible(false);
+        }
+               
     }
 
     /**
@@ -50,8 +57,8 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         txtTelefone = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         txtEmail = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblId = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
@@ -127,11 +134,11 @@ public class JClienteInserir2 extends javax.swing.JFrame {
 
         btnCancelar.setText("Cancelar");
 
-        jLabel1.setText("Id:");
+        lblId.setText("Id:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtIdActionPerformed(evt);
             }
         });
 
@@ -165,7 +172,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
                                 .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(ftxtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +182,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
                             .addComponent(lblTelefone)
                             .addComponent(lblEstadoCivil)
                             .addComponent(lblSexo)
-                            .addComponent(jLabel1))))
+                            .addComponent(lblId))))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -183,8 +190,8 @@ public class JClienteInserir2 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblId)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
@@ -202,7 +209,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
                     .addComponent(lblTelefone)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -248,6 +255,8 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         return;
     }
     
+    try{
+        
     String nome = txtNome.getText();
     String cpf = ftxtCPF.getText().replace(".", "").replace("-", "");
     float cpf2 = Float.valueOf(cpf);
@@ -261,15 +270,13 @@ public class JClienteInserir2 extends javax.swing.JFrame {
        sexo = rbtnMasculino.getText();
     }
     String estadoCivil = cmbEstadoCivil.getSelectedItem().toString(); 
-    String data = ftxtDataNascimento.getText();
-    /*    try {
-            Date dataNascimento = new SimpleDateFormat("yyyy/MM/dd").parse(data);
-        } catch (ParseException ex) {
-            Logger.getLogger(JClienteInserir2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    Date dataNasc = (Date) dataNascimento;*/
+    String[] data = ftxtDataNascimento.getText().split("/");
+    Calendar calendar = Calendar.getInstance(); 
+    calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1]), Integer.parseInt(data[0]));
+    Date dataNasc = calendar.getTime();
+    System.out.print(dataNasc);
     
-    Cliente cliente = new Cliente(nome, cpf2, endereco, telefone, email, sexo, estadoCivil);
+    Cliente cliente = new Cliente(nome, cpf2, endereco, telefone, email, sexo, estadoCivil, dataNasc);
     
     ConexaoBD conexao = new ConexaoBD();
     ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
@@ -278,6 +285,15 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     
     conexao.fecharConexao();
     
+    JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
+    
+    Component comp = SwingUtilities.getRoot(this);
+   ((Window) comp).dispose();
+         
+    
+    }catch(Exception ex){
+        JOptionPane.showMessageDialog(null,"Erro ao salvar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+    }
        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -293,9 +309,9 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtnMasculinoActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
 
     private void txtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneActionPerformed
         // TODO add your handling code here:
@@ -342,13 +358,12 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbEstadoCivil;
     private javax.swing.JFormattedTextField ftxtCPF;
     private javax.swing.JFormattedTextField ftxtDataNascimento;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblDataNascimento;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblEstadoCivil;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSexo;
     private javax.swing.JLabel lblTelefone;
@@ -356,6 +371,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtnMasculino;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables

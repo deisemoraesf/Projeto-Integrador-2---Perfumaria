@@ -32,7 +32,7 @@ public class Cliente {
     
     
 
-    public Cliente(String nome, float cpf, String endereco, float telefone, String email, String sexo, String estadoCivil) {
+    public Cliente(String nome, float cpf, String endereco, float telefone, String email, String sexo, String estadoCivil, Date dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
@@ -40,7 +40,7 @@ public class Cliente {
         this.email = email;
         this.sexo = sexo;
         this.estadoCivil = estadoCivil;
-        //this.dataNascimento = dataNascimento;
+        this.dataNascimento = dataNascimento;
     }
 
     public int getId() {
