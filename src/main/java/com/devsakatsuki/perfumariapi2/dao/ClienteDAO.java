@@ -120,4 +120,28 @@ public class ClienteDAO {
     
     }
     
+    public void AtualizaCliente(Cliente cli){
+    String sql="update cliente set nome=?,cpf=?,endereco=?,telefone=?,email=?,sexo=?,estado_civil=?,data_nascimento=? WHERE id=?";
+    
+    try{
+    PreparedStatement ps;
+    ps = this.conexao.prepareStatement(sql);
+    
+    ps.setString(1, cli.getNome());
+    ps.setString(2, cli.getCpf());
+    ps.setString(3, cli.getEndereco());
+    ps.setString(4, cli.getTelefone());
+    ps.setString(5, cli.getEmail());
+    ps.setString(6, cli.getSexo());
+    ps.setString(7, cli.getEstadoCivil());
+    ps.setDate(8, new java.sql.Date(cli.getDataNascimento().getTime()));
+    ps.setInt(9, cli.getId());
+    ps.execute();
+    
+    }catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+                                
+    }
 }

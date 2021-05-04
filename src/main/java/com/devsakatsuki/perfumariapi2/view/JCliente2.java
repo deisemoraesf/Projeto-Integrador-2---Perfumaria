@@ -33,7 +33,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTbCliente = new javax.swing.JTable();
         jbtnNovo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbtnEditar = new javax.swing.JButton();
         jbtnExcluir = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
@@ -68,8 +68,13 @@ public class JCliente2 extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar.png"))); // NOI18N
-        jButton2.setText("Editar");
+        jbtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar.png"))); // NOI18N
+        jbtnEditar.setText("Editar");
+        jbtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditarActionPerformed(evt);
+            }
+        });
 
         jbtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lixeira.png"))); // NOI18N
         jbtnExcluir.setText("Excluir");
@@ -109,7 +114,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbtnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtnNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -127,7 +132,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jbtnNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(jbtnEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnExcluir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -177,6 +182,21 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jbtnExcluirActionPerformed
+
+    private void jbtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarActionPerformed
+       ConexaoBD conexao = new ConexaoBD();
+       ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
+        
+        Cliente c = new Cliente();
+        int index = jTbCliente.getSelectedRow();
+        c = cli.getClientes().get(index);
+        
+        JClienteInserir2 jci = new JClienteInserir2(c);
+        jci.setVisible(true);
+
+        
+        
+    }//GEN-LAST:event_jbtnEditarActionPerformed
     
     public void carregaTabela(){
         ConexaoBD conexao = new ConexaoBD();
@@ -184,7 +204,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         
         DefaultTableModel tblClientes = (DefaultTableModel)jTbCliente.getModel();
         
-        tblClientes.removeTableModelListener(jTbCliente);
+        tblClientes.setNumRows(0);
         
         for(Cliente c: cli.getClientes()){
             tblClientes.addRow(new Object []{
@@ -197,13 +217,13 @@ public class JCliente2 extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTbCliente;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbtnEditar;
     private javax.swing.JButton jbtnExcluir;
     private javax.swing.JButton jbtnNovo;
     // End of variables declaration//GEN-END:variables

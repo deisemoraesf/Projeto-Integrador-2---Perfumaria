@@ -28,6 +28,28 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         }
                
     }
+    
+    //Construtor para receber edica
+    public JClienteInserir2(Cliente c) {
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        txtId.setText(String.valueOf(c.getId()));
+        txtNome.setText(c.getNome());
+        ftxtCPF.setText(c.getCpf());
+        txtEndereco.setText(c.getEndereco());
+        ftxtTelefone.setText(c.getTelefone());
+        txtEmail.setText(c.getEmail());
+        if(c.getSexo().equals("Feminino")){
+            rbtnFeminino.setSelected(true);
+        }else{
+            rbtnMasculino.setSelected(true);
+        }
+        cmbEstadoCivil.setSelectedItem(c.getEstadoCivil());
+        ftxtDataNascimento.setText(c.getDataNascimento().toString());
+               
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -280,37 +302,71 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     }
     
     try{
-        
-    String nome = txtNome.getText();
-    String cpf = ftxtCPF.getText().replace(".", "").replace("-", "");
-    String endereco = txtEndereco.getText();
-    String telefone = ftxtTelefone.getText().replace("-","");
-    String email = txtEmail.getText();
-    String sexo = btnGroupSexo.getSelection().getActionCommand();
-    String estadoCivil = cmbEstadoCivil.getSelectedItem().toString(); 
-    String[] data = ftxtDataNascimento.getText().split("/");
-    Calendar calendar = Calendar.getInstance(); 
-    calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1])-1, Integer.parseInt(data[0]));
-    Date dataNasc = calendar.getTime();
-    System.out.print(dataNasc);
-    
-    Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
     
     ConexaoBD conexao = new ConexaoBD();
-    ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
+    ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());    
     
-    cli.inserirCliente(cliente);
-    
-    conexao.fecharConexao();
-    
-    JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
-    
-    Component comp = SwingUtilities.getRoot(this);
-   ((Window) comp).dispose();
-   
-    JCliente2 jCliente = new JCliente2();
-    
-    jCliente.carregaTabela();
+    if(!txtId.getText().isEmpty()){
+        String nome = txtNome.getText();
+        String cpf = ftxtCPF.getText().replace(".", "").replace("-", "");
+        String endereco = txtEndereco.getText();
+        String telefone = ftxtTelefone.getText().replace("-","");
+        String email = txtEmail.getText();
+        String sexo = btnGroupSexo.getSelection().getActionCommand();
+        String estadoCivil = cmbEstadoCivil.getSelectedItem().toString(); 
+        String[] data = ftxtDataNascimento.getText().split("/");
+        Calendar calendar = Calendar.getInstance(); 
+        calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1])-1, Integer.parseInt(data[0]));
+        Date dataNasc = calendar.getTime();
+        System.out.print(dataNasc);
+
+        Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
+
+        cli.AtualizaCliente(cliente);
+
+        conexao.fecharConexao();
+
+        JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
+
+        //Fecha tela de editar/Salvar
+        Component comp = SwingUtilities.getRoot(this);
+       ((Window) comp).dispose();
+
+        //Refresh a List
+        JCliente2 jCliente = new JCliente2();
+        jCliente.carregaTabela();
+            
+    }else{
+        
+        String nome = txtNome.getText();
+        String cpf = ftxtCPF.getText().replace(".", "").replace("-", "");
+        String endereco = txtEndereco.getText();
+        String telefone = ftxtTelefone.getText().replace("-","");
+        String email = txtEmail.getText();
+        String sexo = btnGroupSexo.getSelection().getActionCommand();
+        String estadoCivil = cmbEstadoCivil.getSelectedItem().toString(); 
+        String[] data = ftxtDataNascimento.getText().split("/");
+        Calendar calendar = Calendar.getInstance(); 
+        calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1])-1, Integer.parseInt(data[0]));
+        Date dataNasc = calendar.getTime();
+        System.out.print(dataNasc);
+
+        Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
+
+        cli.inserirCliente(cliente);
+
+        conexao.fecharConexao();
+
+        JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
+
+        Component comp = SwingUtilities.getRoot(this);
+       ((Window) comp).dispose();
+
+        JCliente2 jCliente = new JCliente2();
+
+        jCliente.carregaTabela();
+
+    }
     
     }catch(Exception ex){
         JOptionPane.showMessageDialog(null,"Erro ao salvar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
@@ -349,6 +405,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         Component comp = SwingUtilities.getRoot(this);
         ((Window) comp).dispose();
+        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
