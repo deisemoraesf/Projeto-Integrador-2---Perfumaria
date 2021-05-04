@@ -38,10 +38,11 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupSexo = new javax.swing.ButtonGroup();
         lblCPF = new javax.swing.JLabel();
         lblEndereco = new javax.swing.JLabel();
-        rbtnFeminino = new javax.swing.JRadioButton();
         rbtnMasculino = new javax.swing.JRadioButton();
+        rbtnFeminino = new javax.swing.JRadioButton();
         cmbEstadoCivil = new javax.swing.JComboBox<>();
         ftxtCPF = new javax.swing.JFormattedTextField();
         ftxtDataNascimento = new javax.swing.JFormattedTextField();
@@ -54,11 +55,11 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtEndereco = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
-        txtTelefone = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         txtEmail = new javax.swing.JTextField();
         lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
+        ftxtTelefone = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
@@ -67,13 +68,20 @@ public class JClienteInserir2 extends javax.swing.JFrame {
 
         lblEndereco.setText("Endereço:");
 
-        rbtnFeminino.setText("Feminino");
-
+        btnGroupSexo.add(rbtnMasculino);
         rbtnMasculino.setSelected(true);
         rbtnMasculino.setText("Masculino");
         rbtnMasculino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtnMasculinoActionPerformed(evt);
+            }
+        });
+
+        btnGroupSexo.add(rbtnFeminino);
+        rbtnFeminino.setText("Feminino");
+        rbtnFeminino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnFemininoActionPerformed(evt);
             }
         });
 
@@ -126,19 +134,35 @@ public class JClienteInserir2 extends javax.swing.JFrame {
 
         lblNome.setText("Nome:");
 
-        txtTelefone.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefoneActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
-        btnCancelar.setText("Cancelar");
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
 
         lblId.setText("Id:");
 
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
+            }
+        });
+
+        try {
+            ftxtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftxtTelefoneActionPerformed(evt);
             }
         });
 
@@ -168,11 +192,11 @@ public class JClienteInserir2 extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(rbtnMasculino))
                                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(ftxtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ftxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +207,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
                             .addComponent(lblEstadoCivil)
                             .addComponent(lblSexo)
                             .addComponent(lblId))))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +231,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefone)
-                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ftxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEmail)
@@ -259,24 +283,18 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         
     String nome = txtNome.getText();
     String cpf = ftxtCPF.getText().replace(".", "").replace("-", "");
-    float cpf2 = Float.valueOf(cpf);
     String endereco = txtEndereco.getText();
-    float telefone = Float.valueOf(txtTelefone.getText());
+    String telefone = ftxtTelefone.getText().replace("-","");
     String email = txtEmail.getText();
-    String sexo = "";
-    if(rbtnFeminino.isSelected()){
-       sexo = rbtnFeminino.getText();
-    }else{
-       sexo = rbtnMasculino.getText();
-    }
+    String sexo = btnGroupSexo.getSelection().getActionCommand();
     String estadoCivil = cmbEstadoCivil.getSelectedItem().toString(); 
     String[] data = ftxtDataNascimento.getText().split("/");
     Calendar calendar = Calendar.getInstance(); 
-    calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1]), Integer.parseInt(data[0]));
+    calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1])-1, Integer.parseInt(data[0]));
     Date dataNasc = calendar.getTime();
     System.out.print(dataNasc);
     
-    Cliente cliente = new Cliente(nome, cpf2, endereco, telefone, email, sexo, estadoCivil, dataNasc);
+    Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
     
     ConexaoBD conexao = new ConexaoBD();
     ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
@@ -289,7 +307,10 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     
     Component comp = SwingUtilities.getRoot(this);
    ((Window) comp).dispose();
-         
+   
+    JCliente2 jCliente = new JCliente2();
+    
+    jCliente.carregaTabela();
     
     }catch(Exception ex){
         JOptionPane.showMessageDialog(null,"Erro ao salvar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
@@ -313,9 +334,22 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
 
-    private void txtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneActionPerformed
+    private void rbtnFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnFemininoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefoneActionPerformed
+    }//GEN-LAST:event_rbtnFemininoActionPerformed
+
+    private void ftxtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftxtTelefoneActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        Component comp = SwingUtilities.getRoot(this);
+        ((Window) comp).dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,10 +388,12 @@ public class JClienteInserir2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.ButtonGroup btnGroupSexo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cmbEstadoCivil;
     private javax.swing.JFormattedTextField ftxtCPF;
     private javax.swing.JFormattedTextField ftxtDataNascimento;
+    private javax.swing.JFormattedTextField ftxtTelefone;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblDataNascimento;
     private javax.swing.JLabel lblEmail;
@@ -373,6 +409,5 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

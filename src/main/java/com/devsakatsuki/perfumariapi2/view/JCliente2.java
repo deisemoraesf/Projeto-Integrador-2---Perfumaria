@@ -1,12 +1,22 @@
 
 package com.devsakatsuki.perfumariapi2.view;
 
+import com.devsakatsuki.perfumariapi2.dao.ClienteDAO;
+import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
+import com.devsakatsuki.perfumariapi2.model.Cliente;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 public class JCliente2 extends javax.swing.JInternalFrame {
 
     /** Creates new form JCliente2 */
     public JCliente2() {
         initComponents();
+        
+        carregaTabela();
+        
        
     }
 
@@ -21,10 +31,10 @@ public class JCliente2 extends javax.swing.JInternalFrame {
 
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jTbCliente = new javax.swing.JTable();
+        jbtnNovo = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbtnExcluir = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -40,32 +50,34 @@ public class JCliente2 extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTbCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nome", "CPF", "Telefone"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTbCliente);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_file_16.png"))); // NOI18N
-        jButton1.setText("Novo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_file_16.png"))); // NOI18N
+        jbtnNovo.setText("Novo");
+        jbtnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtnNovoActionPerformed(evt);
             }
         });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar.png"))); // NOI18N
         jButton2.setText("Editar");
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lixeira.png"))); // NOI18N
-        jButton3.setText("Excluir");
+        jbtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lixeira.png"))); // NOI18N
+        jbtnExcluir.setText("Excluir");
+        jbtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnExcluirActionPerformed(evt);
+            }
+        });
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,9 +108,9 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jScrollPane2)
@@ -113,11 +125,11 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addGap(24, 24, 24)
-                .addComponent(jButton1)
+                .addComponent(jbtnNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(jbtnExcluir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -130,10 +142,10 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNovoActionPerformed
         JClienteInserir2 jci = new JClienteInserir2();
         jci.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbtnNovoActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -143,17 +155,57 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
+        // TODO add your handling code here:
+        int escolha = JOptionPane.showConfirmDialog(this, "Deseja excluir cliente?", "Excluir Cliente",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        System.out.print(escolha);
+        
+        if( escolha == 0){
+        Cliente c = new Cliente();
+        
+        ConexaoBD conexao = new ConexaoBD();
+        ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
+        
+        int index = jTbCliente.getSelectedRow();
+        c = cli.getClientes().get(index);
+        
+        cli.deletarCliente(c.getId());
+        
+        carregaTabela();
+       
+        } 
+        
+        
+    }//GEN-LAST:event_jbtnExcluirActionPerformed
+    
+    public void carregaTabela(){
+        ConexaoBD conexao = new ConexaoBD();
+        ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
+        
+        DefaultTableModel tblClientes = (DefaultTableModel)jTbCliente.getModel();
+        
+        tblClientes.removeTableModelListener(jTbCliente);
+        
+        for(Cliente c: cli.getClientes()){
+            tblClientes.addRow(new Object []{
+                c.getId(),
+                c.getNome(),
+                c.getCpf(),
+                c.getTelefone()
+            });
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTbCliente;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbtnExcluir;
+    private javax.swing.JButton jbtnNovo;
     // End of variables declaration//GEN-END:variables
 
     private void setExtendedState(int MAXIMIZED_BOTH) {

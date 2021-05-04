@@ -7,9 +7,9 @@ public class Cliente {
     
     private int id;
     private String nome;
-    private float cpf;
+    private String cpf;
     private String endereco;
-    private float telefone;
+    private String telefone;
     private String email;
     private String sexo;
     private String estadoCivil;
@@ -18,7 +18,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int id, String nome, float cpf, String endereco, float telefone, String email, String sexo, String estadoCivil) {
+    public Cliente(int id, String nome, String cpf, String endereco, String telefone, String email, String sexo, String estadoCivil, Date dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -27,12 +27,11 @@ public class Cliente {
         this.email = email;
         this.sexo = sexo;
         this.estadoCivil = estadoCivil;
-        //this.dataNascimento = dataNascimento;
+        this.dataNascimento = dataNascimento;
     }
     
-    
-
-    public Cliente(String nome, float cpf, String endereco, float telefone, String email, String sexo, String estadoCivil, Date dataNascimento) {
+       
+    public Cliente(String nome, String cpf, String endereco, String telefone, String email, String sexo, String estadoCivil, Date dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
@@ -59,11 +58,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public float getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(float cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -75,11 +74,11 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public float getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(float telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
