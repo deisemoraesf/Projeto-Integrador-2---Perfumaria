@@ -16,8 +16,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         initComponents();
         
         carregaTabela();
-        
-       
+              
     }
 
     /** This method is called from within the constructor to
@@ -193,6 +192,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         
         JClienteInserir2 jci = new JClienteInserir2(c);
         jci.setVisible(true);
+        
 
         
         

@@ -6,6 +6,7 @@ import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
 import com.devsakatsuki.perfumariapi2.model.Cliente;
 import java.awt.Component;
 import java.awt.Window;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -40,13 +41,16 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         txtEndereco.setText(c.getEndereco());
         ftxtTelefone.setText(c.getTelefone());
         txtEmail.setText(c.getEmail());
+        if(c.getSexo() != null){
         if(c.getSexo().equals("Feminino")){
             rbtnFeminino.setSelected(true);
         }else{
             rbtnMasculino.setSelected(true);
         }
+        }
         cmbEstadoCivil.setSelectedItem(c.getEstadoCivil());
-        ftxtDataNascimento.setText(c.getDataNascimento().toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        ftxtDataNascimento.setText(dateFormat.format(c.getDataNascimento()));
                
     }
 
@@ -313,6 +317,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         String telefone = ftxtTelefone.getText().replace("-","");
         String email = txtEmail.getText();
         String sexo = btnGroupSexo.getSelection().getActionCommand();
+        System.out.print(sexo);
         String estadoCivil = cmbEstadoCivil.getSelectedItem().toString(); 
         String[] data = ftxtDataNascimento.getText().split("/");
         Calendar calendar = Calendar.getInstance(); 
