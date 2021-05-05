@@ -4,17 +4,19 @@ package com.devsakatsuki.perfumariapi2.view;
 import com.devsakatsuki.perfumariapi2.dao.ClienteDAO;
 import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
 import com.devsakatsuki.perfumariapi2.model.Cliente;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
 public class JCliente2 extends javax.swing.JInternalFrame {
+    
+    //Variaveis globais
+    ConexaoBD conexao = new ConexaoBD();
+    ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
 
     /** Creates new form JCliente2 */
     public JCliente2() {
         initComponents();
-        
         carregaTabela();
               
     }
@@ -149,6 +151,8 @@ public class JCliente2 extends javax.swing.JInternalFrame {
     private void jbtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNovoActionPerformed
         JClienteInserir2 jci = new JClienteInserir2();
         jci.setVisible(true);
+        
+        carregaTabela();
     }//GEN-LAST:event_jbtnNovoActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -166,10 +170,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         
         if( escolha == 0){
         Cliente c = new Cliente();
-        
-        ConexaoBD conexao = new ConexaoBD();
-        ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
-        
+                        
         int index = jTbCliente.getSelectedRow();
         c = cli.getClientes().get(index);
         
@@ -183,25 +184,18 @@ public class JCliente2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jbtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarActionPerformed
-       ConexaoBD conexao = new ConexaoBD();
-       ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
-        
         Cliente c = new Cliente();
         int index = jTbCliente.getSelectedRow();
         c = cli.getClientes().get(index);
         
         JClienteInserir2 jci = new JClienteInserir2(c);
         jci.setVisible(true);
-        
-
-        
-        
+       
+        carregaTabela();        
     }//GEN-LAST:event_jbtnEditarActionPerformed
     
     public void carregaTabela(){
-        ConexaoBD conexao = new ConexaoBD();
-        ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
-        
+           
         DefaultTableModel tblClientes = (DefaultTableModel)jTbCliente.getModel();
         
         tblClientes.setNumRows(0);
@@ -214,6 +208,8 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                 c.getTelefone()
             });
         }
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

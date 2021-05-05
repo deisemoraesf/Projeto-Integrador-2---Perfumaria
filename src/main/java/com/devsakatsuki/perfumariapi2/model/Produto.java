@@ -9,12 +9,12 @@ public class Produto {
     private double preco;
     private String categoria;
     private String marca;
-    private double quantidade;
+    private int quantidade;
     
     public Produto(){
     }
 
-    public Produto(int id, int codigo, String nome, double preco, String categoria, String marca, double quantidade) {
+    public Produto(int id, int codigo, String nome, double preco, String categoria, String marca, int quantidade) {
         this.id = id;
         this.codigo = codigo;
         this.nome = nome;
@@ -24,6 +24,16 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
+    public Produto(int codigo, String nome, double preco, String categoria, String marca, int quantidade) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.preco = preco;
+        this.categoria = categoria;
+        this.marca = marca;
+        this.quantidade = quantidade;
+    }
+    
+    
     public int getId() {
         return id;
     }
@@ -72,13 +82,15 @@ public class Produto {
         this.marca = marca;
     }
 
-    public double getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(double quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+
+   
 
    
         

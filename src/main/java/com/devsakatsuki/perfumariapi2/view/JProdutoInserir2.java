@@ -1,7 +1,10 @@
 
 package com.devsakatsuki.perfumariapi2.view;
 
+import java.awt.Component;
+import java.awt.Window;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class JProdutoInserir2 extends javax.swing.JFrame {
 
@@ -193,7 +196,8 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        Component comp = SwingUtilities.getRoot(this);
+        ((Window) comp).dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void ftxtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtPrecoActionPerformed

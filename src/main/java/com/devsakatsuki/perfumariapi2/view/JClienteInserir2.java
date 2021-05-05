@@ -42,11 +42,11 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         ftxtTelefone.setText(c.getTelefone());
         txtEmail.setText(c.getEmail());
         if(c.getSexo() != null){
-        if(c.getSexo().equals("Feminino")){
-            rbtnFeminino.setSelected(true);
-        }else{
-            rbtnMasculino.setSelected(true);
-        }
+            if(c.getSexo().equals("Feminino")){
+                rbtnFeminino.setSelected(true);
+            }else{
+                rbtnMasculino.setSelected(true);
+            }
         }
         cmbEstadoCivil.setSelectedItem(c.getEstadoCivil());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -311,13 +311,15 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());    
     
     if(!txtId.getText().isEmpty()){
+        int Id = Integer.valueOf(txtId.getText());
         String nome = txtNome.getText();
         String cpf = ftxtCPF.getText().replace(".", "").replace("-", "");
         String endereco = txtEndereco.getText();
         String telefone = ftxtTelefone.getText().replace("-","");
         String email = txtEmail.getText();
+        rbtnFeminino.setActionCommand("Feminino");
+        rbtnMasculino.setActionCommand("Masculino");
         String sexo = btnGroupSexo.getSelection().getActionCommand();
-        System.out.print(sexo);
         String estadoCivil = cmbEstadoCivil.getSelectedItem().toString(); 
         String[] data = ftxtDataNascimento.getText().split("/");
         Calendar calendar = Calendar.getInstance(); 
@@ -325,7 +327,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         Date dataNasc = calendar.getTime();
         System.out.print(dataNasc);
 
-        Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
+        Cliente cliente = new Cliente(Id, nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
 
         cli.AtualizaCliente(cliente);
 
@@ -333,13 +335,10 @@ public class JClienteInserir2 extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
 
-        //Fecha tela de editar/Salvar
+        
+         //Fecha tela de editar/Salvar
         Component comp = SwingUtilities.getRoot(this);
-       ((Window) comp).dispose();
-
-        //Refresh a List
-        JCliente2 jCliente = new JCliente2();
-        jCliente.carregaTabela();
+        ((Window) comp).dispose();
             
     }else{
         
@@ -348,6 +347,8 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         String endereco = txtEndereco.getText();
         String telefone = ftxtTelefone.getText().replace("-","");
         String email = txtEmail.getText();
+        rbtnFeminino.setActionCommand("Feminino");
+        rbtnMasculino.setActionCommand("Masculino");
         String sexo = btnGroupSexo.getSelection().getActionCommand();
         String estadoCivil = cmbEstadoCivil.getSelectedItem().toString(); 
         String[] data = ftxtDataNascimento.getText().split("/");
@@ -363,14 +364,11 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         conexao.fecharConexao();
 
         JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
-
+        
         Component comp = SwingUtilities.getRoot(this);
-       ((Window) comp).dispose();
+        ((Window) comp).dispose();
 
-        JCliente2 jCliente = new JCliente2();
-
-        jCliente.carregaTabela();
-
+        
     }
     
     }catch(Exception ex){

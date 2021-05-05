@@ -76,34 +76,6 @@ public class ClienteDAO {
         return clientes;
     }
     
-    public Cliente getClientes(int Id){
-        String sql="select id_cliente, nome_cliente, cpf, veiculo, placa from cliente where id_cliente=?";
-        Cliente cliente = new Cliente();
-        try {
-            Statement st = conexao.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-                       
-                //nome, cpf, endereco, telefone, email, sexo, estado_civil, data_nascimento
-                cliente.setId(rs.getInt("id"));
-                cliente.setNome(rs.getString("nome"));
-                cliente.setCpf(rs.getString("cpf"));
-                cliente.setEndereco(rs.getString("endereco"));
-                cliente.setTelefone(rs.getString("telefone"));
-                cliente.setEmail(rs.getString("email"));
-                cliente.setSexo(rs.getString("sexo"));
-                cliente.setEstadoCivil(rs.getString("estado_civil"));
-                cliente.setDataNascimento(rs.getDate("data_nascimento"));
-                                
-                    
-        } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        return cliente;
-    
-    }
-    
     public void deletarCliente(int Id){
         String sql="delete from cliente where id=?";
         PreparedStatement ps;
@@ -144,4 +116,6 @@ public class ClienteDAO {
 
                                 
     }
+    
+    
 }

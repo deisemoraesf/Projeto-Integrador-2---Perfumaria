@@ -14,3 +14,13 @@ estado_civil VARCHAR (50),
 data_nascimento DATE
 );
 
+CREATE TABLE produto(
+id INT auto_increment primary key,
+codigo INT,
+nome VARCHAR (255),
+preco DOUBLE,
+categoria VARCHAR (255),
+marca VARCHAR (255),
+quantidade INT 
+);
+
