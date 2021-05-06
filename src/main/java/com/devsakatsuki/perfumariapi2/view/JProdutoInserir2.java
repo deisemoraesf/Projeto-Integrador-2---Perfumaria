@@ -1,6 +1,9 @@
 
 package com.devsakatsuki.perfumariapi2.view;
 
+import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
+import com.devsakatsuki.perfumariapi2.dao.ProdutoDAO;
+import com.devsakatsuki.perfumariapi2.model.Produto;
 import java.awt.Component;
 import java.awt.Window;
 import javax.swing.JOptionPane;
@@ -14,7 +17,26 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
     public JProdutoInserir2() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        //Para campo Id ficar oculto quando for inserir cliente
+        if(ftxtId.getText().equals("")){
+            lblId.setVisible(false);
+            ftxtId.setVisible(false);
+        }
     }
+    public JProdutoInserir2(Produto p) {
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        ftxtId.setText(String.valueOf(p.getId()));
+        ftxtCodigo.setText(String.valueOf(p.getId()));
+        txtNome.setText(p.getNome());
+        ftxtPreco.setText(String.valueOf(p.getPreco()));
+        cmbCategoria.setSelectedItem(p.getCategoria());
+        cmbMarca.setSelectedItem(p.getMarca());
+        ftxtQuantidade.setText(String.valueOf(p.getQuantidade()));
+        
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,6 +61,8 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         cmbMarca = new javax.swing.JComboBox<>();
         ftxtQuantidade = new javax.swing.JFormattedTextField();
         ftxtCodigo = new javax.swing.JFormattedTextField();
+        lblId = new javax.swing.JLabel();
+        ftxtId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Produtos");
@@ -69,10 +93,16 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
 
         lblQuantidade.setText("Quantidade:");
 
-        ftxtPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        ftxtPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
         ftxtPreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ftxtPrecoActionPerformed(evt);
+            }
+        });
+
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
             }
         });
 
@@ -88,6 +118,8 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         ftxtQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         ftxtCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        lblId.setText("Id:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,7 +139,8 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ftxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ftxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(ftxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ftxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
@@ -127,23 +160,31 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
                             .addComponent(cmbMarca, 0, 168, Short.MAX_VALUE)
                             .addComponent(ftxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblId)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblId)
+                    .addComponent(ftxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ftxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPreco)
-                    .addComponent(ftxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(ftxtPreco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCategoria)
                     .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -155,7 +196,7 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuantidade)
                     .addComponent(ftxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
@@ -188,7 +229,59 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         return;
     }
     
+    try{
+    
+    ConexaoBD conexao = new ConexaoBD();
+    ProdutoDAO pro = new ProdutoDAO(conexao.abrirConexao());    
+    
+    if(!ftxtId.getText().isEmpty()){
+        int Id = Integer.valueOf(ftxtId.getText());
+        int codigo = Integer.valueOf(ftxtCodigo.getText());
+        String nome = txtNome.getText();
+        double preco = Double.valueOf(ftxtPreco.getText());
+        String categoria = cmbCategoria.getSelectedItem().toString(); 
+        String marca = cmbMarca.getSelectedItem().toString();
+        int quantidade = Integer.valueOf(ftxtQuantidade.getText());
 
+        Produto produto = new Produto(Id, codigo, nome, preco, categoria, marca, quantidade);
+
+        pro.AtualizaProduto(produto);
+
+        conexao.fecharConexao();
+
+        JOptionPane.showMessageDialog(this, "Produto Salvo com Sucesso!");
+
+        
+         //Fecha tela de editar/Salvar
+        Component comp = SwingUtilities.getRoot(this);
+        ((Window) comp).dispose();
+            
+    }else{
+        
+        int codigo = Integer.valueOf(ftxtCodigo.getText());
+        String nome = txtNome.getText();
+        double preco = Double.valueOf(ftxtPreco.getText());
+        String categoria = cmbCategoria.getSelectedItem().toString(); 
+        String marca = cmbMarca.getSelectedItem().toString();
+        int quantidade = Integer.valueOf(ftxtQuantidade.getText());
+
+        Produto produto = new Produto(codigo, nome, preco, categoria, marca, quantidade);
+
+        pro.inserirProduto(produto);
+
+        conexao.fecharConexao();
+
+        JOptionPane.showMessageDialog(this, "Produto Salvo com Sucesso!");
+        
+        Component comp = SwingUtilities.getRoot(this);
+        ((Window) comp).dispose();
+
+        
+    }
+    
+    }catch(Exception ex){
+        JOptionPane.showMessageDialog(null,"Erro ao salvar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+    }
     
    
     
@@ -207,6 +300,10 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
     private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbCategoriaActionPerformed
+
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,10 +346,12 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbMarca;
     private javax.swing.JFormattedTextField ftxtCodigo;
+    private javax.swing.JTextField ftxtId;
     private javax.swing.JFormattedTextField ftxtPreco;
     private javax.swing.JFormattedTextField ftxtQuantidade;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPreco;

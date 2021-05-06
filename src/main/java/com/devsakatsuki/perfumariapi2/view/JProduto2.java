@@ -171,9 +171,9 @@ public class JProduto2 extends javax.swing.JInternalFrame {
         int index = jTbProduto.getSelectedRow();
         p = pro.getProdutos().get(index);
         
-        //Criar um condtrutor JProdutoInserir2 com produto
-        //JProdutoInserir2 jpi = new JProdutoInserir2(p);
-        //jpi.setVisible(true);
+       
+        JProdutoInserir2 jpi = new JProdutoInserir2(p);
+        jpi.setVisible(true);
        
         carregaTabela(); 
     }//GEN-LAST:event_jBtnEditarActionPerformed
