@@ -2,14 +2,12 @@
 package com.devsakatsuki.perfumariapi2.dao;
 
 import java.sql.Connection;
-import com.devsakatsuki.perfumariapi2.model.Cliente;
 import com.devsakatsuki.perfumariapi2.model.Produto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

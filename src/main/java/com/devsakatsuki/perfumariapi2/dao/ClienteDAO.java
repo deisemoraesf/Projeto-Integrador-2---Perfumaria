@@ -39,7 +39,7 @@ public class ClienteDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+        System.out.print("test");
     }
     
     public List<Cliente> getClientes(){
@@ -71,8 +71,7 @@ public class ClienteDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+                
         return clientes;
     }
     

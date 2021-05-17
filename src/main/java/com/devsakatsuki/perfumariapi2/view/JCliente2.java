@@ -13,12 +13,12 @@ public class JCliente2 extends javax.swing.JInternalFrame {
     //Variaveis globais
     ConexaoBD conexao = new ConexaoBD();
     ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
-
+    
     /** Creates new form JCliente2 */
     public JCliente2() {
         initComponents();
         carregaTabela();
-              
+        
     }
 
     /** This method is called from within the constructor to
@@ -149,10 +149,9 @@ public class JCliente2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jbtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNovoActionPerformed
-        JClienteInserir2 jci = new JClienteInserir2();
-        jci.setVisible(true);
+        JClienteInserir2 clienteInserir = new JClienteInserir2();
+        clienteInserir.mostraTela(this);
         
-        carregaTabela();
     }//GEN-LAST:event_jbtnNovoActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -188,10 +187,10 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         int index = jTbCliente.getSelectedRow();
         c = cli.getClientes().get(index);
         
-        JClienteInserir2 jci = new JClienteInserir2(c);
-        jci.setVisible(true);
+        JClienteInserir2 clienteInserir = new JClienteInserir2(c);
+        clienteInserir.mostraTela(this);
        
-        carregaTabela();        
+        
     }//GEN-LAST:event_jbtnEditarActionPerformed
     
     public void carregaTabela(){
@@ -208,8 +207,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                 c.getTelefone()
             });
         }
-        
-        
+            
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
