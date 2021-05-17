@@ -334,11 +334,12 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         conexao.fecharConexao();
 
         JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
-
         
-         //Fecha tela de editar/Salvar
+        //Fecha tela de editar/Salvar
         Component comp = SwingUtilities.getRoot(this);
         ((Window) comp).dispose();
+        
+        
             
     }else{
         
@@ -368,6 +369,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         Component comp = SwingUtilities.getRoot(this);
         ((Window) comp).dispose();
 
+        executeMostraTela();
         
     }
     
@@ -445,6 +447,17 @@ public class JClienteInserir2 extends javax.swing.JFrame {
             }
         });
     }
+    
+    private JCliente2 clientePrincipal;
+    public void mostraTela(JCliente2 jc){
+        this.clientePrincipal = jc;
+        setVisible(true);
+    }
+    
+    public void executeMostraTela(){
+        clientePrincipal.carregaTabela();
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
