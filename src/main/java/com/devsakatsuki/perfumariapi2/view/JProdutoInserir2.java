@@ -6,10 +6,15 @@ import com.devsakatsuki.perfumariapi2.dao.ProdutoDAO;
 import com.devsakatsuki.perfumariapi2.model.Produto;
 import java.awt.Component;
 import java.awt.Window;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class JProdutoInserir2 extends javax.swing.JFrame {
+    
+    Locale br = new Locale("pt", "Brazil");
+    NumberFormat nf = NumberFormat.getInstance(br);
 
     /**
      * Creates new form JProdutoInserir2
@@ -31,7 +36,7 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         ftxtId.setText(String.valueOf(p.getId()));
         ftxtCodigo.setText(String.valueOf(p.getCodigo()));
         txtNome.setText(p.getNome());
-        ftxtPreco.setText(String.valueOf(p.getPreco()));
+        ftxtPreco.setText(nf.format(p.getPreco()));
         cmbCategoria.setSelectedItem(p.getCategoria());
         cmbMarca.setSelectedItem(p.getMarca());
         ftxtQuantidade.setText(String.valueOf(p.getQuantidade()));

@@ -4,6 +4,8 @@ package com.devsakatsuki.perfumariapi2.view;
 import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
 import com.devsakatsuki.perfumariapi2.dao.ProdutoDAO;
 import com.devsakatsuki.perfumariapi2.model.Produto;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,6 +14,9 @@ public class JProduto2 extends javax.swing.JInternalFrame {
     //Variaveis globais
     ConexaoBD conexao = new ConexaoBD();
     ProdutoDAO pro = new ProdutoDAO(conexao.abrirConexao());
+    
+    Locale br = new Locale("pt", "Brazil");
+    NumberFormat nf = NumberFormat.getInstance(br);
 
     /** Creates new form JProduto2 */
     public JProduto2() {
@@ -173,7 +178,7 @@ public class JProduto2 extends javax.swing.JInternalFrame {
             tblProduto.addRow(new Object []{
                 p.getCodigo(),
                 p.getNome(),
-                p.getPreco(),
+                nf.format(p.getPreco()),
                 p.getQuantidade(),
                 p.getCategoria(),
                 p.getMarca()
@@ -194,7 +199,7 @@ public class JProduto2 extends javax.swing.JInternalFrame {
                 tblProduto.addRow(new Object []{
                     p.getCodigo(),
                     p.getNome(),
-                    p.getPreco(),
+                    nf.format(p.getPreco()),
                     p.getQuantidade(),
                     p.getCategoria(),
                     p.getMarca()
@@ -215,7 +220,7 @@ public class JProduto2 extends javax.swing.JInternalFrame {
                 tblProduto.addRow(new Object []{
                    p.getCodigo(),
                     p.getNome(),
-                    p.getPreco(),
+                    nf.format(p.getPreco()),
                     p.getQuantidade(),
                     p.getCategoria(),
                     p.getMarca()
@@ -236,7 +241,7 @@ public class JProduto2 extends javax.swing.JInternalFrame {
                 tblProduto.addRow(new Object []{
                    p.getCodigo(),
                     p.getNome(),
-                    p.getPreco(),
+                    nf.format(p.getPreco()),
                     p.getQuantidade(),
                     p.getCategoria(),
                     p.getMarca()
@@ -293,7 +298,7 @@ public class JProduto2 extends javax.swing.JInternalFrame {
             tblClientes.addRow(new Object []{
                 p.getCodigo(),
                 p.getNome(),
-                p.getPreco(),
+                nf.format(p.getPreco()),
                 p.getQuantidade(),
                 p.getCategoria(),
                 p.getMarca()
