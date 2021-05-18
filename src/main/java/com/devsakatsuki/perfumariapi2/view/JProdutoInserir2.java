@@ -29,7 +29,7 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         ftxtId.setText(String.valueOf(p.getId()));
-        ftxtCodigo.setText(String.valueOf(p.getId()));
+        ftxtCodigo.setText(String.valueOf(p.getCodigo()));
         txtNome.setText(p.getNome());
         ftxtPreco.setText(String.valueOf(p.getPreco()));
         cmbCategoria.setSelectedItem(p.getCategoria());
@@ -238,7 +238,8 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         int Id = Integer.valueOf(ftxtId.getText());
         int codigo = Integer.valueOf(ftxtCodigo.getText());
         String nome = txtNome.getText();
-        double preco = Double.valueOf(ftxtPreco.getText());
+        String formataValor=ftxtPreco.getText().replace(".", "");
+        double preco = Double.valueOf(formataValor.replaceAll(",", "."));
         String categoria = cmbCategoria.getSelectedItem().toString(); 
         String marca = cmbMarca.getSelectedItem().toString();
         int quantidade = Integer.valueOf(ftxtQuantidade.getText());
@@ -255,16 +256,18 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
          //Fecha tela de editar/Salvar
         Component comp = SwingUtilities.getRoot(this);
         ((Window) comp).dispose();
+        
+        executeMostraTela();
             
     }else{
         
         int codigo = Integer.valueOf(ftxtCodigo.getText());
         String nome = txtNome.getText();
-        double preco = Double.valueOf(ftxtPreco.getText());
+        String formataValor=ftxtPreco.getText().replace(".", "");
+        double preco = Double.valueOf(formataValor.replaceAll(",", "."));
         String categoria = cmbCategoria.getSelectedItem().toString(); 
         String marca = cmbMarca.getSelectedItem().toString();
         int quantidade = Integer.valueOf(ftxtQuantidade.getText());
-
         Produto produto = new Produto(codigo, nome, preco, categoria, marca, quantidade);
 
         pro.inserirProduto(produto);
@@ -276,7 +279,7 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         Component comp = SwingUtilities.getRoot(this);
         ((Window) comp).dispose();
 
-        
+        executeMostraTela();
     }
     
     }catch(Exception ex){
@@ -338,6 +341,17 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
                 new JProdutoInserir2().setVisible(true);
             }
         });
+    }
+    
+    //Metodos para refresh da tela ao salvar ou editar
+    private JProduto2 produtoPrincipal;
+    public void mostraTela(JProduto2 jc){
+        this.produtoPrincipal = jc;
+        setVisible(true);
+    }
+    
+    public void executeMostraTela(){
+        produtoPrincipal.carregaTabela();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

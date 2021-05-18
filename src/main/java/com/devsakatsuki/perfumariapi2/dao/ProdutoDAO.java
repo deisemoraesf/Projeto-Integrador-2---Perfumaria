@@ -113,5 +113,129 @@ public class ProdutoDAO {
                                 
     }
     
+    public Produto getProdutoId(int codigo){
+     
+        Produto produto = new Produto();
+        
+        String sql="select * from produto where codigo=?";
+        
+        try {
+            PreparedStatement ps;
+            ps = this.conexao.prepareStatement(sql);
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+            //nome, cpf, endereco, telefone, email, sexo, estado_civil, data_nascimento
+            produto.setId(rs.getInt("id"));
+            produto.setCodigo(rs.getInt("codigo"));
+            produto.setNome(rs.getString("nome"));
+            produto.setPreco(rs.getDouble("preco"));
+            produto.setCategoria(rs.getString("categoria"));
+            produto.setMarca(rs.getString("marca"));
+            produto.setId(rs.getInt("quantidade"));
+            
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return produto;
+    }
+    
+     
+    public List<Produto> getProdutoNome(String nome){
+     
+        List<Produto> produto = new ArrayList<Produto>();
+        
+        String sql="select * from produto where nome like'%"+nome+"%'";
+        
+        try {
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+            
+            int id= rs.getInt("id");
+            int codigo = rs.getInt("codigo");
+            String nome2 = rs.getString("nome");
+            double preco = rs.getDouble("preco");
+            String categoria = rs.getString("categoria");
+            String marca = rs.getString("marca");
+            int quantidade = rs.getInt("quantidade");
+                                
+            Produto p = new Produto(id, codigo, nome2, preco, categoria, marca, quantidade);
+            
+            produto.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return produto;
+    }
+    
+    public List<Produto> getProdutoMarca(String marca){
+     
+        List<Produto> produto = new ArrayList<Produto>();
+        
+        String sql="select * from produto where marca like'%"+marca+"%'";
+        
+        try {
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+            
+            int id= rs.getInt("id");
+            int codigo = rs.getInt("codigo");
+            String nome2 = rs.getString("nome");
+            double preco = rs.getDouble("preco");
+            String categoria = rs.getString("categoria");
+            String marca2 = rs.getString("marca");
+            int quantidade = rs.getInt("quantidade");
+                                
+            Produto p = new Produto(id, codigo, nome2, preco, categoria, marca2, quantidade);
+            
+            produto.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return produto;
+    }
+    
+    public List<Produto> getProdutoCategoria(String categoria){
+     
+        List<Produto> produto = new ArrayList<Produto>();
+        
+        String sql="select * from produto where categoria like'%"+categoria+"%'";
+        
+        try {
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+            
+            int id= rs.getInt("id");
+            int codigo = rs.getInt("codigo");
+            String nome2 = rs.getString("nome");
+            double preco = rs.getDouble("preco");
+            String categoria2 = rs.getString("categoria");
+            String marca2 = rs.getString("marca");
+            int quantidade = rs.getInt("quantidade");
+                                
+            Produto p = new Produto(id, codigo, nome2, preco, categoria2, marca2, quantidade);
+            
+            produto.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return produto;
+    }
     
 }

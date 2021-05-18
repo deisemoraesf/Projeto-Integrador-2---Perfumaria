@@ -42,6 +42,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
+        setMaximizable(true);
         setTitle("Cliente");
         setPreferredSize(new java.awt.Dimension(670, 500));
 
@@ -249,12 +250,14 @@ public class JCliente2 extends javax.swing.JInternalFrame {
 
     private void jbtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarActionPerformed
         Cliente c = new Cliente();
-        int index = jTbCliente.getSelectedRow();
-        c = cli.getClientes().get(index);
-        
-        JClienteInserir2 clienteInserir = new JClienteInserir2(c);
-        clienteInserir.mostraTela(this);
-       
+        int index = index = jTbCliente.getSelectedRow();
+        if(index == -1){
+            JOptionPane.showMessageDialog(null,"É preciso selecionar um cliente", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }else{
+            c = cli.getClientes().get(index);
+            JClienteInserir2 clienteInserir = new JClienteInserir2(c);
+            clienteInserir.mostraTela(this);
+        }
         
     }//GEN-LAST:event_jbtnEditarActionPerformed
     

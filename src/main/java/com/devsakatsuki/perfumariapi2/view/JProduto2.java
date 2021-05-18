@@ -29,14 +29,14 @@ public class JProduto2 extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ComboPesquisa = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTbProduto = new javax.swing.JTable();
         jBtnNovo = new javax.swing.JButton();
         jBtnEditar = new javax.swing.JButton();
         jBtnExcluir = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        txtPesquisa = new javax.swing.JTextField();
+        btnPesquisa = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -46,22 +46,19 @@ public class JProduto2 extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Produto");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "Categoria", "Marca" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        ComboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "Categoria", "Marca", "Todos" }));
+        ComboPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                ComboPesquisaActionPerformed(evt);
             }
         });
 
         jTbProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Código", "Nome", "Preço", "Quantidade"
+                "Código", "Nome", "Preço", "Quantidade", "Categoria", "Marca"
             }
         ));
         jScrollPane2.setViewportView(jTbProduto);
@@ -90,17 +87,17 @@ public class JProduto2 extends javax.swing.JInternalFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtPesquisaActionPerformed(evt);
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.png"))); // NOI18N
-        jButton4.setText("Pesquisar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.png"))); // NOI18N
+        btnPesquisa.setText("Pesquisar");
+        btnPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnPesquisaActionPerformed(evt);
             }
         });
 
@@ -113,15 +110,15 @@ public class JProduto2 extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1)
+                .addComponent(txtPesquisa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBtnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBtnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBtnNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -130,9 +127,9 @@ public class JProduto2 extends javax.swing.JInternalFrame {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisa))
                 .addGap(24, 24, 24)
                 .addComponent(jBtnNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -147,35 +144,126 @@ public class JProduto2 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void ComboPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPesquisaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_ComboPesquisaActionPerformed
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
         JProdutoInserir2 jpi = new JProdutoInserir2();
-        jpi.setVisible(true);
+        jpi.mostraTela(this);
         
-        carregaTabela();
+        
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtPesquisaActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Código")){
+            try{
+                
+            Produto p = pro.getProdutoId(Integer.valueOf(txtPesquisa.getText()));    
+                
+            DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();
+        
+            tblProduto.setNumRows(0);
+            
+            tblProduto.addRow(new Object []{
+                p.getCodigo(),
+                p.getNome(),
+                p.getPreco(),
+                p.getQuantidade(),
+                p.getCategoria(),
+                p.getMarca()
+            });
+            
+                
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+            }
+        } else if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Nome")){
+            try{
+                          
+            DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();
+        
+            tblProduto.setNumRows(0);
+            
+            for(Produto p: pro.getProdutoNome(txtPesquisa.getText())){
+                tblProduto.addRow(new Object []{
+                    p.getCodigo(),
+                    p.getNome(),
+                    p.getPreco(),
+                    p.getQuantidade(),
+                    p.getCategoria(),
+                    p.getMarca()
+                });
+            }
+                
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+            }
+        }else if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Marca")){
+            try{
+                                     
+            DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();
+        
+            tblProduto.setNumRows(0);
+            
+            for(Produto p: pro.getProdutoMarca(txtPesquisa.getText())){
+                tblProduto.addRow(new Object []{
+                   p.getCodigo(),
+                    p.getNome(),
+                    p.getPreco(),
+                    p.getQuantidade(),
+                    p.getCategoria(),
+                    p.getMarca()
+                });
+            }
+                
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+            }
+        }else if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Categoria")){
+            try{
+                                     
+            DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();
+        
+            tblProduto.setNumRows(0);
+            
+            for(Produto p: pro.getProdutoCategoria(txtPesquisa.getText())){
+                tblProduto.addRow(new Object []{
+                   p.getCodigo(),
+                    p.getNome(),
+                    p.getPreco(),
+                    p.getQuantidade(),
+                    p.getCategoria(),
+                    p.getMarca()
+                });
+            }
+                
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+            }
+        }else{
+            txtPesquisa.setText("Todos");
+            carregaTabela();
+        }    
+    }//GEN-LAST:event_btnPesquisaActionPerformed
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
         Produto p = new Produto();
         int index = jTbProduto.getSelectedRow();
-        p = pro.getProdutos().get(index);
         
+        if(index == -1){
+            JOptionPane.showMessageDialog(null,"É preciso selecionar um produto", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }else{    
+            p = pro.getProdutos().get(index);
+            JProdutoInserir2 jpi = new JProdutoInserir2(p);
+            jpi.mostraTela(this);
        
-        JProdutoInserir2 jpi = new JProdutoInserir2(p);
-        jpi.setVisible(true);
-       
-        carregaTabela(); 
+        }
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -206,7 +294,9 @@ public class JProduto2 extends javax.swing.JInternalFrame {
                 p.getCodigo(),
                 p.getNome(),
                 p.getPreco(),
-                p.getQuantidade()
+                p.getQuantidade(),
+                p.getCategoria(),
+                p.getMarca()
             });
         }
         
@@ -214,15 +304,15 @@ public class JProduto2 extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboPesquisa;
+    private javax.swing.JButton btnPesquisa;
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnNovo;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTbProduto;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 
 }
