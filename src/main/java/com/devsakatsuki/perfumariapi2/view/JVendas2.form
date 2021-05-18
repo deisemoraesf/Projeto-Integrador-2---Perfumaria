@@ -214,9 +214,6 @@
           <Font name="Tahoma" size="14" style="1"/>
         </Property>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Itens da Venda"/>
-      </AccessibilityProperties>
 
       <Layout>
         <DimensionLayout dim="0">

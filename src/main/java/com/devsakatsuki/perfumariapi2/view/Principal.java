@@ -1,6 +1,8 @@
 
 package com.devsakatsuki.perfumariapi2.view;
 
+import java.awt.Dimension;
+
 public class Principal extends javax.swing.JFrame {
 
     /**
@@ -160,6 +162,7 @@ public class Principal extends javax.swing.JFrame {
         JCliente2 jcliente = new JCliente2();
         desktop.add(jcliente);
         jcliente.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -225,6 +228,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
+       
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel desktop;

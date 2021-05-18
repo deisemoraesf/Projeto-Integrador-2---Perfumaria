@@ -448,6 +448,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         });
     }
     
+    //Metodos para refresh da tela ao salvar ou editar
     private JCliente2 clientePrincipal;
     public void mostraTela(JCliente2 jc){
         this.clientePrincipal = jc;

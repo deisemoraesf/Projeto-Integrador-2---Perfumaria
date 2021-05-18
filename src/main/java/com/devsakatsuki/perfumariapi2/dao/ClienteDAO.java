@@ -116,5 +116,101 @@ public class ClienteDAO {
                                 
     }
     
+    public Cliente getClienteId(int id){
+     
+        Cliente cliente = new Cliente();
+        
+        String sql="select * from cliente where id=?";
+        
+        try {
+            PreparedStatement ps;
+            ps = this.conexao.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+            //nome, cpf, endereco, telefone, email, sexo, estado_civil, data_nascimento
+            cliente.setId(rs.getInt("id"));
+            cliente.setNome(rs.getString("nome"));
+            cliente.setCpf(rs.getString("cpf"));
+            cliente.setEndereco(rs.getString("endereco"));
+            cliente.setTelefone(rs.getString("telefone"));
+            cliente.setEmail(rs.getString("email"));
+            cliente.setSexo(rs.getString("sexo"));
+            cliente.setEstadoCivil(rs.getString("estado_civil"));
+            cliente.setDataNascimento(rs.getDate("data_nascimento"));
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return cliente;
+    }
+    
+    public Cliente getClienteCpf(String cpf){
+     
+        Cliente cliente = new Cliente();
+        
+        String sql="select * from cliente where cpf=?";
+        
+        try {
+            PreparedStatement ps;
+            ps = this.conexao.prepareStatement(sql);
+            ps.setString(1, cpf);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+            //nome, cpf, endereco, telefone, email, sexo, estado_civil, data_nascimento
+            cliente.setId(rs.getInt("id"));
+            cliente.setNome(rs.getString("nome"));
+            cliente.setCpf(rs.getString("cpf"));
+            cliente.setEndereco(rs.getString("endereco"));
+            cliente.setTelefone(rs.getString("telefone"));
+            cliente.setEmail(rs.getString("email"));
+            cliente.setSexo(rs.getString("sexo"));
+            cliente.setEstadoCivil(rs.getString("estado_civil"));
+            cliente.setDataNascimento(rs.getDate("data_nascimento"));
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return cliente;
+    }
+    
+    public List<Cliente> getClienteNome(String nome){
+     
+        List<Cliente> cliente = new ArrayList<Cliente>();
+        
+        String sql="select * from cliente where nome like'%"+nome+"%'";
+        
+        try {
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+            //nome, cpf, endereco, telefone, email, sexo, estado_civil, data_nascimento
+            int id = rs.getInt("id");
+            String nome2 = rs.getString("nome");
+            String cpf = rs.getString("cpf");
+            String endereco = rs.getString("endereco");
+            String telefone = rs.getString("telefone");
+            String email = rs.getString("email");
+            String sexo = rs.getString("sexo");
+            String estadoCivil = rs.getString("estado_civil");
+            Date dtNasc = rs.getDate("data_nascimento");
+                                
+            Cliente c = new Cliente(id, nome, cpf, endereco, telefone, email, sexo, estadoCivil, dtNasc);
+            
+            cliente.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return cliente;
+    }
     
 }

@@ -292,8 +292,6 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30))
         );
 
-        pnlItensVenda.getAccessibleContext().setAccessibleName("Itens da Venda");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -310,7 +308,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbProdutoActionPerformed
 
     private void btnBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaClienteActionPerformed
-       JCliente2 jc = new JCliente2();
+       JBuscarCliente2 jc = new JBuscarCliente2();
        jc.setVisible(true);
     }//GEN-LAST:event_btnBuscaClienteActionPerformed
 
