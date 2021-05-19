@@ -113,6 +113,12 @@ public class Cliente {
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    @Override
+    public String toString() {
+        return getNome();
+    }
+    
     
     
     

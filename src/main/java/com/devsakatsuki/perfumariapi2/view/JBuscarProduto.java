@@ -15,13 +15,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author 55119
  */
-public class JBuscarCliente2 extends javax.swing.JFrame {
+public class JBuscarProduto extends javax.swing.JFrame {
     ConexaoBD conexao = new ConexaoBD();
     ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
     /**
      * Creates new form JBuscarCliente2
      */
-    public JBuscarCliente2() {
+    public JBuscarProduto() {
         initComponents();
     }
 
@@ -35,38 +35,38 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
     private void initComponents() {
 
         txtPesquisa = new javax.swing.JTextField();
-        jbtnPesquisar = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabelaCliente = new javax.swing.JTable();
-        jbtnNovo = new javax.swing.JButton();
-        ComboPesquisa = new javax.swing.JComboBox<>();
+        tblProduto = new javax.swing.JTable();
+        btnNovo = new javax.swing.JButton();
+        cmbPesquisa = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jbtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.png"))); // NOI18N
-        jbtnPesquisar.setText("Pesquisar");
-        jbtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.png"))); // NOI18N
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnPesquisarActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
 
-        TabelaCliente.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Nome", "CPF", "Telefone"
+                "Código", "Nome", "Preço", "Quantidade"
             }
         ));
-        jScrollPane1.setViewportView(TabelaCliente);
+        jScrollPane1.setViewportView(tblProduto);
 
-        jbtnNovo.setText("Novo");
+        btnNovo.setText("Novo");
 
-        ComboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF" }));
-        ComboPesquisa.addActionListener(new java.awt.event.ActionListener() {
+        cmbPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Código" }));
+        cmbPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboPesquisaActionPerformed(evt);
+                cmbPesquisaActionPerformed(evt);
             }
         });
 
@@ -76,15 +76,15 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbtnPesquisar)
+                .addComponent(btnPesquisar)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(237, 237, 237)
-                .addComponent(jbtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,31 +92,31 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnPesquisar))
+                    .addComponent(btnPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(jbtnNovo)
+                .addComponent(btnNovo)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ComboPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPesquisaActionPerformed
+    private void cmbPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPesquisaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ComboPesquisaActionPerformed
+    }//GEN-LAST:event_cmbPesquisaActionPerformed
 
-    private void jbtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPesquisarActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
-        if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Cpf")){
+        if(cmbPesquisa.getSelectedItem().toString().equalsIgnoreCase("Cpf")){
             try{
                 
             Cliente c = cli.getClienteCpf(txtPesquisa.getText());    
                 
-            DefaultTableModel tblClientes = (DefaultTableModel)TabelaCliente.getModel();
+            DefaultTableModel tblClientes = (DefaultTableModel)tblProduto.getModel();
         
             tblClientes.setNumRows(0);
             
@@ -131,11 +131,11 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null,"Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
-        }else if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Nome")){
+        }else if(cmbPesquisa.getSelectedItem().toString().equalsIgnoreCase("Nome")){
             try{
                 
                           
-            DefaultTableModel tblClientes = (DefaultTableModel)TabelaCliente.getModel();
+            DefaultTableModel tblClientes = (DefaultTableModel)tblProduto.getModel();
         
             tblClientes.setNumRows(0);
             
@@ -154,7 +154,7 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(this, "Escolha um filtro");
         }
-    }//GEN-LAST:event_jbtnPesquisarActionPerformed
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,30 +173,31 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JBuscarCliente2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JBuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JBuscarCliente2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JBuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JBuscarCliente2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JBuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JBuscarCliente2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JBuscarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JBuscarCliente2().setVisible(true);
+                new JBuscarProduto().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboPesquisa;
-    private javax.swing.JTable TabelaCliente;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JComboBox<String> cmbPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbtnNovo;
-    private javax.swing.JButton jbtnPesquisar;
+    private javax.swing.JTable tblProduto;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 }

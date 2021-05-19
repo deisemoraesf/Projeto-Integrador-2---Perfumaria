@@ -142,8 +142,7 @@ public class ProdutoDAO {
         }
                 
         return produto;
-    }
-    
+    }    
      
     public List<Produto> getProdutoNome(String nome){
      
@@ -236,6 +235,7 @@ public class ProdutoDAO {
         }
                 
         return produto;
-    }
+    }    
     
+
 }
