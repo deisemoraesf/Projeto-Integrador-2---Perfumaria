@@ -77,15 +77,21 @@
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itemMenuRelAnalitico">
+            <MenuItem class="javax.swing.JMenuItem" name="itemMenuRelSintetico">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Rel. Venda Sint&#xe9;tico"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuRelSinteticoActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itemMenuRelSintetico">
+            <MenuItem class="javax.swing.JMenuItem" name="itemMenuRelAnalitico">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Rel. Venda Anal&#xed;tico"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuRelAnaliticoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

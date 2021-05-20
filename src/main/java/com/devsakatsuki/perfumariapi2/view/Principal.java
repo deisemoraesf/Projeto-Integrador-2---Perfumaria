@@ -1,7 +1,9 @@
 
 package com.devsakatsuki.perfumariapi2.view;
 
+import com.devsakatsuki.perfumariapi2.model.Venda;
 import java.awt.Dimension;
+import java.util.List;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -34,8 +36,8 @@ public class Principal extends javax.swing.JFrame {
         menuVendas = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         menuRelatorios = new javax.swing.JMenu();
-        itemMenuRelAnalitico = new javax.swing.JMenuItem();
         itemMenuRelSintetico = new javax.swing.JMenuItem();
+        itemMenuRelAnalitico = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
 
@@ -43,8 +45,6 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Venda");
-
-        desktop.setPreferredSize(getPreferredSize());
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);
@@ -109,11 +109,21 @@ public class Principal extends javax.swing.JFrame {
         menuRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/report-icon_16.png"))); // NOI18N
         menuRelatorios.setText("Relatórios");
 
-        itemMenuRelAnalitico.setText("Rel. Venda Sintético");
-        menuRelatorios.add(itemMenuRelAnalitico);
-
-        itemMenuRelSintetico.setText("Rel. Venda Analítico");
+        itemMenuRelSintetico.setText("Rel. Venda Sintético");
+        itemMenuRelSintetico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuRelSinteticoActionPerformed(evt);
+            }
+        });
         menuRelatorios.add(itemMenuRelSintetico);
+
+        itemMenuRelAnalitico.setText("Rel. Venda Analítico");
+        itemMenuRelAnalitico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuRelAnaliticoActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(itemMenuRelAnalitico);
 
         menuPrincipal.add(menuRelatorios);
 
@@ -145,7 +155,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -192,8 +202,33 @@ public class Principal extends javax.swing.JFrame {
         desktop.add(jvendas);
         jvendas.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void itemMenuRelSinteticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuRelSinteticoActionPerformed
+        // TODO add your handling code here:
+        JSelecaoRelatorio sr = new JSelecaoRelatorio("Sintetico");
+        sr.setVisible(true);
+    }//GEN-LAST:event_itemMenuRelSinteticoActionPerformed
+
+    private void itemMenuRelAnaliticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuRelAnaliticoActionPerformed
+        // TODO add your handling code here:
+        JSelecaoRelatorio sr = new JSelecaoRelatorio("Analítico");
+        sr.setVisible(true);
+    }//GEN-LAST:event_itemMenuRelAnaliticoActionPerformed
     
-    
+    public void carregaRelatorios(String tipo, List<Venda> vendas){
+        desktop.removeAll();
+        desktop.repaint();
+        if(tipo.equalsIgnoreCase("Analitico")){
+        JRelatorios relatorios = new JRelatorios(tipo, vendas);
+        desktop.add(relatorios);
+        relatorios.setVisible(true);
+        }else{
+        JRelatorios relatorios = new JRelatorios(tipo, vendas);
+        desktop.add(relatorios);
+        relatorios.setVisible(true);
+        }    
+          
+    }
     /**
      * @param args the command line arguments
      */
