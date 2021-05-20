@@ -9,6 +9,9 @@ import com.devsakatsuki.perfumariapi2.model.Cliente;
 import com.devsakatsuki.perfumariapi2.model.Produto;
 import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,9 +25,11 @@ public class JVendas2 extends javax.swing.JInternalFrame {
     Locale br = new Locale("pt", "Brazil");
     NumberFormat nf = NumberFormat.getInstance(br);
     
-
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    
     public JVendas2() {
         initComponents();
+        txtData.setText(dateFormat.format(new Date(System.currentTimeMillis())));
         
         for(Produto prod : pdao.getProdutos()){
             cmbProdutos.addItem(prod);
@@ -66,10 +71,10 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         lblDadosVenda = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblData = new javax.swing.JLabel();
-        txtData = new javax.swing.JTextField();
         btnPesquisarCliente = new javax.swing.JButton();
         lblCliente = new javax.swing.JLabel();
         cmbClientes = new javax.swing.JComboBox<>();
+        txtData = new javax.swing.JFormattedTextField();
         btnFinalizarVenda = new javax.swing.JButton();
         btnCancelarVenda = new javax.swing.JButton();
 
@@ -247,8 +252,6 @@ public class JVendas2 extends javax.swing.JInternalFrame {
 
         lblData.setText("Data Venda:");
 
-        txtData.setEditable(false);
-
         btnPesquisarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.png"))); // NOI18N
         btnPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,6 +264,17 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         cmbClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbClientesActionPerformed(evt);
+            }
+        });
+
+        try {
+            txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataActionPerformed(evt);
             }
         });
 
@@ -280,11 +294,11 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                                     .addComponent(lblCliente))
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(pnlDadosVendaLayout.createSequentialGroup()
                                         .addComponent(cmbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnPesquisarCliente)))))
+                                        .addComponent(btnPesquisarCliente))
+                                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(111, 111, 111))
                     .addGroup(pnlDadosVendaLayout.createSequentialGroup()
                         .addComponent(jSeparator1)
@@ -303,7 +317,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                         .addComponent(lblCliente)
                         .addComponent(cmbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnPesquisarCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblData)
                     .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -311,6 +325,11 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         );
 
         btnFinalizarVenda.setText("Finalizar");
+        btnFinalizarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarVendaActionPerformed(evt);
+            }
+        });
 
         btnCancelarVenda.setText("Cancelar");
 
@@ -325,9 +344,9 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pnlProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnlDadosVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(28, 28, 28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlItensVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 19, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnFinalizarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -400,6 +419,20 @@ public class JVendas2 extends javax.swing.JInternalFrame {
  
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
+    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataActionPerformed
+
+    private void btnFinalizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarVendaActionPerformed
+        // TODO add your handling code here:
+        
+        //Metodo para setar data salvar
+        String[] data = txtData.getText().split("/");
+        Calendar calendar = Calendar.getInstance(); 
+        calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1])-1, Integer.parseInt(data[0]));
+        Date dataVenda = calendar.getTime();
+    }//GEN-LAST:event_btnFinalizarVendaActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator JSeparator1;
@@ -426,7 +459,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlProdutos;
     private javax.swing.JSpinner spnQuantidade;
     private javax.swing.JTable tblItensVenda;
-    private javax.swing.JTextField txtData;
+    private javax.swing.JFormattedTextField txtData;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtTotalVendas;
     // End of variables declaration//GEN-END:variables
