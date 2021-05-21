@@ -47,6 +47,10 @@ public void inserirVenda(Venda venda) {
             ps.setInt(3, iv.getQuantidade());
             ps.setDouble(4, iv.getValorUnitario());
             ps.execute();
+            
+            ProdutoDAO pdao = new ProdutoDAO(conexao);
+            pdao.saidaEstoque(iv.getProduto().getId(), iv.getQuantidade());
+            
         }
                 
     } catch (SQLException ex) {

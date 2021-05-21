@@ -107,7 +107,7 @@ public class ProdutoDAO {
     ps.execute();
     
     }catch (SQLException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+         Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
                                 
@@ -235,7 +235,21 @@ public class ProdutoDAO {
         }
                 
         return produto;
-    }    
-    
+    }
+           
+    public void saidaEstoque(int id, int quantidade){
+         String sql = "update produto set quantidade = quantidade - ? where id=?";
+        
+        try {
+            PreparedStatement ps;
+            ps = this.conexao.prepareStatement(sql);
+            ps.setInt(1, quantidade);
+            ps.setInt(2, id);
+            ps.execute();
+        } catch (SQLException ex) {
+             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+    }
 
 }
