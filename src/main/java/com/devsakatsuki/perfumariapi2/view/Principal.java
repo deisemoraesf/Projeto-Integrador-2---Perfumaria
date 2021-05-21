@@ -157,7 +157,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(desktop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -203,25 +203,24 @@ public class Principal extends javax.swing.JFrame {
 
     private void jmiRelatorioSinteticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRelatorioSinteticoActionPerformed
         JSelecaoRelatorio sr = new JSelecaoRelatorio("Sintetico");
-        sr.setVisible(true);
+        sr.mostraTelaPrincipal(this);
     }//GEN-LAST:event_jmiRelatorioSinteticoActionPerformed
 
     private void jmiRelatorioAnaliticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRelatorioAnaliticoActionPerformed
         JSelecaoRelatorio sr = new JSelecaoRelatorio("Analítico");
-        sr.setVisible(true);
+        sr.mostraTelaPrincipal(this);
     }//GEN-LAST:event_jmiRelatorioAnaliticoActionPerformed
     
     public void carregaRelatorios(String tipo, List<Venda> vendas){
         desktop.removeAll();
         desktop.repaint();
         if(tipo.equalsIgnoreCase("Analitico")){
-        JRelatorios relatorios = new JRelatorios(tipo, vendas);
-        desktop.add(relatorios);
-        relatorios.setVisible(true);
+        JRelatorios relatorios;
+        form.posicionarInternalFrame(relatorios = new JRelatorios(tipo, vendas), desktop);
         }else{
-        JRelatorios relatorios = new JRelatorios(tipo, vendas);
-        desktop.add(relatorios);
-        relatorios.setVisible(true);
+        JRelatorios relatorios;
+        form.posicionarInternalFrame(relatorios = new JRelatorios(tipo, vendas), desktop);
+       
         }         
     }
     

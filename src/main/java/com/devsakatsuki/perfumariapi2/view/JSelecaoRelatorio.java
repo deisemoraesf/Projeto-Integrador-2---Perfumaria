@@ -21,8 +21,10 @@ import javax.swing.SwingUtilities;
  * @author 55119
  */
 public class JSelecaoRelatorio extends javax.swing.JFrame {
+
     ConexaoBD conexao = new ConexaoBD();
     VendaDAO vdao = new VendaDAO(conexao.abrirConexao());
+
     /**
      * Creates new form JSelecaoRelatorio
      */
@@ -34,7 +36,7 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
         lblSintetico.setVisible(false);
         lblAnalitico.setVisible(false);
     }
-    
+
     public JSelecaoRelatorio(String relatorio) {
         initComponents();
         setLocationRelativeTo(null);
@@ -42,15 +44,15 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
         checkAnalitico.setVisible(false);
         lblSintetico.setVisible(false);
         lblAnalitico.setVisible(false);
-                
-        if(relatorio.equalsIgnoreCase("Analítico")){
+
+        if (relatorio.equalsIgnoreCase("Analítico")) {
             lblAnalitico.setVisible(true);
             checkAnalitico.setSelected(true);
-        }else{
+        } else {
             lblSintetico.setVisible(true);
             checkSintetico.setSelected(true);
         }
-        
+
     }
 
     /**
@@ -74,8 +76,10 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lblSintetico.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblSintetico.setText("Relatório Sintético");
 
+        lblAnalitico.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblAnalitico.setText("Relatório Analítico");
 
         try {
@@ -152,12 +156,12 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDataDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDataAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDataDe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGerarRelatorio)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
@@ -165,60 +169,83 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
 
     private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
         // TODO add your handling code here:
-        if(checkSintetico.isSelected()){
-        String[] datad = txtDataDe.getText().split("/");
-        String[] dataa = txtDataDe.getText().split("/");
-        Calendar calendar = Calendar.getInstance(); 
-        Calendar calendar2 = Calendar.getInstance(); 
-        calendar.set(Integer.parseInt(datad[2]), Integer.parseInt(datad[1])-1, Integer.parseInt(datad[0]));
-        calendar2.set(Integer.parseInt(dataa[2]), Integer.parseInt(dataa[1])-1, Integer.parseInt(dataa[0]));
-        Date dataDe = calendar.getTime();
-        Date dataAte = calendar2.getTime();
-        calendar2.add(Calendar.DATE, 30);
-        Date data30 = calendar2.getTime();
-        
-        if(dataDe.after(data30)){
-            JOptionPane.showMessageDialog(null,"Período maior que 30 dias", "Aviso", JOptionPane.WARNING_MESSAGE);            
+        if (txtDataDe.getText().contains("  /  /    ") || txtDataAte.getText().contains("  /  /    ")) {
+            JOptionPane.showMessageDialog(null, "Campos data em branco", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
-        
-        Component comp = SwingUtilities.getRoot(this);
-        ((Window) comp).dispose();
-        
-        executeMostraTelaRelatorio("Sintetico", vdao.getRelatorios(dataDe, dataAte));
-            
-            
-        }else{
-        String[] datad = txtDataDe.getText().split("/");
-        String[] dataa = txtDataDe.getText().split("/");
-        Calendar calendar = Calendar.getInstance(); 
-        Calendar calendar2 = Calendar.getInstance(); 
-        calendar.set(Integer.parseInt(datad[2]), Integer.parseInt(datad[1])-1, Integer.parseInt(datad[0]));
-        calendar2.set(Integer.parseInt(dataa[2]), Integer.parseInt(dataa[1])-1, Integer.parseInt(dataa[0]));
-        Date dataDe = calendar.getTime();
-        Date dataAte = calendar2.getTime();
-        calendar2.add(Calendar.DATE, 30);
-        Date data30 = calendar2.getTime();
-        
-        if(dataDe.after(data30)){
-            JOptionPane.showMessageDialog(null,"Período maior que 30 dias", "Aviso", JOptionPane.WARNING_MESSAGE);            
-        }    
-        
-        Component comp = SwingUtilities.getRoot(this);
-        ((Window) comp).dispose();
-        
-        executeMostraTelaRelatorio("Analitico", vdao.getRelatorios(dataDe, dataAte));
+
+        if (checkSintetico.isSelected()) {
+            String[] datad = txtDataDe.getText().split("/");
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Integer.parseInt(datad[2]), Integer.parseInt(datad[1])-1, Integer.parseInt(datad[0]));
+            Date dataDe = calendar.getTime();
+
+            String[] dataa = txtDataAte.getText().split("/");
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.set(Integer.parseInt(dataa[2]), Integer.parseInt(dataa[1])-1, Integer.parseInt(dataa[0]));
+            Date dataAte = calendar2.getTime();
+
+            Calendar calendar3 = Calendar.getInstance();
+            calendar3.setTime(dataDe);
+            calendar3.add(Calendar.DATE, 30);
+            Date data30 = calendar3.getTime();
+
+            System.out.print(dataDe);
+            System.out.print(dataAte);
+            System.out.print(data30);
+
+            if (dataDe.after(data30)) {
+                JOptionPane.showMessageDialog(null, "Período maior que 30 dias", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+
+            executeMostraTelaRelatorio("Sintetico", vdao.getRelatorios(dataDe, dataAte));
+
+            Component comp = SwingUtilities.getRoot(this);
+            ((Window) comp).dispose();
+
+        } else {
+
+            String[] datad = txtDataDe.getText().split("/");
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Integer.parseInt(datad[2]), Integer.parseInt(datad[1]) - 1, Integer.parseInt(datad[0]));
+            Date dataDe = calendar.getTime();
+
+            String[] dataa = txtDataAte.getText().split("/");
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.set(Integer.parseInt(dataa[2]), Integer.parseInt(dataa[1]) - 1, Integer.parseInt(dataa[0]));
+            Date dataAte = calendar2.getTime();
+
+            Calendar calendar3 = Calendar.getInstance();
+            calendar3.setTime(dataDe);
+            calendar3.add(Calendar.DATE, 30);
+            Date data30 = calendar3.getTime();
+
+            System.out.print(dataDe);
+            System.out.print(dataAte);
+            System.out.print(data30);
+
+            if (dataDe.after(data30)) {
+                JOptionPane.showMessageDialog(null, "Período maior que 30 dias", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+
+            executeMostraTelaRelatorio("Analitico", vdao.getRelatorios(dataDe, dataAte));
+
+            Component comp = SwingUtilities.getRoot(this);
+            ((Window) comp).dispose();
+
         }
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
-    
+
     private Principal principal;
-    public void mostraTelaPrincipal(Principal p){
+
+    public void mostraTelaPrincipal(Principal p) {
         this.principal = p;
         setVisible(true);
     }
-    
-    public void executeMostraTelaRelatorio(String tipo, List<Venda> vendas){
+
+    public void executeMostraTelaRelatorio(String tipo, List<Venda> vendas) {
         principal.carregaRelatorios(tipo, vendas);
     }
+
     /**
      * @param args the command line arguments
      */

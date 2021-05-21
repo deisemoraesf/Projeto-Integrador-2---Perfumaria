@@ -1,5 +1,6 @@
 package com.devsakatsuki.perfumariapi2.dao;
 
+import com.devsakatsuki.perfumariapi2.model.Cliente;
 import com.devsakatsuki.perfumariapi2.model.ItemVenda;
 import com.devsakatsuki.perfumariapi2.model.Venda;
 import java.sql.Connection;
@@ -18,9 +19,11 @@ public class VendaDAO {
     
     Connection conexao;
     
+    ConexaoBD conexao2 = new ConexaoBD();
+    ClienteDAO cli = new ClienteDAO(conexao2.abrirConexao());
+    
     public VendaDAO(Connection conexao) {
     this.conexao = conexao;
-    
     }
     
 public void inserirVenda(Venda venda) {
@@ -62,30 +65,26 @@ public void inserirVenda(Venda venda) {
 public List<Venda> getRelatorios(Date ini, Date fim){
         List<Venda> vendas = new ArrayList<Venda>();
         
-        String sql= "select * from venda where data between ? AND ?";
+        String sql= "select * from venda where datavenda between ? AND ?";
         
         try {
             PreparedStatement ps;
             ps = this.conexao.prepareStatement(sql);
             ps.setDate(1, new java.sql.Date(ini.getTime()));
-            ps.setDate(1, new java.sql.Date(fim.getTime()));
+            ps.setDate(2, new java.sql.Date(fim.getTime()));
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
+               
+                int id = rs.getInt("id");
+                int idCliente = rs.getInt("idcliente");
+                Date dataVenda = rs.getDate("datavenda");
+                double valorTotal = rs.getDouble("valortotal");
+                 
+                Cliente cliente = cli.getClienteId(idCliente);
+                Venda v = new Venda(id, cliente, dataVenda, valorTotal);
                 
-                /*int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                String cpf = rs.getString("cpf");
-                String endereco = rs.getString("endereco");
-                String telefone = rs.getString("telefone");
-                String email = rs.getString("email");
-                String sexo = rs.getString("sexo");
-                String estadoCivil = rs.getString("estado_civil");
-                Date dtNasc = rs.getDate("data_nascimento");
-                                
-                Cliente c = new Cliente(id, nome, cpf, endereco, telefone, email, sexo, estadoCivil, dtNasc);
-                
-                vendas.add(c);*/
+                vendas.add(v);
                 
             }
         } catch (SQLException ex) {

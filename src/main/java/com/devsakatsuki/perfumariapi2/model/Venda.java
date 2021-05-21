@@ -33,6 +33,15 @@ public class Venda {
         this.itensRemover = new ArrayList<>();
     }
 
+    public Venda(int id, Cliente cliente, Date dataVenda, Double valorTotal) {
+        this.id = id;
+        this.cliente = cliente;
+        this.dataVenda = dataVenda;
+        this.valorTotal = valorTotal;
+    }
+    
+    
+    
     public int getId() {
         return id;
     }
@@ -57,14 +66,16 @@ public class Venda {
         this.dataVenda = dataVenda;
     }
 
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+    
+
     public Double getValorTotal() {
-        double total = 0;
-        for(ItemVenda iv : itens){
-            total += (iv.getValorUnitario() * iv.getQuantidade());
-        }
-        return total;
+        return valorTotal;
     }
 
+    
     public List<ItemVenda> getItens() {
         return itens;
     }
@@ -86,6 +97,14 @@ public class Venda {
 
     public int quantidadeItens() {
         return itens.size();
+    }
+    
+    public Double calculaValorTotal() {
+        double total = 0;
+        for(ItemVenda iv : itens){
+            total += (iv.getValorUnitario() * iv.getQuantidade());
+        }
+        return total;
     }
     
 }

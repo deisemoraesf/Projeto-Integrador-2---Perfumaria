@@ -35,9 +35,6 @@ public class JVendas2 extends javax.swing.JInternalFrame {
     public JVendas2() {
         initComponents();
         
-        
-        
-        
         ftxtData.setText(dateFormat.format(new Date(System.currentTimeMillis())));
         
         for(Produto prod : pdao.getProdutos()){
@@ -304,21 +301,21 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
-                    .addGroup(pnlDadosVendaLayout.createSequentialGroup()
-                        .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblDadosVenda, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDadosVendaLayout.createSequentialGroup()
-                                .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblData)
-                                    .addComponent(lblCliente))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblDadosVenda, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDadosVendaLayout.createSequentialGroup()
+                            .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblData)
+                                .addComponent(lblCliente))
+                            .addGap(18, 18, 18)
+                            .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnlDadosVendaLayout.createSequentialGroup()
                                     .addComponent(ftxtData, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(pnlDadosVendaLayout.createSequentialGroup()
-                                        .addComponent(cmbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnPesquisarCliente)))))
-                        .addGap(0, 29, Short.MAX_VALUE)))
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(pnlDadosVendaLayout.createSequentialGroup()
+                                    .addComponent(cmbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))))))
                 .addContainerGap())
         );
         pnlDadosVendaLayout.setVerticalGroup(
@@ -336,8 +333,8 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                     .addGroup(pnlDadosVendaLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbClientes)
-                            .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                            .addComponent(cmbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPesquisarCliente))
                         .addGap(18, 18, Short.MAX_VALUE)))
                 .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ftxtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -415,7 +412,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
             ItemVendaTableModel ivtm = (ItemVendaTableModel) tblItensVenda.getModel();
             ivtm.setDados(venda.getItens());
 
-            ftxtValorTotal.setValue(venda.getValorTotal());
+            ftxtValorTotal.setValue(venda.calculaValorTotal());
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
     private void ftxtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtDataActionPerformed
@@ -433,6 +430,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         if (opcao == 0) {           
             venda.setCliente((Cliente)cmbClientes.getSelectedItem());
             venda.setDataVenda(dataVenda);
+            venda.setValorTotal(venda.calculaValorTotal());
             if(venda.getId() == 0){
                 try {
                     vdao.inserirVenda(venda);

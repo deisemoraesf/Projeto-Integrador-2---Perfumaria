@@ -2,6 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
+    <Property name="closable" type="boolean" value="true"/>
     <Property name="title" type="java.lang.String" value="Relat&#xf3;rios"/>
   </Properties>
   <SyntheticProperties>
@@ -32,7 +33,7 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="555" max="32767" attributes="0"/>
+              <Component id="jScrollAnalitico" pref="555" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
@@ -45,7 +46,7 @@
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="555" max="32767" attributes="0"/>
+                  <Component id="jScrollSintetico" pref="555" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -58,7 +59,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblAnalitico" min="-2" pref="34" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="107" max="-2" attributes="0"/>
+              <Component id="jScrollAnalitico" min="-2" pref="107" max="-2" attributes="0"/>
               <EmptySpace pref="79" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="lblValor" max="32767" attributes="0"/>
@@ -69,7 +70,7 @@
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="86" max="-2" attributes="0"/>
+                  <Component id="jScrollSintetico" min="-2" pref="86" max="-2" attributes="0"/>
                   <EmptySpace pref="233" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -93,7 +94,7 @@
         <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Anal&#xed;tico de Vendas"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="jScrollAnalitico">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
@@ -115,7 +116,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+    <Container class="javax.swing.JScrollPane" name="jScrollSintetico">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
@@ -125,7 +126,8 @@
         <Component class="javax.swing.JTable" name="TabelaSintetico">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="0">
+              <Table columnCount="4" rowCount="0">
+                <Column editable="true" title="N&#xfa;mero" type="java.lang.Object"/>
                 <Column editable="true" title="Data da Venda" type="java.lang.Object"/>
                 <Column editable="true" title="Cliente" type="java.lang.Object"/>
                 <Column editable="true" title="Valor Total" type="java.lang.Object"/>
