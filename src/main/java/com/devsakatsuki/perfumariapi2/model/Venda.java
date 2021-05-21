@@ -1,4 +1,3 @@
-
 package com.devsakatsuki.perfumariapi2.model;
 
 import java.util.ArrayList;
@@ -12,23 +11,17 @@ public class Venda {
     private Cliente cliente;
     private Date dataVenda;
     private Double valorTotal;
-    private Produto produto;
-    private int quantidade;
-    
-    
-    private List<Produto> itens;
-    private List<Produto> itensRemover;
+    private List<ItemVenda> itens;
+    private List<ItemVenda> itensRemover;
 
     public Venda() {
         this.id = 0;
         this.cliente = new Cliente();
         this.dataVenda = new Date();
         this.valorTotal = 0.0;
-        this.produto = new Produto();
-        this.quantidade = 0;
-        
         this.itens = new ArrayList<>();
         this.itensRemover = new ArrayList<>();
+        
     }
 
     public Venda(int id) {
@@ -36,9 +29,6 @@ public class Venda {
         this.cliente = new Cliente();
         this.dataVenda = new Date();
         this.valorTotal = 0.0;
-        this.produto = new Produto();
-        this.quantidade = 0;
-        
         this.itens = new ArrayList<>();
         this.itensRemover = new ArrayList<>();
     }
@@ -67,79 +57,35 @@ public class Venda {
         this.dataVenda = dataVenda;
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-    
-
     public Double getValorTotal() {
         double total = 0;
-        for (Produto item : itens){
-            total += (item.getPreco()* item.getQuantidade());
+        for(ItemVenda iv : itens){
+            total += (iv.getValorUnitario() * iv.getQuantidade());
         }
-        return total ;
+        return total;
     }
 
-
-    public List<Produto> getItens() {
+    public List<ItemVenda> getItens() {
         return itens;
     }
 
-    public void setItens(List<Produto> itens) {
-        this.itens = itens;
+    public List<ItemVenda> getItensRemover() {
+        return itensRemover;
     }
     
-    public void addItem(Produto itemVenda){
+    public void addItem(ItemVenda itemVenda) {
         itens.add(itemVenda);
     }
-    
-    public void removerItem(Produto itemVenda){
+
+    public void removeItem(ItemVenda itemVenda) {
         itens.remove(itemVenda);
-        if (itemVenda.getId() !=0){
+        if (itemVenda.getId()!= 0) {
             itensRemover.add(itemVenda);
         }
     }
 
-    public int qtdItens(){
+    public int quantidadeItens() {
         return itens.size();
     }
-    
-    
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-    
-    
-    
-    
-    
-    
-
-
-    
     
 }

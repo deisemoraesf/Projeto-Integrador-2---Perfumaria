@@ -200,6 +200,7 @@ public class Principal extends javax.swing.JFrame {
         desktop.repaint();
         JVendas2 jvendas = new JVendas2();
         desktop.add(jvendas);
+        Venda venda = new Venda();
         jvendas.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

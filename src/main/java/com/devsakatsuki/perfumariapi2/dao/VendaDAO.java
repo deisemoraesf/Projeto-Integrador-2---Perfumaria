@@ -1,7 +1,6 @@
-
 package com.devsakatsuki.perfumariapi2.dao;
 
-import com.devsakatsuki.perfumariapi2.model.Cliente;
+import com.devsakatsuki.perfumariapi2.model.ItemVenda;
 import com.devsakatsuki.perfumariapi2.model.Venda;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,26 +20,42 @@ public class VendaDAO {
     
     public VendaDAO(Connection conexao) {
     this.conexao = conexao;
+    
     }
     
+public void inserirVenda(Venda venda) {
     
-    public void gravarVenda(Venda venda) {
-        String sql="insert into produto(codigo, nome, preco, categoria, marca, quantidade) values (?, ?, ?, ?, ?, ?)";
-        PreparedStatement ps;
+    String sql = "INSERT INTO venda (idcliente, datavenda ,valortotal) VALUES (?, ?, ?)";
+    PreparedStatement ps;
+    
+    try {
+        ps = this.conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.setInt(1, venda.getCliente().getId());
+        ps.setDate(2, new java.sql.Date(venda.getDataVenda().getTime()));
+        ps.setDouble(3, venda.getValorTotal());
+        ps.execute();
         
-        try {
+        ResultSet rs = ps.getGeneratedKeys();
+        rs.next();
+        int idVenda = rs.getInt(1);
+        
+        for (ItemVenda iv : venda.getItens()){
+            sql = "INSERT INTO item_venda (idproduto, idvenda, quantidade, valorunitario) VALUES (?, ?, ?, ?)";
             ps = this.conexao.prepareStatement(sql);
-            ps.setInt(1, venda.getId());
-                ps.setInt(6, venda.getQuantidade());
-            
+            ps.setInt(1, iv.getProduto().getCodigo());
+            ps.setInt(2, idVenda);
+            ps.setInt(3, iv.getQuantidade());
+            ps.setDouble(4, iv.getValorUnitario());
             ps.execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+                
+    } catch (SQLException ex) {
+        Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
-    
-    public List<Venda> getRelatorios(Date ini, Date fim){
+        
+    }
+
+public List<Venda> getRelatorios(Date ini, Date fim){
         List<Venda> vendas = new ArrayList<Venda>();
         
         String sql= "select * from venda where data between ? AND ?";
@@ -70,7 +85,7 @@ public class VendaDAO {
                 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
                 
         return vendas;
