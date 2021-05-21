@@ -24,3 +24,19 @@ marca VARCHAR (255),
 quantidade INT 
 );
 
+CREATE TABLE item_venda (
+id INT auto_increment primary key,
+idproduto bigint (20),
+idvenda bigint (20),
+quantidade int (11),
+valorunitario double
+);
+
+
+CREATE TABLE venda (
+id INT auto_increment primary key,
+idcliente bigint (20),
+datavenda date,
+valortotal double
+);
+
