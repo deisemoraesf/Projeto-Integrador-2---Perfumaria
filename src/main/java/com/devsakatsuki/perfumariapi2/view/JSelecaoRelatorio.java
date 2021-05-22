@@ -117,9 +117,10 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSintetico)
-                            .addComponent(lblAnalitico))
+                        .addComponent(lblAnalitico)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblSintetico)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(checkSintetico)
@@ -144,14 +145,14 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSintetico)
-                    .addComponent(checkSintetico))
+                .addComponent(checkSintetico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAnalitico)
-                    .addComponent(checkAnalitico))
-                .addGap(16, 16, 16)
+                    .addComponent(checkAnalitico)
+                    .addComponent(lblSintetico))
+                .addGap(4, 4, 4)
+                .addComponent(lblAnalitico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
@@ -161,7 +162,7 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
                     .addComponent(txtDataDe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGerarRelatorio)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
@@ -197,11 +198,13 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Período maior que 30 dias", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
 
-            executeMostraTelaRelatorio("Sintetico", vdao.getRelatorios(dataDe, dataAte));
+            executeMostraTelaRelatorioSintetico(vdao.getRelatorios(dataDe, dataAte));
 
             Component comp = SwingUtilities.getRoot(this);
             ((Window) comp).dispose();
-
+            
+            conexao.fecharConexao();
+            
         } else {
 
             String[] datad = txtDataDe.getText().split("/");
@@ -227,11 +230,12 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Período maior que 30 dias", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
 
-            executeMostraTelaRelatorio("Analitico", vdao.getRelatorios(dataDe, dataAte));
+            executeMostraTelaRelatorioAnalitico(vdao.getRelatorios(dataDe, dataAte));
 
             Component comp = SwingUtilities.getRoot(this);
             ((Window) comp).dispose();
-
+            
+            conexao.fecharConexao();
         }
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
@@ -242,8 +246,12 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
         setVisible(true);
     }
 
-    public void executeMostraTelaRelatorio(String tipo, List<Venda> vendas) {
-        principal.carregaRelatorios(tipo, vendas);
+    public void executeMostraTelaRelatorioSintetico(List<Venda> vendas) {
+        principal.carregaRelatoriosSintetico(vendas);
+    }
+    
+    public void executeMostraTelaRelatorioAnalitico(List<Venda> vendas) {
+        principal.carregaRelatoriosAnalitico(vendas);
     }
 
     /**

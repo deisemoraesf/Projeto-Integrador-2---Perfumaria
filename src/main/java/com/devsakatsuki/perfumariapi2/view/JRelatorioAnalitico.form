@@ -23,19 +23,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="lblAnalitico" max="32767" attributes="0"/>
-                  <Component id="lblSintetico" pref="217" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollAnalitico" pref="555" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="lblTotal" min="-2" pref="79" max="-2" attributes="0"/>
@@ -43,49 +30,34 @@
               <Component id="lblValor" min="-2" pref="67" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollSintetico" pref="555" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
+              <Component id="lblAnalitico" min="-2" pref="217" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jScrollAnalitico" min="-2" pref="971" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="lblSintetico" min="-2" pref="37" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Component id="lblAnalitico" min="-2" pref="34" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-              <Component id="jScrollAnalitico" min="-2" pref="107" max="-2" attributes="0"/>
-              <EmptySpace pref="79" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollAnalitico" pref="327" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="lblValor" max="32767" attributes="0"/>
                   <Component id="lblTotal" pref="26" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                  <Component id="jScrollSintetico" min="-2" pref="86" max="-2" attributes="0"/>
-                  <EmptySpace pref="233" max="32767" attributes="0"/>
-              </Group>
-          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblSintetico">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Sint&#xe9;tico de Vendas"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblAnalitico">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -104,33 +76,13 @@
         <Component class="javax.swing.JTable" name="TabelaAnalitico">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="0">
+              <Table columnCount="6" rowCount="0">
+                <Column editable="true" title="N&#xfa;mero" type="java.lang.Object"/>
                 <Column editable="true" title="Data da venda" type="java.lang.Object"/>
                 <Column editable="true" title="Cliente" type="java.lang.Object"/>
                 <Column editable="true" title="Produtos" type="java.lang.Object"/>
                 <Column editable="true" title="Quantidade" type="java.lang.Object"/>
                 <Column editable="true" title="Total" type="java.lang.Object"/>
-              </Table>
-            </Property>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JScrollPane" name="jScrollSintetico">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="TabelaSintetico">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="0">
-                <Column editable="true" title="N&#xfa;mero" type="java.lang.Object"/>
-                <Column editable="true" title="Data da Venda" type="java.lang.Object"/>
-                <Column editable="true" title="Cliente" type="java.lang.Object"/>
-                <Column editable="true" title="Valor Total" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>

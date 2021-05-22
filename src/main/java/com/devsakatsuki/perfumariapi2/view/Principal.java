@@ -211,17 +211,20 @@ public class Principal extends javax.swing.JFrame {
         sr.mostraTelaPrincipal(this);
     }//GEN-LAST:event_jmiRelatorioAnaliticoActionPerformed
     
-    public void carregaRelatorios(String tipo, List<Venda> vendas){
+    public void carregaRelatoriosSintetico(List<Venda> vendas){
         desktop.removeAll();
         desktop.repaint();
-        if(tipo.equalsIgnoreCase("Analitico")){
-        JRelatorios relatorios;
-        form.posicionarInternalFrame(relatorios = new JRelatorios(tipo, vendas), desktop);
-        }else{
-        JRelatorios relatorios;
-        form.posicionarInternalFrame(relatorios = new JRelatorios(tipo, vendas), desktop);
-       
-        }         
+        JRelatorioSintetico relatorios;
+        form.posicionarInternalFrame(relatorios = new JRelatorioSintetico(vendas), desktop);
+            
+    }
+    
+    public void carregaRelatoriosAnalitico(List<Venda> vendas){
+        desktop.removeAll();
+        desktop.repaint();
+        JRelatorioAnalitico relatorios;
+        form.posicionarInternalFrame(relatorios = new JRelatorioAnalitico(vendas), desktop);
+            
     }
     
    

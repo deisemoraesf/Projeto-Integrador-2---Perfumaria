@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author 55119
  */
-public class JRelatorios extends javax.swing.JInternalFrame {
+public class JRelatorioSintetico extends javax.swing.JInternalFrame {
     
     ConexaoBD conexao = new ConexaoBD();
     VendaDAO ven = new VendaDAO(conexao.abrirConexao());
@@ -23,21 +23,17 @@ public class JRelatorios extends javax.swing.JInternalFrame {
     /**
      * Creates new form JRelatorios
      */
-    public JRelatorios() {
+    public JRelatorioSintetico() {
         initComponents();
     }
     
-    public JRelatorios(String tipo, List<Venda> vendas) {
+    public JRelatorioSintetico(List<Venda> vendas) {
         initComponents();
-        
-        if(tipo.equalsIgnoreCase("Sintetico")){
+       
             lblSintetico.setVisible(true);
             jScrollSintetico.setVisible(true);
             TabelaSintetico.setVisible(true);
-            lblAnalitico.setVisible(false);
-            jScrollAnalitico.setVisible(false);
-            TabelaAnalitico.setVisible(false);
-            
+                        
         DefaultTableModel tblSintetico = (DefaultTableModel)TabelaSintetico.getModel();
         
         tblSintetico.setNumRows(0);
@@ -55,14 +51,7 @@ public class JRelatorios extends javax.swing.JInternalFrame {
         
         lblValor.setText(String.valueOf(valorTotalVendas));
             
-        }else{
-            lblSintetico.setVisible(false);
-            jScrollSintetico.setVisible(false);
-            TabelaSintetico.setVisible(false);
-            lblAnalitico.setVisible(true);
-            jScrollAnalitico.setVisible(true);
-            TabelaAnalitico.setVisible(true);
-        }
+        
     }
 
     /**
@@ -75,9 +64,6 @@ public class JRelatorios extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         lblSintetico = new javax.swing.JLabel();
-        lblAnalitico = new javax.swing.JLabel();
-        jScrollAnalitico = new javax.swing.JScrollPane();
-        TabelaAnalitico = new javax.swing.JTable();
         jScrollSintetico = new javax.swing.JScrollPane();
         TabelaSintetico = new javax.swing.JTable();
         lblTotal = new javax.swing.JLabel();
@@ -88,19 +74,6 @@ public class JRelatorios extends javax.swing.JInternalFrame {
 
         lblSintetico.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblSintetico.setText("Relatório Sintético de Vendas");
-
-        lblAnalitico.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblAnalitico.setText("Relatório Analítico de Vendas");
-
-        TabelaAnalitico.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Data da venda", "Cliente", "Produtos", "Quantidade", "Total"
-            }
-        ));
-        jScrollAnalitico.setViewportView(TabelaAnalitico);
 
         TabelaSintetico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,46 +94,32 @@ public class JRelatorios extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(179, 179, 179)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblAnalitico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblSintetico, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollAnalitico, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollSintetico, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(302, 302, 302)
+                .addComponent(lblSintetico, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(303, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollSintetico)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblSintetico, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
-                .addComponent(jScrollAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addComponent(jScrollSintetico, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(93, 93, 93)
-                    .addComponent(jScrollSintetico, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(233, Short.MAX_VALUE)))
         );
 
         pack();
@@ -168,11 +127,8 @@ public class JRelatorios extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TabelaAnalitico;
     private javax.swing.JTable TabelaSintetico;
-    private javax.swing.JScrollPane jScrollAnalitico;
     private javax.swing.JScrollPane jScrollSintetico;
-    private javax.swing.JLabel lblAnalitico;
     private javax.swing.JLabel lblSintetico;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblValor;

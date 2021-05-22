@@ -39,6 +39,14 @@ public class Venda {
         this.dataVenda = dataVenda;
         this.valorTotal = valorTotal;
     }
+
+    public Venda(int id, Cliente cliente, Date dataVenda, Double valorTotal, List<ItemVenda> itens) {
+        this.id = id;
+        this.cliente = cliente;
+        this.dataVenda = dataVenda;
+        this.valorTotal = valorTotal;
+        this.itens = itens;
+    }
     
     
     
@@ -79,6 +87,11 @@ public class Venda {
     public List<ItemVenda> getItens() {
         return itens;
     }
+
+    public void setItens(List<ItemVenda> itens) {
+        this.itens = itens;
+    }
+    
 
     public List<ItemVenda> getItensRemover() {
         return itensRemover;

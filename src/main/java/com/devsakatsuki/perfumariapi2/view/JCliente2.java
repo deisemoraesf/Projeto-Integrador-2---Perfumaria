@@ -185,6 +185,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                 c.getTelefone()
             });
             
+            conexao.fecharConexao();
                 
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null,"Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
@@ -205,6 +206,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                 c.getTelefone()
             });
             
+            conexao.fecharConexao();
                 
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null,"Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
@@ -225,7 +227,8 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                     c.getTelefone()
                 });
             }
-                
+            
+            conexao.fecharConexao();
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null,"Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
@@ -252,7 +255,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
        
         } 
         
-        
+        conexao.fecharConexao();
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jbtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarActionPerformed
@@ -265,7 +268,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
             JClienteInserir2 clienteInserir = new JClienteInserir2(c);
             clienteInserir.mostraTela(this);
         }
-        
+        conexao.fecharConexao();
     }//GEN-LAST:event_jbtnEditarActionPerformed
     
     public void carregaTabela(){
@@ -282,7 +285,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                 c.getTelefone()
             });
         }
-            
+        conexao.fecharConexao();
     }
     
     public void setPosicao() {

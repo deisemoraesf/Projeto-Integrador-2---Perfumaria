@@ -25,6 +25,15 @@ public class ItemVenda {
         this.valorUnitario = 0.0;
     }
 
+    public ItemVenda(int id, Venda venda, Produto produto, int quantidade, Double valorUnitario) {
+        this.id = id;
+        this.venda = venda;
+        this.produto = produto;
+        this.quantidade = quantidade;
+        this.valorUnitario = valorUnitario;
+    }
+
+    
     public int getId() {
         return id;
     }
