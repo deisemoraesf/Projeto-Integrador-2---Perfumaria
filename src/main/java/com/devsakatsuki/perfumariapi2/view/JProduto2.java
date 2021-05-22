@@ -49,9 +49,9 @@ public class JProduto2 extends javax.swing.JInternalFrame {
         setTitle("Produtos");
         setPreferredSize(new java.awt.Dimension(1008, 623));
 
-        jLabel1.setText("Produto");
+        jLabel1.setText("Filtro:");
 
-        ComboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "Categoria", "Marca", "Todos" }));
+        ComboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Código", "Nome", "Categoria", "Marca", " " }));
         ComboPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboPesquisaActionPerformed(evt);
@@ -110,14 +110,14 @@ public class JProduto2 extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 992, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPesquisa)
+                .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBtnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -129,18 +129,21 @@ public class JProduto2 extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisa))
-                .addGap(24, 24, 24)
-                .addComponent(jBtnNovo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnExcluir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jBtnNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnExcluir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPesquisa))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
                 .addContainerGap())
@@ -163,92 +166,112 @@ public class JProduto2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPesquisaActionPerformed
 
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
-        // TODO add your handling code here:
         if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Código")){
-            try{
-                
-            Produto p = pro.getProdutoId(Integer.valueOf(txtPesquisa.getText()));    
-                
-            DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();
-        
-            tblProduto.setNumRows(0);
+            try{                
+                Produto p = pro.getProdutoId(Integer.valueOf(txtPesquisa.getText()));    
+                if(p.getId()!=0){
+                    DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();        
+                    tblProduto.setNumRows(0);
             
-            tblProduto.addRow(new Object []{
-                p.getCodigo(),
-                p.getNome(),
-                nf.format(p.getPreco()),
-                p.getQuantidade(),
-                p.getCategoria(),
-                p.getMarca()
-            });
-            
-                
+                    tblProduto.addRow(new Object []{
+                        p.getCodigo(),
+                        p.getNome(),
+                        nf.format(p.getPreco()),
+                        p.getQuantidade(),
+                        p.getCategoria(),
+                        p.getMarca()
+                    });   
+                }else{
+                    JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou produto.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }  
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
+            
+            
         } else if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Nome")){
             try{
-                          
-            DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();
-        
-            tblProduto.setNumRows(0);
+                if(pro.getProdutoNome(txtPesquisa.getText()).size() > 0){
+                    if(txtPesquisa.getText().equals("")){
+                      JOptionPane.showMessageDialog(null, "Informe o nome do produto.", "Aviso", JOptionPane.WARNING_MESSAGE);                         
+                    }else{                                               
+                        DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();        
+                        tblProduto.setNumRows(0);
             
-            for(Produto p: pro.getProdutoNome(txtPesquisa.getText())){
-                tblProduto.addRow(new Object []{
-                    p.getCodigo(),
-                    p.getNome(),
-                    nf.format(p.getPreco()),
-                    p.getQuantidade(),
-                    p.getCategoria(),
-                    p.getMarca()
-                });
-            }
-                
+                        for(Produto p: pro.getProdutoNome(txtPesquisa.getText())){
+                            tblProduto.addRow(new Object []{
+                                p.getCodigo(),
+                                p.getNome(),
+                                nf.format(p.getPreco()),
+                                p.getQuantidade(),
+                                p.getCategoria(),
+                                p.getMarca()
+                            });
+                        }
+                    }
+                }else{                    
+                    JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou produto.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
+            
+            
         }else if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Marca")){
             try{
-                                     
-            DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();
-        
-            tblProduto.setNumRows(0);
+                if(pro.getProdutoMarca(txtPesquisa.getText()).size() > 0){
+                    if(txtPesquisa.getText().equals("")){
+                        JOptionPane.showMessageDialog(null, "Informe a marca do produto.", "Aviso", JOptionPane.WARNING_MESSAGE);                         
+                    }else{                     
+                        DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();        
+                        tblProduto.setNumRows(0);
             
-            for(Produto p: pro.getProdutoMarca(txtPesquisa.getText())){
-                tblProduto.addRow(new Object []{
-                   p.getCodigo(),
-                    p.getNome(),
-                    nf.format(p.getPreco()),
-                    p.getQuantidade(),
-                    p.getCategoria(),
-                    p.getMarca()
-                });
-            }
-                
+                        for(Produto p: pro.getProdutoMarca(txtPesquisa.getText())){
+                            tblProduto.addRow(new Object []{
+                                p.getCodigo(),
+                                p.getNome(),
+                                nf.format(p.getPreco()),
+                                p.getQuantidade(),
+                                p.getCategoria(),
+                                p.getMarca()
+                            });
+                        }
+                    }
+                }else{
+                   JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou produto.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                } 
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
+            
+            
         }else if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Categoria")){
             try{
-                                     
-            DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();
-        
-            tblProduto.setNumRows(0);
+                if(pro.getProdutoCategoria(txtPesquisa.getText()).size() > 0){
+                    if(txtPesquisa.getText().equals("")){
+                        JOptionPane.showMessageDialog(null, "Informe a categoria do produto.", "Aviso", JOptionPane.WARNING_MESSAGE);                         
+                    }else{
+                        DefaultTableModel tblProduto = (DefaultTableModel)jTbProduto.getModel();        
+                        tblProduto.setNumRows(0);
             
-            for(Produto p: pro.getProdutoCategoria(txtPesquisa.getText())){
-                tblProduto.addRow(new Object []{
-                   p.getCodigo(),
-                    p.getNome(),
-                    nf.format(p.getPreco()),
-                    p.getQuantidade(),
-                    p.getCategoria(),
-                    p.getMarca()
-                });
-            }
-                
+                        for(Produto p: pro.getProdutoCategoria(txtPesquisa.getText())){
+                            tblProduto.addRow(new Object []{
+                                p.getCodigo(),
+                                p.getNome(),
+                                nf.format(p.getPreco()),
+                                p.getQuantidade(),
+                                p.getCategoria(),
+                                p.getMarca()
+                            });
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou produto.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
+            
         }else{
             txtPesquisa.setText("Todos");
             carregaTabela();
@@ -270,20 +293,23 @@ public class JProduto2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        // TODO add your handling code here:
-        int escolha = JOptionPane.showConfirmDialog(this, "Deseja excluir produto?", "Excluir Produto",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int i = i = jTbProduto.getSelectedRow();
+        if(i == -1){
+            JOptionPane.showMessageDialog(null, "Selecione um produto", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }else{
+            int escolha = JOptionPane.showConfirmDialog(this, "Deseja excluir produto?", "Excluir Produto",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         
-        if( escolha == 0){
-        Produto p = new Produto();
+            if( escolha == 0){
+                Produto p = new Produto();
                         
-        int index = jTbProduto.getSelectedRow();
-        p = pro.getProdutos().get(index);
+                int index = jTbProduto.getSelectedRow();
+                p = pro.getProdutos().get(index);
         
-        pro.deletarProduto(p.getId());
+                pro.deletarProduto(p.getId());
         
-        carregaTabela();
-       
-        } 
+                carregaTabela();
+            }     
+        }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     public void carregaTabela(){

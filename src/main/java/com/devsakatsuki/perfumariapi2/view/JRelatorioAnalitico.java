@@ -87,9 +87,17 @@ public class JRelatorioAnalitico extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Número", "Data da venda", "Cliente", "Produtos", "Quantidade", "Total"
+                "Número Venda", "Data da venda", "Cliente", "Produtos", "Quantidade", "Total Venda"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollAnalitico.setViewportView(TabelaAnalitico);
 
         lblTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

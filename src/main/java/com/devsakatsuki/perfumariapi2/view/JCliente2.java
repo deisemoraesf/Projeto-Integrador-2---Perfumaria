@@ -50,7 +50,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         setName("Cliente"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1008, 623));
 
-        ComboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Código", "Nome", "Cpf", " " }));
+        ComboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Código", "Nome", "CPF", " " }));
         ComboPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboPesquisaActionPerformed(evt);
@@ -105,77 +105,71 @@ public class JCliente2 extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Cliente");
+        jLabel1.setText("Filtro:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbtnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnPesquisar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(25, 25, 25))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtPesquisa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbtnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtnNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtnPesquisar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnPesquisar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPesquisa)
-                            .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(2, 2, 2)))
+                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(24, 24, 24)
                 .addComponent(jbtnNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnExcluir)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPesquisaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_ComboPesquisaActionPerformed
 
     private void jbtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNovoActionPerformed
         JClienteInserir2 clienteInserir = new JClienteInserir2();
         clienteInserir.mostraTela(this);
-
     }//GEN-LAST:event_jbtnNovoActionPerformed
 
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtPesquisaActionPerformed
 
     private void jbtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPesquisarActionPerformed
-        // TODO add your handling code here:
         if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Código")) {
             try {
-
                 Cliente c = cli.getClienteId(Integer.valueOf(txtPesquisa.getText()));
-
-                if (c != null) {
-                    
+                if (c.getId() != 0) {                    
                     DefaultTableModel tblClientes = (DefaultTableModel) jTbCliente.getModel();
 
                     tblClientes.setNumRows(0);
@@ -197,7 +191,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
             try {
 
                 Cliente c = cli.getClienteCpf(txtPesquisa.getText());
-                if (c != null) {
+                if (c.getCpf() != null) {
                     
                     DefaultTableModel tblClientes = (DefaultTableModel) jTbCliente.getModel();
 
@@ -219,18 +213,20 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         } else if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Nome")) {
             try {
                 if (cli.getClienteNome(txtPesquisa.getText()).size() > 0) {
+                    if(txtPesquisa.getText().equals("")){
+                        JOptionPane.showMessageDialog(null, "Informe o nome do cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);                         
+                    }else{
+                        DefaultTableModel tblClientes = (DefaultTableModel) jTbCliente.getModel();
+                        tblClientes.setNumRows(0);
 
-                    DefaultTableModel tblClientes = (DefaultTableModel) jTbCliente.getModel();
-
-                    tblClientes.setNumRows(0);
-
-                    for (Cliente c : cli.getClienteNome(txtPesquisa.getText())) {
-                        tblClientes.addRow(new Object[]{
-                            c.getId(),
-                            c.getNome(),
-                            c.getCpf(),
-                            c.getTelefone()
-                        });
+                        for (Cliente c : cli.getClienteNome(txtPesquisa.getText())) {
+                            tblClientes.addRow(new Object[]{
+                                c.getId(),
+                                c.getNome(),
+                                c.getCpf(),
+                                c.getTelefone()
+                            });
+                        }
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -248,7 +244,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int index = index = jTbCliente.getSelectedRow();
         if (index == -1) {
-            JOptionPane.showMessageDialog(null, "É preciso selecionar um cliente", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione um cliente", "Aviso", JOptionPane.WARNING_MESSAGE);
         } else {
             int escolha = JOptionPane.showConfirmDialog(this, "Deseja excluir cliente?", "Excluir Cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             System.out.print(escolha);
