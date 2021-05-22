@@ -124,7 +124,10 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboPesquisaActionPerformed
 
     private void jbtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPesquisarActionPerformed
-
+        if(txtPesquisa.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Digite algo.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        
         if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Cpf")) {
             try {
 
