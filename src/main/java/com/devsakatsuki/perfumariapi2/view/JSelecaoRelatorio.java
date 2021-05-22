@@ -5,12 +5,12 @@ import com.devsakatsuki.perfumariapi2.dao.VendaDAO;
 import com.devsakatsuki.perfumariapi2.model.Venda;
 import java.awt.Component;
 import java.awt.Window;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-
 
 public class JSelecaoRelatorio extends javax.swing.JFrame {
 
@@ -184,14 +184,17 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
         }
 
         if (checkSintetico.isSelected()) {
+            SimpleDateFormat sdformat = new 
+            SimpleDateFormat("yyyy-MM-dd");
+            
             String[] datad = txtDataDe.getText().split("/");
             Calendar calendar = Calendar.getInstance();
-            calendar.set(Integer.parseInt(datad[2]), Integer.parseInt(datad[1])-1, Integer.parseInt(datad[0]));
-            Date dataDe = calendar.getTime();
+            calendar.set(Integer.parseInt(datad[2]), Integer.parseInt(datad[1]) - 1, Integer.parseInt(datad[0]));
+            Date dataDe =calendar.getTime();
 
             String[] dataa = txtDataAte.getText().split("/");
             Calendar calendar2 = Calendar.getInstance();
-            calendar2.set(Integer.parseInt(dataa[2]), Integer.parseInt(dataa[1])-1, Integer.parseInt(dataa[0]));
+            calendar2.set(Integer.parseInt(dataa[2]), Integer.parseInt(dataa[1]) - 1, Integer.parseInt(dataa[0]));
             Date dataAte = calendar2.getTime();
 
             Calendar calendar3 = Calendar.getInstance();
@@ -203,17 +206,19 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
             System.out.print(dataAte);
             System.out.print(data30);
 
-            if (dataDe.after(data30)) {
+            if (dataDe.after(dataAte)) {
+                JOptionPane.showMessageDialog(null, "A data De não pode ser maior que data Até.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }else if(dataAte.after(data30)){
                 JOptionPane.showMessageDialog(null, "Período maior que 30 dias", "Aviso", JOptionPane.WARNING_MESSAGE);
+            } else {
+
+                executeMostraTelaRelatorioSintetico(vdao.getRelatorios(dataDe, dataAte));
+
+                Component comp = SwingUtilities.getRoot(this);
+                ((Window) comp).dispose();
+
+                conexao.fecharConexao();
             }
-
-            executeMostraTelaRelatorioSintetico(vdao.getRelatorios(dataDe, dataAte));
-
-            Component comp = SwingUtilities.getRoot(this);
-            ((Window) comp).dispose();
-            
-            conexao.fecharConexao();
-            
         } else {
 
             String[] datad = txtDataDe.getText().split("/");
@@ -237,14 +242,15 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
 
             if (dataDe.after(data30)) {
                 JOptionPane.showMessageDialog(null, "Período maior que 30 dias", "Aviso", JOptionPane.WARNING_MESSAGE);
+            } else {
+
+                executeMostraTelaRelatorioAnalitico(vdao.getRelatorios(dataDe, dataAte));
+
+                Component comp = SwingUtilities.getRoot(this);
+                ((Window) comp).dispose();
+
+                conexao.fecharConexao();
             }
-
-            executeMostraTelaRelatorioAnalitico(vdao.getRelatorios(dataDe, dataAte));
-
-            Component comp = SwingUtilities.getRoot(this);
-            ((Window) comp).dispose();
-            
-            conexao.fecharConexao();
         }
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
@@ -258,7 +264,7 @@ public class JSelecaoRelatorio extends javax.swing.JFrame {
     public void executeMostraTelaRelatorioSintetico(List<Venda> vendas) {
         principal.carregaRelatoriosSintetico(vendas);
     }
-    
+
     public void executeMostraTelaRelatorioAnalitico(List<Venda> vendas) {
         principal.carregaRelatoriosAnalitico(vendas);
     }

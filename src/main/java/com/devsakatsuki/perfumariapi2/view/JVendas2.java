@@ -16,36 +16,34 @@ import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 
-
 public class JVendas2 extends javax.swing.JInternalFrame {
-                
+
     ConexaoBD conexao = new ConexaoBD();
     ProdutoDAO pdao = new ProdutoDAO(conexao.abrirConexao());
     ClienteDAO cdao = new ClienteDAO(conexao.abrirConexao());
     VendaDAO vdao = new VendaDAO(conexao.abrirConexao());
-    
+
     Venda venda = new Venda();
-        
+
     Locale br = new Locale("pt", "Brazil");
     NumberFormat nf = NumberFormat.getInstance(br);
     NumberFormat nfc = NumberFormat.getCurrencyInstance();
-    
-    
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    
+
     public JVendas2() {
         initComponents();
-        
+
         ftxtData.setText(dateFormat.format(new Date(System.currentTimeMillis())));
-        
-        for(Produto prod : pdao.getProdutos()){
+
+        for (Produto prod : pdao.getProdutos()) {
             cmbProdutos.addItem(prod);
-        } 
-        
-        for(Cliente cli : cdao.getClientes()){
+        }
+
+        for (Cliente cli : cdao.getClientes()) {
             cmbClientes.addItem(cli);
         }
-  
+
     }
 
     /**
@@ -388,64 +386,74 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha para remover.", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
-                  
+
     }//GEN-LAST:event_btnRemoverItensActionPerformed
-    
+
     private void cmbProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProdutosActionPerformed
-        Produto prod = (Produto) cmbProdutos.getSelectedItem();      
-        ftxtPreco.setText(String.valueOf(prod.getPreco()));         
+        Produto prod = (Produto) cmbProdutos.getSelectedItem();
+        ftxtPreco.setText(String.valueOf(prod.getPreco()));
     }//GEN-LAST:event_cmbProdutosActionPerformed
 
     private void cmbClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClientesActionPerformed
-               
+
     }//GEN-LAST:event_cmbClientesActionPerformed
 
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
-            ItemVenda iv = new ItemVenda();
-            
-            Produto prod = (Produto) cmbProdutos.getSelectedItem();
+        ItemVenda iv = new ItemVenda();
+
+        Produto prod = (Produto) cmbProdutos.getSelectedItem();
+        if (prod.getQuantidade() > 0) {
             iv.setProduto((Produto) cmbProdutos.getSelectedItem());
             iv.setVenda(venda);
-            iv.setQuantidade((int) spnQuantidade.getValue());
+            if (prod.getQuantidade() >= (int) spnQuantidade.getValue()) {
+                iv.setQuantidade((int) spnQuantidade.getValue());
+            } else {
+                JOptionPane.showMessageDialog(null, "Não há quantidades suficientes. " + prod.getQuantidade() + " Quantidades disponíveis.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
             iv.setValorUnitario(prod.getPreco());
+            if ((int) spnQuantidade.getValue() > 0 && (int) spnQuantidade.getValue()<= prod.getQuantidade()) {
+                venda.addItem(iv);
+            } else {
+                JOptionPane.showMessageDialog(null, "Escolha a quantidade.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Não há produto no estoque.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
 
-            venda.addItem(iv);
+        ItemVendaTableModel ivtm = (ItemVendaTableModel) tblItensVenda.getModel();
+        ivtm.setDados(venda.getItens());
 
-            ItemVendaTableModel ivtm = (ItemVendaTableModel) tblItensVenda.getModel();
-            ivtm.setDados(venda.getItens());
-
-            ftxtValorTotal.setValue(nfc.format(venda.calculaValorTotal()));
+        ftxtValorTotal.setValue(nfc.format(venda.calculaValorTotal()));
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
     private void ftxtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtDataActionPerformed
-      
+
     }//GEN-LAST:event_ftxtDataActionPerformed
 
     private void btnFinalizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarVendaActionPerformed
-         //Metodo para setar data salvar
+        //Metodo para setar data salvar
         String[] data = ftxtData.getText().split("/");
-        Calendar calendar = Calendar.getInstance(); 
-        calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1])-1, Integer.parseInt(data[0]));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[0]));
         Date dataVenda = calendar.getTime();
-        
+
         int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente finalizar a venda?");
-        if (opcao == 0) {           
-                venda.setCliente((Cliente)cmbClientes.getSelectedItem());
-                venda.setDataVenda(dataVenda);
-                venda.setValorTotal(venda.calculaValorTotal());                
-                if(venda.getValorTotal() != 0.0){
-                    try {
-                        vdao.inserirVenda(venda);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(this, "Erro ao inserir a venda.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        if (opcao == 0) {
+            venda.setCliente((Cliente) cmbClientes.getSelectedItem());
+            venda.setDataVenda(dataVenda);
+            venda.setValorTotal(venda.calculaValorTotal());
+            if (venda.getValorTotal() != 0.0) {
+                try {
+                    vdao.inserirVenda(venda);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao inserir a venda.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
-                    }
-                    JOptionPane.showMessageDialog(this, "Venda cadastrada com sucesso!");
                 }
-                else{
-                    JOptionPane.showMessageDialog(this, "Selecione os produtos da venda");
-                }
-       
+                JOptionPane.showMessageDialog(this, "Venda cadastrada com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione os produtos da venda");
+            }
+
             limpaVenda();
             venda = new Venda();
         }
@@ -466,18 +474,17 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         if (opcao == 0) {
             limpaVenda();
             venda = new Venda();
-        }         
+        }
     }//GEN-LAST:event_btnCancelarVendaActionPerformed
-   
-    private void limpaVenda(){
+
+    private void limpaVenda() {
         venda = null;
         ftxtValorTotal.setValue(null);
         tblItensVenda.setModel(new ItemVendaTableModel());
-        spnQuantidade.setValue(1);     
+        spnQuantidade.setValue(1);
     }
-  
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator JSeparator1;
     private javax.swing.JButton btnAdicionarProduto;
@@ -507,6 +514,5 @@ public class JVendas2 extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner spnQuantidade;
     private javax.swing.JTable tblItensVenda;
     // End of variables declaration//GEN-END:variables
-
 
 }

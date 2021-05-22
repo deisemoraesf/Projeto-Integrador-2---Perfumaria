@@ -367,7 +367,17 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1])-1, Integer.parseInt(data[0]));
         Date dataNasc = calendar.getTime();
         System.out.print(dataNasc);
-
+        
+        Cliente pesquisaCliente = cli.getClienteCpf(cpf);
+        if(pesquisaCliente != null){
+            JOptionPane.showMessageDialog(this, "Cliente já existe para este CPF.");
+            
+            Component comp = SwingUtilities.getRoot(this);
+            ((Window) comp).dispose();
+            
+            executeMostraTela();
+        }else{
+        
         Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
 
         cli.inserirCliente(cliente);
@@ -380,6 +390,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         ((Window) comp).dispose();
 
         executeMostraTela();
+        }
         
     }
     
