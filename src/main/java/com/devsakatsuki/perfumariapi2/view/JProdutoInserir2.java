@@ -1,4 +1,3 @@
-
 package com.devsakatsuki.perfumariapi2.view;
 
 import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
@@ -12,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class JProdutoInserir2 extends javax.swing.JFrame {
-    
+
     Locale br = new Locale("pt", "Brazil");
     NumberFormat nf = NumberFormat.getInstance(br);
 
@@ -22,17 +21,19 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
     public JProdutoInserir2() {
         initComponents();
         setLocationRelativeTo(null);
-        
+        checkVenda.setVisible(false);
         //Para campo Id ficar oculto quando for inserir cliente
-        if(ftxtId.getText().equals("")){
+        if (ftxtId.getText().equals("")) {
             lblId.setVisible(false);
             ftxtId.setVisible(false);
         }
     }
+
     public JProdutoInserir2(Produto p) {
         initComponents();
         setLocationRelativeTo(null);
-        
+        checkVenda.setVisible(false);
+
         ftxtId.setText(String.valueOf(p.getId()));
         ftxtCodigo.setText(String.valueOf(p.getCodigo()));
         txtNome.setText(p.getNome());
@@ -40,8 +41,20 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         cmbCategoria.setSelectedItem(p.getCategoria());
         cmbMarca.setSelectedItem(p.getMarca());
         ftxtQuantidade.setText(String.valueOf(p.getQuantidade()));
-        
-    }    
+
+    }
+
+    public JProdutoInserir2(String venda) {
+        initComponents();
+        setLocationRelativeTo(null);
+        checkVenda.setVisible(false);
+        checkVenda.setSelected(true);
+        //Para campo Id ficar oculto quando for inserir cliente
+        if (ftxtId.getText().equals("")) {
+            lblId.setVisible(false);
+            ftxtId.setVisible(false);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,6 +81,7 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         ftxtCodigo = new javax.swing.JFormattedTextField();
         lblId = new javax.swing.JLabel();
         ftxtId = new javax.swing.JTextField();
+        checkVenda = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Produto");
@@ -130,6 +144,8 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
 
         ftxtId.setEditable(false);
 
+        checkVenda.setText("jCheckBox1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,7 +182,10 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
                                     .addComponent(lblId))
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ftxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(ftxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                                        .addComponent(checkVenda))
                                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ftxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
@@ -174,15 +193,18 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
                         .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar)))
-                .addGap(0, 36, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblId)
-                    .addComponent(ftxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblId)
+                            .addComponent(ftxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(checkVenda))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ftxtCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,99 +241,101 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-    
-    if (ftxtCodigo.getText().equals("")){
-        JOptionPane.showMessageDialog(null,"O campo Código é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
-        return;
-    }    
-    
-    if (txtNome.getText().equals("")){
-        JOptionPane.showMessageDialog(null,"O campo Nome é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    if (ftxtPreco.getText().equals("")){
-        JOptionPane.showMessageDialog(null,"O campo Preço é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    if (ftxtQuantidade.getText().equals("")){
-        JOptionPane.showMessageDialog(null,"O campo Quantidade é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    try{
-    
-    ConexaoBD conexao = new ConexaoBD();
-    ProdutoDAO pro = new ProdutoDAO(conexao.abrirConexao());    
-    
-    if(!ftxtId.getText().isEmpty()){
-        int Id = Integer.valueOf(ftxtId.getText());
-        int codigo = Integer.valueOf(ftxtCodigo.getText());
-        String nome = txtNome.getText();
-        String formataValor=ftxtPreco.getText().replace(".", "");
-        double preco = Double.valueOf(formataValor.replaceAll(",", "."));
-        String categoria = cmbCategoria.getSelectedItem().toString(); 
-        String marca = cmbMarca.getSelectedItem().toString();
-        int quantidade = Integer.valueOf(ftxtQuantidade.getText());
 
-        Produto produto = new Produto(Id, codigo, nome, preco, categoria, marca, quantidade);
-
-        pro.AtualizaProduto(produto);
-
-        conexao.fecharConexao();
-
-        JOptionPane.showMessageDialog(this, "Produto Salvo com Sucesso!");
-
-        
-         //Fecha tela de editar/Salvar
-        Component comp = SwingUtilities.getRoot(this);
-        ((Window) comp).dispose();
-        
-        executeMostraTela();
-            
-    }else{
-        
-        int codigo = Integer.valueOf(ftxtCodigo.getText());
-        String nome = txtNome.getText();
-        String formataValor=ftxtPreco.getText().replace(".", "");
-        double preco = Double.valueOf(formataValor.replaceAll(",", "."));
-        String categoria = cmbCategoria.getSelectedItem().toString(); 
-        String marca = cmbMarca.getSelectedItem().toString();
-        int quantidade = Integer.valueOf(ftxtQuantidade.getText());
-        Produto produto = new Produto(codigo, nome, preco, categoria, marca, quantidade);
-        
-        Produto pesquisaCodigo = pro.getProdutoId(codigo);
-        
-        if(pesquisaCodigo.getId() !=0){
-            JOptionPane.showMessageDialog(this, "Produto já existe para este código.");
-            Component comp = SwingUtilities.getRoot(this);
-            ((Window) comp).dispose();
-
-            executeMostraTela();
-
-        }else{
-        
-        pro.inserirProduto(produto);
-
-        conexao.fecharConexao();
-
-        JOptionPane.showMessageDialog(this, "Produto Salvo com Sucesso!");
-        
-        Component comp = SwingUtilities.getRoot(this);
-        ((Window) comp).dispose();
-
-        executeMostraTela();
+        if (ftxtCodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo Código é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-    }
-    
-    }catch(Exception ex){
-        JOptionPane.showMessageDialog(null,"Erro ao salvar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
-    }
-    
-   
-    
-        
+
+        if (txtNome.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo Nome é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (ftxtPreco.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo Preço é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (ftxtQuantidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo Quantidade é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+
+            ConexaoBD conexao = new ConexaoBD();
+            ProdutoDAO pro = new ProdutoDAO(conexao.abrirConexao());
+
+            if (!ftxtId.getText().isEmpty()) {
+                int Id = Integer.valueOf(ftxtId.getText());
+                int codigo = Integer.valueOf(ftxtCodigo.getText());
+                String nome = txtNome.getText();
+                String formataValor = ftxtPreco.getText().replace(".", "");
+                double preco = Double.valueOf(formataValor.replaceAll(",", "."));
+                String categoria = cmbCategoria.getSelectedItem().toString();
+                String marca = cmbMarca.getSelectedItem().toString();
+                int quantidade = Integer.valueOf(ftxtQuantidade.getText());
+
+                Produto produto = new Produto(Id, codigo, nome, preco, categoria, marca, quantidade);
+
+                pro.AtualizaProduto(produto);
+
+                conexao.fecharConexao();
+
+                JOptionPane.showMessageDialog(this, "Produto Salvo com Sucesso!");
+
+                //Fecha tela de editar/Salvar
+                Component comp = SwingUtilities.getRoot(this);
+                ((Window) comp).dispose();
+
+                executeMostraTela();
+
+            } else {
+
+                int codigo = Integer.valueOf(ftxtCodigo.getText());
+                String nome = txtNome.getText();
+                String formataValor = ftxtPreco.getText().replace(".", "");
+                double preco = Double.valueOf(formataValor.replaceAll(",", "."));
+                String categoria = cmbCategoria.getSelectedItem().toString();
+                String marca = cmbMarca.getSelectedItem().toString();
+                int quantidade = Integer.valueOf(ftxtQuantidade.getText());
+                Produto produto = new Produto(codigo, nome, preco, categoria, marca, quantidade);
+
+                Produto pesquisaCodigo = pro.getProdutoId(codigo);
+
+                if (pesquisaCodigo.getId() != 0) {
+                    JOptionPane.showMessageDialog(this, "Produto já existe para este código.");
+                    
+                    Component comp = SwingUtilities.getRoot(this);
+                    ((Window) comp).dispose();
+
+                    if(!checkVenda.isSelected()){
+                        executeMostraTela();
+                    }
+
+                } else {
+
+                    pro.inserirProduto(produto);
+
+                    conexao.fecharConexao();
+
+                    JOptionPane.showMessageDialog(this, "Produto Salvo com Sucesso!");
+
+                    Component comp = SwingUtilities.getRoot(this);
+                    ((Window) comp).dispose();
+                    
+                    if (!checkVenda.isSelected()) {
+                        executeMostraTela();
+                    }
+                }
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -365,21 +389,23 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
             }
         });
     }
-    
+
     //Metodos para refresh da tela ao salvar ou editar
     private JProduto2 produtoPrincipal;
-    public void mostraTela(JProduto2 jc){
+
+    public void mostraTela(JProduto2 jc) {
         this.produtoPrincipal = jc;
         setVisible(true);
     }
-    
-    public void executeMostraTela(){
+
+    public void executeMostraTela() {
         produtoPrincipal.carregaTabela();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JCheckBox checkVenda;
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbMarca;
     private javax.swing.JFormattedTextField ftxtCodigo;

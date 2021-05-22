@@ -35,8 +35,9 @@ public class JBuscarProduto extends javax.swing.JFrame {
         btnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
-        btnNovo = new javax.swing.JButton();
+        btnSelecionarProduto = new javax.swing.JButton();
         cmbPesquisa = new javax.swing.JComboBox<>();
+        jbtnNovo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisar Produto");
@@ -59,11 +60,11 @@ public class JBuscarProduto extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblProduto);
 
-        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/novo.png"))); // NOI18N
-        btnNovo.setText("Novo Produto");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+        btnSelecionarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/novo.png"))); // NOI18N
+        btnSelecionarProduto.setText("Novo Produto");
+        btnSelecionarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
+                btnSelecionarProdutoActionPerformed(evt);
             }
         });
 
@@ -71,6 +72,14 @@ public class JBuscarProduto extends javax.swing.JFrame {
         cmbPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPesquisaActionPerformed(evt);
+            }
+        });
+
+        jbtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_file_16.png"))); // NOI18N
+        jbtnNovo.setText("Novo");
+        jbtnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnNovoActionPerformed(evt);
             }
         });
 
@@ -86,10 +95,12 @@ public class JBuscarProduto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisar)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(btnNovo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(298, 298, 298)
+                .addComponent(jbtnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(btnSelecionarProduto)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +113,9 @@ public class JBuscarProduto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(btnNovo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSelecionarProduto)
+                    .addComponent(jbtnNovo))
                 .addContainerGap())
         );
 
@@ -205,9 +218,14 @@ public class JBuscarProduto extends javax.swing.JFrame {
         }  
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+    private void btnSelecionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarProdutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnNovoActionPerformed
+    }//GEN-LAST:event_btnSelecionarProdutoActionPerformed
+
+    private void jbtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNovoActionPerformed
+        JProdutoInserir2 produtoInserir = new JProdutoInserir2("venda");
+        produtoInserir.setVisible(true);
+    }//GEN-LAST:event_jbtnNovoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,10 +282,11 @@ public class JBuscarProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnSelecionarProduto;
     private javax.swing.JComboBox<String> cmbPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtnNovo;
     private javax.swing.JTable tblProduto;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
