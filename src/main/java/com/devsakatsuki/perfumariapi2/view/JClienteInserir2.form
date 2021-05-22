@@ -47,20 +47,24 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="ftxtCPF" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
-                                      <Component id="txtId" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
-                                      <Component id="txtEndereco" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="ftxtTelefone" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                      <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtEmail" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
-                                  </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="rbtnFeminino" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="rbtnMasculino" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="cmbEstadoCivil" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="ftxtCPF" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="txtId" min="-2" pref="46" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="checkVenda" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="txtEndereco" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="ftxtTelefone" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                      <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtEmail" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -70,7 +74,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="63" max="32767" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -88,8 +92,9 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkVenda" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -295,6 +300,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ftxtTelefoneActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkVenda">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jCheckBox1"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

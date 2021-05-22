@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 public class JVendas2 extends javax.swing.JInternalFrame {
@@ -180,8 +181,8 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                     .addComponent(lblPreco)
                     .addComponent(ftxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pnlItensVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Itens da Venda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -300,21 +301,20 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
-                    .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblDadosVenda, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDadosVendaLayout.createSequentialGroup()
-                            .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblData)
-                                .addComponent(lblCliente))
-                            .addGap(18, 18, 18)
-                            .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnlDadosVendaLayout.createSequentialGroup()
-                                    .addComponent(ftxtData, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(pnlDadosVendaLayout.createSequentialGroup()
-                                    .addComponent(cmbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))))))
+                    .addComponent(lblDadosVenda)
+                    .addGroup(pnlDadosVendaLayout.createSequentialGroup()
+                        .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblData)
+                            .addComponent(lblCliente))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlDadosVendaLayout.createSequentialGroup()
+                                .addComponent(ftxtData, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnlDadosVendaLayout.createSequentialGroup()
+                                .addComponent(cmbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         pnlDadosVendaLayout.setVerticalGroup(
@@ -326,15 +326,13 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDadosVendaLayout.createSequentialGroup()
-                        .addComponent(lblCliente)
-                        .addGap(24, 24, 24))
+                    .addComponent(lblCliente)
                     .addGroup(pnlDadosVendaLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPesquisarCliente))
-                        .addGap(18, 18, Short.MAX_VALUE)))
+                            .addComponent(btnPesquisarCliente))))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ftxtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblData))
@@ -366,7 +364,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                         .addComponent(pnlDadosVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(pnlProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -411,7 +409,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Não há quantidades suficientes. " + prod.getQuantidade() + " Quantidades disponíveis.", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
             iv.setValorUnitario(prod.getPreco());
-            if ((int) spnQuantidade.getValue() > 0 && (int) spnQuantidade.getValue()<= prod.getQuantidade()) {
+            if ((int) spnQuantidade.getValue() > 0 && (int) spnQuantidade.getValue() <= prod.getQuantidade()) {
                 venda.addItem(iv);
             } else {
                 JOptionPane.showMessageDialog(null, "Escolha a quantidade.", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -461,7 +459,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         JBuscarCliente2 buscarCliente = new JBuscarCliente2();
-        buscarCliente.setVisible(true);
+        buscarCliente.mostraTela(this);
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
     private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
@@ -484,6 +482,10 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         spnQuantidade.setValue(1);
     }
 
+    public void setClienteBusca(Cliente cliente) {
+        cmbClientes.setSelectedItem(cliente);
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator JSeparator1;

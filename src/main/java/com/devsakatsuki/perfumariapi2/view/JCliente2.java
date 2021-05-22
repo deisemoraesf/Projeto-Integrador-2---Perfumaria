@@ -189,7 +189,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
             }
         } else if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Cpf")) {
             try {
-
+                if(txtPesquisa.getText().length()==1){    
                 Cliente c = cli.getClienteCpf(txtPesquisa.getText());
                 if (c.getCpf() != null) {
                     
@@ -203,6 +203,9 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                         c.getCpf(),
                         c.getTelefone()
                     });
+                }else{
+                    JOptionPane.showMessageDialog(null, "CPF deve der 11 digítos.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
                 }else{
                     JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 
@@ -242,7 +245,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
         // TODO add your handling code here:
-        int index = index = jTbCliente.getSelectedRow();
+        int index = jTbCliente.getSelectedRow();
         if (index == -1) {
             JOptionPane.showMessageDialog(null, "Selecione um cliente", "Aviso", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -264,7 +267,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
 
     private void jbtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarActionPerformed
         Cliente c = new Cliente();
-        int index = index = jTbCliente.getSelectedRow();
+        int index = jTbCliente.getSelectedRow();
         if (index == -1) {
             JOptionPane.showMessageDialog(null, "É preciso selecionar um cliente", "Aviso", JOptionPane.WARNING_MESSAGE);
         } else {

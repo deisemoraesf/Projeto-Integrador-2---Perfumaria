@@ -280,7 +280,18 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         String marca = cmbMarca.getSelectedItem().toString();
         int quantidade = Integer.valueOf(ftxtQuantidade.getText());
         Produto produto = new Produto(codigo, nome, preco, categoria, marca, quantidade);
+        
+        Produto pesquisaCodigo = pro.getProdutoId(codigo);
+        
+        if(pesquisaCodigo.getId() !=0){
+            JOptionPane.showMessageDialog(this, "Produto já existe para este código.");
+            Component comp = SwingUtilities.getRoot(this);
+            ((Window) comp).dispose();
 
+            executeMostraTela();
+
+        }else{
+        
         pro.inserirProduto(produto);
 
         conexao.fecharConexao();
@@ -291,6 +302,7 @@ public class JProdutoInserir2 extends javax.swing.JFrame {
         ((Window) comp).dispose();
 
         executeMostraTela();
+        }
     }
     
     }catch(Exception ex){

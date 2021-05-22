@@ -1,4 +1,3 @@
-
 package com.devsakatsuki.perfumariapi2.view;
 
 import com.devsakatsuki.perfumariapi2.dao.ClienteDAO;
@@ -12,7 +11,6 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-
 public class JClienteInserir2 extends javax.swing.JFrame {
 
     /**
@@ -21,39 +19,53 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     public JClienteInserir2() {
         initComponents();
         setLocationRelativeTo(null);
-        
+        checkVenda.setVisible(false);
+
         //Para campo Id ficar oculto quando for inserir cliente
-        if(txtId.getText().equals("")){
+        if (txtId.getText().equals("")) {
             lblId.setVisible(false);
             txtId.setVisible(false);
         }
-               
+
     }
-    
+
     //Construtor para receber edica
     public JClienteInserir2(Cliente c) {
         initComponents();
         setLocationRelativeTo(null);
-        
+        checkVenda.setVisible(false);
+
         txtId.setText(String.valueOf(c.getId()));
         txtNome.setText(c.getNome());
         ftxtCPF.setText(c.getCpf());
         txtEndereco.setText(c.getEndereco());
         ftxtTelefone.setText(c.getTelefone());
         txtEmail.setText(c.getEmail());
-        if(c.getSexo() != null){
-            if(c.getSexo().equals("Feminino")){
+        if (c.getSexo() != null) {
+            if (c.getSexo().equals("Feminino")) {
                 rbtnFeminino.setSelected(true);
-            }else{
+            } else {
                 rbtnMasculino.setSelected(true);
             }
         }
         cmbEstadoCivil.setSelectedItem(c.getEstadoCivil());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         ftxtDataNascimento.setText(dateFormat.format(c.getDataNascimento()));
-               
+
     }
 
+    public JClienteInserir2(String venda) {
+        initComponents();
+        setLocationRelativeTo(null);
+        checkVenda.setVisible(false);
+        checkVenda.setSelected(true);
+        //Para campo Id ficar oculto quando for inserir cliente
+        if (txtId.getText().equals("")) {
+            lblId.setVisible(false);
+            txtId.setVisible(false);
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,6 +98,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         ftxtTelefone = new javax.swing.JFormattedTextField();
+        checkVenda = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Cliente");
@@ -195,6 +208,8 @@ public class JClienteInserir2 extends javax.swing.JFrame {
             }
         });
 
+        checkVenda.setText("jCheckBox1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,22 +232,25 @@ public class JClienteInserir2 extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(ftxtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtEndereco)
-                                        .addComponent(ftxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtNome)
-                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(rbtnFeminino)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(rbtnMasculino))
-                                    .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(ftxtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(checkVenda))
+                                        .addComponent(txtEndereco)
+                                        .addComponent(ftxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtNome)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(ftxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalvar)
@@ -246,8 +264,9 @@ public class JClienteInserir2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblId)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkVenda))
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -295,109 +314,113 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbEstadoCivilActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-    if (txtNome.getText().equals("")){
-        JOptionPane.showMessageDialog(null,"O campo Nome é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    if (ftxtCPF.getText().equals("   .   .   -  ")){
-        JOptionPane.showMessageDialog(null,"O campo CPF é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    if (txtEndereco.getText().equals("")){
-        JOptionPane.showMessageDialog(null,"O campo Endereço é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    if (ftxtDataNascimento.getText().equals("  /  /    ")){
-        JOptionPane.showMessageDialog(null,"O campo Data de nascimento é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    try{
-    
-    ConexaoBD conexao = new ConexaoBD();
-    ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());    
-    
-    if(!txtId.getText().isEmpty()){
-        int Id = Integer.valueOf(txtId.getText());
-        String nome = txtNome.getText();
-        String cpf = ftxtCPF.getText().replace(".", "").replace("-", "");
-        String endereco = txtEndereco.getText();
-        String telefone = ftxtTelefone.getText().replace("-","");
-        String email = txtEmail.getText();
-        rbtnFeminino.setActionCommand("Feminino");
-        rbtnMasculino.setActionCommand("Masculino");
-        String sexo = btnGroupSexo.getSelection().getActionCommand();
-        String estadoCivil = cmbEstadoCivil.getSelectedItem().toString(); 
-        String[] data = ftxtDataNascimento.getText().split("/");
-        Calendar calendar = Calendar.getInstance(); 
-        calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1])-1, Integer.parseInt(data[0]));
-        Date dataNasc = calendar.getTime();
-        System.out.print(dataNasc);
-
-        Cliente cliente = new Cliente(Id, nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
-
-        cli.AtualizaCliente(cliente);
-
-        conexao.fecharConexao();
-
-        JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
-        
-        //Fecha tela de editar/Salvar
-        Component comp = SwingUtilities.getRoot(this);
-        ((Window) comp).dispose();
-        
-        executeMostraTela();
-            
-    }else{
-        
-        String nome = txtNome.getText();
-        String cpf = ftxtCPF.getText().replace(".", "").replace("-", "");
-        String endereco = txtEndereco.getText();
-        String telefone = ftxtTelefone.getText().replace("-","");
-        String email = txtEmail.getText();
-        rbtnFeminino.setActionCommand("Feminino");
-        rbtnMasculino.setActionCommand("Masculino");
-        String sexo = btnGroupSexo.getSelection().getActionCommand();
-        String estadoCivil = cmbEstadoCivil.getSelectedItem().toString(); 
-        String[] data = ftxtDataNascimento.getText().split("/");
-        Calendar calendar = Calendar.getInstance(); 
-        calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1])-1, Integer.parseInt(data[0]));
-        Date dataNasc = calendar.getTime();
-        System.out.print(dataNasc);
-        
-        Cliente pesquisaCliente = cli.getClienteCpf(cpf);
-        if(pesquisaCliente != null){
-            JOptionPane.showMessageDialog(this, "Cliente já existe para este CPF.");
-            
-            Component comp = SwingUtilities.getRoot(this);
-            ((Window) comp).dispose();
-            
-            executeMostraTela();
-        }else{
-        
-        Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
-
-        cli.inserirCliente(cliente);
-
-        conexao.fecharConexao();
-
-        JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
-        
-        Component comp = SwingUtilities.getRoot(this);
-        ((Window) comp).dispose();
-
-        executeMostraTela();
+        if (txtNome.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo Nome é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-        
-    }
-    
-    }catch(Exception ex){
-        JOptionPane.showMessageDialog(null,"Erro ao salvar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
-    }
-       
+
+        if (ftxtCPF.getText().equals("   .   .   -  ")) {
+            JOptionPane.showMessageDialog(null, "O campo CPF é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (txtEndereco.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo Endereço é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (ftxtDataNascimento.getText().equals("  /  /    ")) {
+            JOptionPane.showMessageDialog(null, "O campo Data de nascimento é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+
+            ConexaoBD conexao = new ConexaoBD();
+            ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
+
+            if (!txtId.getText().isEmpty()) {
+                int Id = Integer.valueOf(txtId.getText());
+                String nome = txtNome.getText();
+                String cpf = ftxtCPF.getText().replace(".", "").replace("-", "");
+                String endereco = txtEndereco.getText();
+                String telefone = ftxtTelefone.getText().replace("-", "");
+                String email = txtEmail.getText();
+                rbtnFeminino.setActionCommand("Feminino");
+                rbtnMasculino.setActionCommand("Masculino");
+                String sexo = btnGroupSexo.getSelection().getActionCommand();
+                String estadoCivil = cmbEstadoCivil.getSelectedItem().toString();
+                String[] data = ftxtDataNascimento.getText().split("/");
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[0]));
+                Date dataNasc = calendar.getTime();
+                System.out.print(dataNasc);
+
+                Cliente cliente = new Cliente(Id, nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
+
+                cli.AtualizaCliente(cliente);
+
+                conexao.fecharConexao();
+
+                JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
+
+                //Fecha tela de editar/Salvar
+                Component comp = SwingUtilities.getRoot(this);
+                ((Window) comp).dispose();
+
+                executeMostraTela();
+
+            } else {
+
+                String nome = txtNome.getText();
+                String cpf = ftxtCPF.getText().replace(".", "").replace("-", "");
+                String endereco = txtEndereco.getText();
+                String telefone = ftxtTelefone.getText().replace("-", "");
+                String email = txtEmail.getText();
+                rbtnFeminino.setActionCommand("Feminino");
+                rbtnMasculino.setActionCommand("Masculino");
+                String sexo = btnGroupSexo.getSelection().getActionCommand();
+                String estadoCivil = cmbEstadoCivil.getSelectedItem().toString();
+                String[] data = ftxtDataNascimento.getText().split("/");
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Integer.parseInt(data[2]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[0]));
+                Date dataNasc = calendar.getTime();
+                System.out.print(dataNasc);
+
+                Cliente pesquisaCliente = cli.getClienteCpf(cpf);
+                if (pesquisaCliente.getId() != 0) {
+                    JOptionPane.showMessageDialog(this, "Cliente já existe para este CPF.");
+
+                    Component comp = SwingUtilities.getRoot(this);
+                    ((Window) comp).dispose();
+
+                    if (!checkVenda.isSelected()) {
+                        executeMostraTela();
+                    }
+                } else {
+
+                    Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, sexo, estadoCivil, dataNasc);
+
+                    cli.inserirCliente(cliente);
+
+                    conexao.fecharConexao();
+
+                    JOptionPane.showMessageDialog(this, "Cliente Salvo com Sucesso!");
+
+                    Component comp = SwingUtilities.getRoot(this);
+                    ((Window) comp).dispose();
+
+                    if (!checkVenda.isSelected()) {
+                        executeMostraTela();
+                    }
+                }
+
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -431,7 +454,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         Component comp = SwingUtilities.getRoot(this);
         ((Window) comp).dispose();
-        
+
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
@@ -468,23 +491,25 @@ public class JClienteInserir2 extends javax.swing.JFrame {
             }
         });
     }
-    
+
     //Metodos para refresh da tela ao salvar ou editar
     private JCliente2 clientePrincipal;
-    public void mostraTela(JCliente2 jc){
+
+    public void mostraTela(JCliente2 jc) {
         this.clientePrincipal = jc;
         setVisible(true);
     }
-    
-    public void executeMostraTela(){
+
+    public void executeMostraTela() {
         clientePrincipal.carregaTabela();
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.ButtonGroup btnGroupSexo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JCheckBox checkVenda;
     private javax.swing.JComboBox<String> cmbEstadoCivil;
     private javax.swing.JFormattedTextField ftxtCPF;
     private javax.swing.JFormattedTextField ftxtDataNascimento;

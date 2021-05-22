@@ -3,15 +3,17 @@ package com.devsakatsuki.perfumariapi2.view;
 import com.devsakatsuki.perfumariapi2.dao.ClienteDAO;
 import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
 import com.devsakatsuki.perfumariapi2.model.Cliente;
+import java.awt.Component;
+import java.awt.Window;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-
 public class JBuscarCliente2 extends javax.swing.JFrame {
+
     ConexaoBD conexao = new ConexaoBD();
     ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
 
-    
     public JBuscarCliente2() {
         initComponents();
         setLocationRelativeTo(null);
@@ -30,8 +32,9 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
         jbtnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaCliente = new javax.swing.JTable();
-        jbtnNovo = new javax.swing.JButton();
         ComboPesquisa = new javax.swing.JComboBox<>();
+        btnSelecionarCliente = new javax.swing.JButton();
+        jbtnNovo1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisar Cliente");
@@ -54,12 +57,26 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TabelaCliente);
 
-        jbtnNovo.setText("Novo");
-
         ComboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF" }));
         ComboPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboPesquisaActionPerformed(evt);
+            }
+        });
+
+        btnSelecionarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/novo.png"))); // NOI18N
+        btnSelecionarCliente.setText("Selecionar cliente");
+        btnSelecionarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarClienteActionPerformed(evt);
+            }
+        });
+
+        jbtnNovo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_file_16.png"))); // NOI18N
+        jbtnNovo1.setText("Novo");
+        jbtnNovo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnNovo1ActionPerformed(evt);
             }
         });
 
@@ -76,9 +93,11 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
                 .addComponent(jbtnPesquisar)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(237, 237, 237)
-                .addComponent(jbtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(290, 290, 290)
+                .addComponent(jbtnNovo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSelecionarCliente)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,10 +107,12 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
                     .addComponent(ComboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnPesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jbtnNovo)
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSelecionarCliente)
+                    .addComponent(jbtnNovo1))
                 .addContainerGap())
         );
 
@@ -99,58 +120,97 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPesquisaActionPerformed
-        
+
     }//GEN-LAST:event_ComboPesquisaActionPerformed
 
     private void jbtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPesquisarActionPerformed
-        
-        if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Cpf")){
-            try{
-                
-            Cliente c = cli.getClienteCpf(txtPesquisa.getText());    
-                
-            DefaultTableModel tblClientes = (DefaultTableModel)TabelaCliente.getModel();
-        
-            tblClientes.setNumRows(0);
-            
-            tblClientes.addRow(new Object []{
-                c.getId(),
-                c.getNome(),
-                c.getCpf(),
-                c.getTelefone()
-            });
-            
-                
-            }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+
+        if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Cpf")) {
+            try {
+
+                Cliente c = cli.getClienteCpf(txtPesquisa.getText());
+                if (c.getId() != 0) {
+                    DefaultTableModel tblClientes = (DefaultTableModel) TabelaCliente.getModel();
+
+                    tblClientes.setNumRows(0);
+
+                    tblClientes.addRow(new Object[]{
+                        c.getId(),
+                        c.getNome(),
+                        c.getCpf(),
+                        c.getTelefone()
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+
+                }
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
-        }else if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Nome")){
-            try{
-                
-                          
-            DefaultTableModel tblClientes = (DefaultTableModel)TabelaCliente.getModel();
-        
-            tblClientes.setNumRows(0);
-            
-            for(Cliente c: cli.getClienteNome(txtPesquisa.getText())){
-                tblClientes.addRow(new Object []{
-                    c.getId(),
-                    c.getNome(),
-                    c.getCpf(),
-                    c.getTelefone()
-                });
+        } else if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Nome")) {
+            try {
+
+                if (cli.getClienteNome(txtPesquisa.getText()).size() > 0) {
+
+                    DefaultTableModel tblClientes = (DefaultTableModel) TabelaCliente.getModel();
+
+                    tblClientes.setNumRows(0);
+
+                    for (Cliente c : cli.getClienteNome(txtPesquisa.getText())) {
+                        tblClientes.addRow(new Object[]{
+                            c.getId(),
+                            c.getNome(),
+                            c.getCpf(),
+                            c.getTelefone()
+                        });
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
-                
-            }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
-            }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Escolha um filtro");
         }
-        
-        
+
+
     }//GEN-LAST:event_jbtnPesquisarActionPerformed
 
+    private void btnSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarClienteActionPerformed
+        int index = TabelaCliente.getSelectedRow();
+        
+        if (index == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione um cliente", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else {
+            
+            Cliente c = cli.getClientes().get(index);
+            
+            executeMostraTela(c);
+            
+            Component comp = SwingUtilities.getRoot(this);
+            ((Window) comp).dispose();
+
+        }
+    }//GEN-LAST:event_btnSelecionarClienteActionPerformed
+
+    private void jbtnNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNovo1ActionPerformed
+        JClienteInserir2 clienteInserir = new JClienteInserir2("venda");
+        clienteInserir.setVisible(true);
+    }//GEN-LAST:event_jbtnNovo1ActionPerformed
+
+    private JVendas2 venda;
+
+    public void mostraTela(JVendas2 jv) {
+        this.venda = jv;
+        setVisible(true);
+    }
+
+    public void executeMostraTela(Cliente cliente) {
+        venda.setClienteBusca(cliente);
+    }
     /**
      * @param args the command line arguments
      */
@@ -189,8 +249,9 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboPesquisa;
     private javax.swing.JTable TabelaCliente;
+    private javax.swing.JButton btnSelecionarCliente;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbtnNovo;
+    private javax.swing.JButton jbtnNovo1;
     private javax.swing.JButton jbtnPesquisar;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
