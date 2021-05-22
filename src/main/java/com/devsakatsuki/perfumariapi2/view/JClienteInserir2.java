@@ -344,7 +344,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         Component comp = SwingUtilities.getRoot(this);
         ((Window) comp).dispose();
         
-        
+        executeMostraTela();
             
     }else{
         
