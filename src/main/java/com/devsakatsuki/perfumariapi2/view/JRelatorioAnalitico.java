@@ -1,25 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.devsakatsuki.perfumariapi2.view;
 
 import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
 import com.devsakatsuki.perfumariapi2.dao.VendaDAO;
 import com.devsakatsuki.perfumariapi2.model.ItemVenda;
 import com.devsakatsuki.perfumariapi2.model.Venda;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author 55119
- */
+
 public class JRelatorioAnalitico extends javax.swing.JInternalFrame {
 
     ConexaoBD conexao = new ConexaoBD();
     VendaDAO ven = new VendaDAO(conexao.abrirConexao());
+    private final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
+    NumberFormat nfc = NumberFormat.getCurrencyInstance();
 
     /**
      * Creates new form JRelatorios
@@ -43,11 +39,11 @@ public class JRelatorioAnalitico extends javax.swing.JInternalFrame {
         for (Venda v : vendas) {
             tblAnalitico.addRow(new Object[]{
                 v.getId(),
-                v.getDataVenda(),
+                SDF.format(v.getDataVenda()),
                 v.getCliente().getNome(),
                 "",
                 "",
-                v.getValorTotal()
+                nfc.format(v.getValorTotal())
             });
             for (ItemVenda iv : v.getItens()) {
                 tblAnalitico.addRow(new Object[]{
@@ -61,7 +57,7 @@ public class JRelatorioAnalitico extends javax.swing.JInternalFrame {
             valorTotalVendas += v.getValorTotal();
         }
 
-        lblValor.setText(String.valueOf(valorTotalVendas));
+        lblValor.setText(String.valueOf(nfc.format(valorTotalVendas)));
 
     }
 
@@ -96,7 +92,7 @@ public class JRelatorioAnalitico extends javax.swing.JInternalFrame {
         ));
         jScrollAnalitico.setViewportView(TabelaAnalitico);
 
-        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTotal.setText("Total:");
 
         lblValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -105,26 +101,25 @@ public class JRelatorioAnalitico extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(279, 279, 279)
-                .addComponent(lblAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(371, 371, 371)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollAnalitico, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addComponent(jScrollAnalitico, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

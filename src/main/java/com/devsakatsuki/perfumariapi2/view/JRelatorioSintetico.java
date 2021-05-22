@@ -1,24 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.devsakatsuki.perfumariapi2.view;
 
 import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
 import com.devsakatsuki.perfumariapi2.dao.VendaDAO;
 import com.devsakatsuki.perfumariapi2.model.Venda;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author 55119
- */
+
 public class JRelatorioSintetico extends javax.swing.JInternalFrame {
     
     ConexaoBD conexao = new ConexaoBD();
     VendaDAO ven = new VendaDAO(conexao.abrirConexao());
+    private final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
+    NumberFormat nfc = NumberFormat.getCurrencyInstance();
 
     /**
      * Creates new form JRelatorios
@@ -35,21 +32,21 @@ public class JRelatorioSintetico extends javax.swing.JInternalFrame {
             TabelaSintetico.setVisible(true);
                         
         DefaultTableModel tblSintetico = (DefaultTableModel)TabelaSintetico.getModel();
-        
+               
         tblSintetico.setNumRows(0);
         
         double valorTotalVendas =0;
         for(Venda v: vendas){
             tblSintetico.addRow(new Object []{
                 v.getId(),
-                v.getDataVenda(),
+                SDF.format(v.getDataVenda()),
                 v.getCliente().getNome(),
-                v.getValorTotal()
+                nfc.format(v.getValorTotal())
             });
             valorTotalVendas +=v.getValorTotal();
         }
         
-        lblValor.setText(String.valueOf(valorTotalVendas));
+        lblValor.setText(String.valueOf(nfc.format(valorTotalVendas)));
             
         
     }
@@ -70,7 +67,7 @@ public class JRelatorioSintetico extends javax.swing.JInternalFrame {
         lblValor = new javax.swing.JLabel();
 
         setClosable(true);
-        setTitle("Relatórios");
+        setTitle("Relatório de Venda");
 
         lblSintetico.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblSintetico.setText("Relatório Sintético de Vendas");
@@ -80,12 +77,12 @@ public class JRelatorioSintetico extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Número", "Data da Venda", "Cliente", "Valor Total"
+                "Numero Venda", "Data da Venda", "Cliente", "Valor Total"
             }
         ));
         jScrollSintetico.setViewportView(TabelaSintetico);
 
-        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTotal.setText("Total:");
 
         lblValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -94,19 +91,18 @@ public class JRelatorioSintetico extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
             .addGroup(layout.createSequentialGroup()
                 .addGap(302, 302, 302)
                 .addComponent(lblSintetico, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(303, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollSintetico)
+                .addContainerGap(331, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollSintetico))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,7 +110,7 @@ public class JRelatorioSintetico extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblSintetico, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollSintetico, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                .addComponent(jScrollSintetico, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
