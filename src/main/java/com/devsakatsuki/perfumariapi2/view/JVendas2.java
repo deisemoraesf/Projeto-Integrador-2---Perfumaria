@@ -28,6 +28,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         
     Locale br = new Locale("pt", "Brazil");
     NumberFormat nf = NumberFormat.getInstance(br);
+    NumberFormat nfc = NumberFormat.getCurrencyInstance();
     
     
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -382,6 +383,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
             if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o item " + iv + "?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
                 venda.removeItem(iv);
                 ivtm.setDados(venda.getItens());
+                ftxtValorTotal.setValue(nfc.format(venda.calculaValorTotal()));
             }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha para remover.", "Alerta", JOptionPane.WARNING_MESSAGE);
@@ -412,7 +414,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
             ItemVendaTableModel ivtm = (ItemVendaTableModel) tblItensVenda.getModel();
             ivtm.setDados(venda.getItens());
 
-            ftxtValorTotal.setValue(venda.calculaValorTotal());
+            ftxtValorTotal.setValue(nfc.format(venda.calculaValorTotal()));
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
     private void ftxtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtDataActionPerformed
@@ -428,22 +430,25 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         
         int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente finalizar a venda?");
         if (opcao == 0) {           
-            venda.setCliente((Cliente)cmbClientes.getSelectedItem());
-            venda.setDataVenda(dataVenda);
-            venda.setValorTotal(venda.calculaValorTotal());
-            if(venda.getId() == 0){
-                try {
-                    vdao.inserirVenda(venda);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Erro ao inserir a venda.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                venda.setCliente((Cliente)cmbClientes.getSelectedItem());
+                venda.setDataVenda(dataVenda);
+                venda.setValorTotal(venda.calculaValorTotal());                
+                if(venda.getValorTotal() != 0.0){
+                    try {
+                        vdao.inserirVenda(venda);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(this, "Erro ao inserir a venda.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
+                    }
+                    JOptionPane.showMessageDialog(this, "Venda cadastrada com sucesso!");
                 }
-                JOptionPane.showMessageDialog(this, "Venda salva com Sucesso!");
-            }
+                else{
+                    JOptionPane.showMessageDialog(this, "Selecione os produtos da venda");
+                }
+       
             limpaVenda();
             venda = new Venda();
         }
-  
     }//GEN-LAST:event_btnFinalizarVendaActionPerformed
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
@@ -466,7 +471,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
    
     private void limpaVenda(){
         venda = null;
-        ftxtValorTotal.setValue(new Double (0));
+        ftxtValorTotal.setValue(null);
         tblItensVenda.setModel(new ItemVendaTableModel());
         spnQuantidade.setValue(1);     
     }

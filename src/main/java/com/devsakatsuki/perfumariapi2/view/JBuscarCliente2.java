@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.devsakatsuki.perfumariapi2.view;
 
 import com.devsakatsuki.perfumariapi2.dao.ClienteDAO;
@@ -11,18 +6,15 @@ import com.devsakatsuki.perfumariapi2.model.Cliente;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author 55119
- */
+
 public class JBuscarCliente2 extends javax.swing.JFrame {
     ConexaoBD conexao = new ConexaoBD();
     ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
-    /**
-     * Creates new form JBuscarCliente2
-     */
+
+    
     public JBuscarCliente2() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -42,6 +34,7 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
         ComboPesquisa = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pesquisar Cliente");
 
         jbtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.png"))); // NOI18N
         jbtnPesquisar.setText("Pesquisar");
@@ -106,11 +99,11 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPesquisaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_ComboPesquisaActionPerformed
 
     private void jbtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPesquisarActionPerformed
-        // TODO add your handling code here:
+        
         if(ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Cpf")){
             try{
                 
@@ -154,6 +147,8 @@ public class JBuscarCliente2 extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(this, "Escolha um filtro");
         }
+        
+        
     }//GEN-LAST:event_jbtnPesquisarActionPerformed
 
     /**

@@ -310,6 +310,11 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         return;
     }
     
+    if (ftxtDataNascimento.getText().equals("  /  /    ")){
+        JOptionPane.showMessageDialog(null,"O campo Data de nascimento é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
     try{
     
     ConexaoBD conexao = new ConexaoBD();

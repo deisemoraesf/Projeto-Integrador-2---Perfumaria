@@ -156,8 +156,6 @@ public class JProduto2 extends javax.swing.JInternalFrame {
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
         JProdutoInserir2 jpi = new JProdutoInserir2();
         jpi.mostraTela(this);
-        
-        
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed

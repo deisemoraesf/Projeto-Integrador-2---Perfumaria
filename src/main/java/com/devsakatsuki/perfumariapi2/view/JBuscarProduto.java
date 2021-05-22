@@ -1,28 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.devsakatsuki.perfumariapi2.view;
 
-import com.devsakatsuki.perfumariapi2.dao.ClienteDAO;
 import com.devsakatsuki.perfumariapi2.dao.ConexaoBD;
-import com.devsakatsuki.perfumariapi2.model.Cliente;
+import com.devsakatsuki.perfumariapi2.dao.ProdutoDAO;
+import com.devsakatsuki.perfumariapi2.model.Produto;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author 55119
- */
+
 public class JBuscarProduto extends javax.swing.JFrame {
     ConexaoBD conexao = new ConexaoBD();
-    ClienteDAO cli = new ClienteDAO(conexao.abrirConexao());
-    /**
-     * Creates new form JBuscarCliente2
-     */
+    ProdutoDAO pro = new ProdutoDAO(conexao.abrirConexao());
+    
+    Locale br = new Locale("pt", "Brazil");
+    NumberFormat nf = NumberFormat.getInstance(br);
+
+    
     public JBuscarProduto() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -42,6 +39,7 @@ public class JBuscarProduto extends javax.swing.JFrame {
         cmbPesquisa = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pesquisar Produto");
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.png"))); // NOI18N
         btnPesquisar.setText("Pesquisar");
@@ -61,7 +59,13 @@ public class JBuscarProduto extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblProduto);
 
-        btnNovo.setText("Novo");
+        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/novo.png"))); // NOI18N
+        btnNovo.setText("Novo Produto");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         cmbPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Código" }));
         cmbPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -83,8 +87,8 @@ public class JBuscarProduto extends javax.swing.JFrame {
                 .addComponent(btnPesquisar)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(237, 237, 237)
-                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163)
+                .addComponent(btnNovo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -110,51 +114,100 @@ public class JBuscarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbPesquisaActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // TODO add your handling code here:
-        if(cmbPesquisa.getSelectedItem().toString().equalsIgnoreCase("Cpf")){
+        if(cmbPesquisa.getSelectedItem().toString().equalsIgnoreCase("Código")){
             try{
                 
-            Cliente c = cli.getClienteCpf(txtPesquisa.getText());    
+            Produto p = pro.getProdutoId(Integer.valueOf(txtPesquisa.getText()));    
                 
-            DefaultTableModel tblClientes = (DefaultTableModel)tblProduto.getModel();
+            DefaultTableModel tblProduto = (DefaultTableModel)this.tblProduto.getModel();
         
-            tblClientes.setNumRows(0);
+            tblProduto.setNumRows(0);
             
-            tblClientes.addRow(new Object []{
-                c.getId(),
-                c.getNome(),
-                c.getCpf(),
-                c.getTelefone()
+            tblProduto.addRow(new Object []{
+                p.getCodigo(),
+                p.getNome(),
+                nf.format(p.getPreco()),
+                p.getQuantidade(),
+                p.getCategoria(),
+                p.getMarca()
             });
             
                 
             }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
-        }else if(cmbPesquisa.getSelectedItem().toString().equalsIgnoreCase("Nome")){
+        } else if(cmbPesquisa.getSelectedItem().toString().equalsIgnoreCase("Nome")){
             try{
-                
                           
-            DefaultTableModel tblClientes = (DefaultTableModel)tblProduto.getModel();
+            DefaultTableModel tblProduto = (DefaultTableModel)this.tblProduto.getModel();
         
-            tblClientes.setNumRows(0);
+            tblProduto.setNumRows(0);
             
-            for(Cliente c: cli.getClienteNome(txtPesquisa.getText())){
-                tblClientes.addRow(new Object []{
-                    c.getId(),
-                    c.getNome(),
-                    c.getCpf(),
-                    c.getTelefone()
+            for(Produto p: pro.getProdutoNome(txtPesquisa.getText())){
+                tblProduto.addRow(new Object []{
+                    p.getCodigo(),
+                    p.getNome(),
+                    nf.format(p.getPreco()),
+                    p.getQuantidade(),
+                    p.getCategoria(),
+                    p.getMarca()
                 });
             }
                 
             }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+            }
+        }else if(cmbPesquisa.getSelectedItem().toString().equalsIgnoreCase("Marca")){
+            try{
+                                     
+            DefaultTableModel tblProduto = (DefaultTableModel)this.tblProduto.getModel();
+        
+            tblProduto.setNumRows(0);
+            
+            for(Produto p: pro.getProdutoMarca(txtPesquisa.getText())){
+                tblProduto.addRow(new Object []{
+                   p.getCodigo(),
+                    p.getNome(),
+                    nf.format(p.getPreco()),
+                    p.getQuantidade(),
+                    p.getCategoria(),
+                    p.getMarca()
+                });
+            }
+                
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+            }
+        }else if(cmbPesquisa.getSelectedItem().toString().equalsIgnoreCase("Categoria")){
+            try{
+                                     
+            DefaultTableModel tblProduto = (DefaultTableModel)this.tblProduto.getModel();
+        
+            tblProduto.setNumRows(0);
+            
+            for(Produto p: pro.getProdutoCategoria(txtPesquisa.getText())){
+                tblProduto.addRow(new Object []{
+                   p.getCodigo(),
+                    p.getNome(),
+                    nf.format(p.getPreco()),
+                    p.getQuantidade(),
+                    p.getCategoria(),
+                    p.getMarca()
+                });
+            }
+                
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Erro ao consultar produto", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
         }else{
-            JOptionPane.showMessageDialog(this, "Escolha um filtro");
-        }
+            txtPesquisa.setText("Todos");
+            carregaTabela();
+        }  
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNovoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,6 +243,24 @@ public class JBuscarProduto extends javax.swing.JFrame {
                 new JBuscarProduto().setVisible(true);
             }
         });
+    }
+    
+    public void carregaTabela(){
+           
+        DefaultTableModel tblClientes = (DefaultTableModel)tblProduto.getModel();
+        
+        tblClientes.setNumRows(0);
+        
+        for(Produto p: pro.getProdutos()){
+            tblClientes.addRow(new Object []{
+                p.getCodigo(),
+                p.getNome(),
+                nf.format(p.getPreco()),
+                p.getQuantidade(),
+                p.getCategoria(),
+                p.getMarca()
+            });
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

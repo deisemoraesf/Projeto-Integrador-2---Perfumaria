@@ -196,7 +196,7 @@ public class Principal extends javax.swing.JFrame {
     private void jmiVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiVendaActionPerformed
         desktop.removeAll();
         desktop.repaint();        
-        Venda venda = new Venda();
+        //Venda venda = new Venda();
         JVendas2 jvendas;
         form.posicionarInternalFrame(jvendas = new JVendas2(), desktop); 
     }//GEN-LAST:event_jmiVendaActionPerformed

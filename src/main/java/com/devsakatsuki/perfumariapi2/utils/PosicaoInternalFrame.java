@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class PosicaoInternalFrame {
     
-    //Centralizar jFrame na tela
+    //Centralizar jInternalFrame com um JPanel
     public void posicionarInternalFrame(JInternalFrame janela, JPanel desktop){
         int lDesk = desktop.getWidth();
         int aDesk = desktop.getHeight();
@@ -19,3 +19,6 @@ public class PosicaoInternalFrame {
     }
     
 }
+
+
+
