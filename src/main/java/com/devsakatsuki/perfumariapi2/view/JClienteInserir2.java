@@ -360,7 +360,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
         }
 
         if (ftxtDataNascimento.getText().equals("  /  /    ")) {
-            JOptionPane.showMessageDialog(null, "O campo Data de nascimento é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo Data de Nascimento é obrigatório", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -419,7 +419,7 @@ public class JClienteInserir2 extends javax.swing.JFrame {
 
                 Cliente pesquisaCliente = cli.getClienteCpf(cpf);
                 if (pesquisaCliente.getId() != 0) {
-                    JOptionPane.showMessageDialog(this, "Cliente já existe para este CPF.");
+                    JOptionPane.showMessageDialog(this, "Existe um cliente cadastrado com esse CPF.");
 
                     Component comp = SwingUtilities.getRoot(this);
                     ((Window) comp).dispose();

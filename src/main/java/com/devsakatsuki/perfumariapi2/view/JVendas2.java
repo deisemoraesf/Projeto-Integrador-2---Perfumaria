@@ -35,10 +35,6 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         initComponents();
 
         ftxtData.setText(dateFormat.format(new Date(System.currentTimeMillis())));
-
-        for (Produto prod : pdao.getProdutos()) {
-            cmbProdutos.addItem(prod);
-        }
     }
 
     /**
@@ -59,8 +55,9 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         lblProdutos = new javax.swing.JLabel();
         spnQuantidade = new javax.swing.JSpinner();
         btnPesquisarProduto = new javax.swing.JButton();
-        cmbProdutos = new javax.swing.JComboBox<>();
         ftxtPreco = new javax.swing.JFormattedTextField();
+        jLabel8 = new javax.swing.JLabel();
+        ftxtProduto = new javax.swing.JFormattedTextField();
         pnlItensVenda = new javax.swing.JPanel();
         lblTotal = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -115,14 +112,12 @@ public class JVendas2 extends javax.swing.JInternalFrame {
             }
         });
 
-        cmbProdutos.setToolTipText("");
-        cmbProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbProdutosActionPerformed(evt);
-            }
-        });
-
         ftxtPreco.setEditable(false);
+
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setText("*");
+
+        ftxtProduto.setEditable(false);
 
         javax.swing.GroupLayout pnlProdutosLayout = new javax.swing.GroupLayout(pnlProdutos);
         pnlProdutos.setLayout(pnlProdutosLayout);
@@ -132,28 +127,31 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnlProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JSeparator1)
-                    .addComponent(lblProdutos)
                     .addGroup(pnlProdutosLayout.createSequentialGroup()
                         .addGroup(pnlProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlProdutosLayout.createSequentialGroup()
                                 .addComponent(lblProduto)
-                                .addGap(37, 37, 37))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProdutosLayout.createSequentialGroup()
-                                .addComponent(lblQuantidade)
-                                .addGap(18, 18, 18)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblProdutos)
+                            .addComponent(lblPreco)
+                            .addComponent(lblQuantidade))
+                        .addGap(18, 18, 18)
                         .addGroup(pnlProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlProdutosLayout.createSequentialGroup()
-                                .addComponent(cmbProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ftxtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnPesquisarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(ftxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblPreco))
+                            .addGroup(pnlProdutosLayout.createSequentialGroup()
+                                .addGroup(pnlProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ftxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProdutosLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnlProdutosLayout.createSequentialGroup()
+                .addGap(205, 205, 205)
                 .addComponent(btnAdicionarProduto)
-                .addGap(197, 197, 197))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlProdutosLayout.setVerticalGroup(
             pnlProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,21 +161,23 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(pnlProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblProduto)
-                    .addComponent(btnPesquisarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbProdutos))
-                .addGap(16, 16, 16)
+                .addGroup(pnlProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblProduto)
+                        .addComponent(jLabel8)
+                        .addComponent(ftxtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPesquisarProduto))
+                .addGap(28, 28, 28)
                 .addGroup(pnlProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblQuantidade)
-                    .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(spnQuantidade)
+                    .addComponent(lblQuantidade))
+                .addGap(22, 22, 22)
                 .addGroup(pnlProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPreco)
-                    .addComponent(ftxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addComponent(ftxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPreco))
+                .addGap(26, 26, 26)
                 .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         pnlItensVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Itens da Venda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -295,22 +295,19 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
+                    .addComponent(lblDadosVenda)
+                    .addGroup(pnlDadosVendaLayout.createSequentialGroup()
+                        .addComponent(lblData)
+                        .addGap(18, 18, 18)
+                        .addComponent(ftxtData, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlDadosVendaLayout.createSequentialGroup()
                         .addComponent(lblCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
-                        .addComponent(ftxtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ftxtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-                    .addGroup(pnlDadosVendaLayout.createSequentialGroup()
-                        .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDadosVenda)
-                            .addGroup(pnlDadosVendaLayout.createSequentialGroup()
-                                .addComponent(lblData)
-                                .addGap(18, 18, 18)
-                                .addComponent(ftxtData, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlDadosVendaLayout.setVerticalGroup(
@@ -318,21 +315,25 @@ public class JVendas2 extends javax.swing.JInternalFrame {
             .addGroup(pnlDadosVendaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblDadosVenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDadosVendaLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(btnPesquisarCliente))
-                    .addGroup(pnlDadosVendaLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCliente)
-                            .addComponent(jLabel7)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDadosVendaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ftxtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlDadosVendaLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblCliente)
+                                    .addComponent(jLabel7))
+                                .addGap(31, 31, 31))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDadosVendaLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ftxtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25))))
+                    .addGroup(pnlDadosVendaLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(btnPesquisarCliente)
+                        .addGap(25, 25, 25)))
                 .addGroup(pnlDadosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblData)
                     .addComponent(ftxtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -344,11 +345,11 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
-                    .addComponent(pnlDadosVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addComponent(pnlDadosVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(pnlItensVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
@@ -364,7 +365,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
                         .addComponent(pnlDadosVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(pnlProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -387,17 +388,12 @@ public class JVendas2 extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnRemoverItensActionPerformed
 
-    private void cmbProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProdutosActionPerformed
-        Produto prod = (Produto) cmbProdutos.getSelectedItem();
-        ftxtPreco.setText(String.valueOf(prod.getPreco()));
-    }//GEN-LAST:event_cmbProdutosActionPerformed
-
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
         ItemVenda iv = new ItemVenda();
 
-        Produto prod = (Produto) cmbProdutos.getSelectedItem();
+        Produto prod = (Produto) ftxtProduto.getValue();        
         if (prod.getQuantidade() > 0) {
-            iv.setProduto((Produto) cmbProdutos.getSelectedItem());
+            iv.setProduto((Produto) ftxtProduto.getValue());
             iv.setVenda(venda);
             if (prod.getQuantidade() >= (int) spnQuantidade.getValue()) {
                 iv.setQuantidade((int) spnQuantidade.getValue());
@@ -436,6 +432,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
             venda.setCliente(venda.getCliente());
             venda.setDataVenda(dataVenda);
             venda.setValorTotal(venda.calculaValorTotal());
+            
             if (venda.getValorTotal() != 0.0) {
                 try {
                     vdao.inserirVenda(venda);
@@ -459,7 +456,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
     private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
-        JBuscarProduto buscarProduto = new JBuscarProduto();
+        JBuscarProduto buscarProduto = new JBuscarProduto(this);
         buscarProduto.setVisible(true);
     }//GEN-LAST:event_btnPesquisarProdutoActionPerformed
 
@@ -477,11 +474,18 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         tblItensVenda.setModel(new ItemVendaTableModel());
         spnQuantidade.setValue(1);
         ftxtCliente.setValue(null);
+        ftxtProduto.setValue(null);
+        ftxtPreco.setValue(null);
     }
 
     public void setClienteText(Cliente cliente) {
         ftxtCliente.setValue(cliente);
-    }  
+    }
+    
+    public void setProdutoText(Produto produto){
+        ftxtProduto.setValue(produto);
+        ftxtPreco.setValue(nfc.format(produto.getPreco()));
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -492,12 +496,13 @@ public class JVendas2 extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPesquisarCliente;
     private javax.swing.JButton btnPesquisarProduto;
     private javax.swing.JButton btnRemoverItens;
-    private javax.swing.JComboBox<Object> cmbProdutos;
     private javax.swing.JFormattedTextField ftxtCliente;
     private javax.swing.JFormattedTextField ftxtData;
     private javax.swing.JFormattedTextField ftxtPreco;
+    private javax.swing.JFormattedTextField ftxtProduto;
     private javax.swing.JFormattedTextField ftxtValorTotal;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblCliente;

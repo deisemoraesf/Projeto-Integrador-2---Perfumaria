@@ -64,7 +64,15 @@ public class JCliente2 extends javax.swing.JInternalFrame {
             new String [] {
                 "Código", "Nome", "CPF", "Telefone"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTbCliente);
 
         jbtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_file_16.png"))); // NOI18N
@@ -187,7 +195,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
-        } else if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Cpf")) {
+        } else if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("CPF")) {
             try {
                 if(txtPesquisa.getText().length()==1){    
                 Cliente c = cli.getClienteCpf(txtPesquisa.getText());
@@ -204,7 +212,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                         c.getTelefone()
                     });
                 }else{
-                    JOptionPane.showMessageDialog(null, "CPF deve der 11 digítos.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "CPF deve ter 11 dígitos.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 }
                 }else{
                     JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -249,7 +257,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         if (index == -1) {
             JOptionPane.showMessageDialog(null, "Selecione um cliente", "Aviso", JOptionPane.WARNING_MESSAGE);
         } else {
-            int escolha = JOptionPane.showConfirmDialog(this, "Deseja excluir cliente?", "Excluir Cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int escolha = JOptionPane.showConfirmDialog(this, "Deseja excluir o cliente?", "Excluir Cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             System.out.print(escolha);
 
             if (escolha == 0) {
@@ -269,7 +277,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         Cliente c = new Cliente();
         int index = jTbCliente.getSelectedRow();
         if (index == -1) {
-            JOptionPane.showMessageDialog(null, "É preciso selecionar um cliente", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione um cliente", "Aviso", JOptionPane.WARNING_MESSAGE);
         } else {
             c = cli.getClientes().get(index);
             JClienteInserir2 clienteInserir = new JClienteInserir2(c);
