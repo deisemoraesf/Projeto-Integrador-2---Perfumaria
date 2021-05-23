@@ -133,7 +133,7 @@ public class ProdutoDAO {
             produto.setPreco(rs.getDouble("preco"));
             produto.setCategoria(rs.getString("categoria"));
             produto.setMarca(rs.getString("marca"));
-            produto.setId(rs.getInt("quantidade"));
+            produto.setQuantidade(rs.getInt("quantidade"));
             
             }
         
