@@ -445,7 +445,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
             return;
         }
  
-            venda.setCliente(venda.getCliente());
+            venda.setCliente((Cliente) ftxtCliente.getValue());
             venda.setDataVenda(dataVenda);
             venda.setValorTotal(venda.calculaValorTotal());
 
@@ -485,7 +485,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         ftxtValorTotal.setValue(null);
         tblItensVenda.setModel(new ItemVendaTableModel());
         spnQuantidade.setValue(1);
-        ftxtCliente.setValue(null);
+        //ftxtCliente.setValue(null);
         ftxtProduto.setValue(null);
         ftxtPreco.setValue(null);
     }
