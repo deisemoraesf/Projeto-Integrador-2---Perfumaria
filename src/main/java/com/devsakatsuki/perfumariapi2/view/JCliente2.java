@@ -161,7 +161,7 @@ public class JCliente2 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPesquisaActionPerformed
-        
+
     }//GEN-LAST:event_ComboPesquisaActionPerformed
 
     private void jbtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNovoActionPerformed
@@ -170,14 +170,14 @@ public class JCliente2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbtnNovoActionPerformed
 
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
-        
+
     }//GEN-LAST:event_txtPesquisaActionPerformed
 
     private void jbtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPesquisarActionPerformed
         if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Código")) {
             try {
                 Cliente c = cli.getClienteId(Integer.valueOf(txtPesquisa.getText()));
-                if (c.getId() != 0) {                    
+                if (c.getId() != 0) {
                     DefaultTableModel tblClientes = (DefaultTableModel) jTbCliente.getModel();
 
                     tblClientes.setNumRows(0);
@@ -188,35 +188,36 @@ public class JCliente2 extends javax.swing.JInternalFrame {
                         c.getCpf(),
                         c.getTelefone()
                     });
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
-                
+
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
             }
         } else if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("CPF")) {
             try {
-                if(txtPesquisa.getText().length()==1){    
-                Cliente c = cli.getClienteCpf(txtPesquisa.getText());
-                if (c.getCpf() != null) {
-                    
-                    DefaultTableModel tblClientes = (DefaultTableModel) jTbCliente.getModel();
+                if (txtPesquisa.getText().length() == 11) {
+                    Cliente c = cli.getClienteCpf(txtPesquisa.getText());
+                    if (c.getCpf() != null) {
 
-                    tblClientes.setNumRows(0);
+                        DefaultTableModel tblClientes = (DefaultTableModel) jTbCliente.getModel();
 
-                    tblClientes.addRow(new Object[]{
-                        c.getId(),
-                        c.getNome(),
-                        c.getCpf(),
-                        c.getTelefone()
-                    });
-                }else{
+                        tblClientes.setNumRows(0);
+
+                        tblClientes.addRow(new Object[]{
+                            c.getId(),
+                            c.getNome(),
+                            c.getCpf(),
+                            c.getTelefone()
+                        });
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+
+                    }
+                } else {
                     JOptionPane.showMessageDialog(null, "CPF deve ter 11 dígitos.", "Aviso", JOptionPane.WARNING_MESSAGE);
-                }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Sua pesquisa não retornou cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
-                
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao consultar cliente", ex.getMessage(), JOptionPane.WARNING_MESSAGE);
@@ -224,9 +225,9 @@ public class JCliente2 extends javax.swing.JInternalFrame {
         } else if (ComboPesquisa.getSelectedItem().toString().equalsIgnoreCase("Nome")) {
             try {
                 if (cli.getClienteNome(txtPesquisa.getText()).size() > 0) {
-                    if(txtPesquisa.getText().equals("")){
-                        JOptionPane.showMessageDialog(null, "Informe o nome do cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);                         
-                    }else{
+                    if (txtPesquisa.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Informe o nome do cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    } else {
                         DefaultTableModel tblClientes = (DefaultTableModel) jTbCliente.getModel();
                         tblClientes.setNumRows(0);
 
