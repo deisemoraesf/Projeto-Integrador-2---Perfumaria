@@ -42,7 +42,7 @@ public class JBuscarProduto extends javax.swing.JDialog {
         tblProdutos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Busca cliente");
+        setTitle("Busca produto");
 
         pnFiltro.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 

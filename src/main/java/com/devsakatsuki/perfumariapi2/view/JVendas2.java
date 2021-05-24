@@ -450,12 +450,18 @@ public class JVendas2 extends javax.swing.JInternalFrame {
             venda.setValorTotal(venda.calculaValorTotal());
 
             try {
-                vdao.inserirVenda(venda);
+                if(venda.getItens().size()>0){
+                    vdao.inserirVenda(venda);
+                    JOptionPane.showMessageDialog(this, "Venda cadastrada com sucesso!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Adicione o(s) produto(s) na venda", "Aviso", JOptionPane.WARNING_MESSAGE);
+
+                }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao inserir a venda.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-                JOptionPane.showMessageDialog(this, "Venda cadastrada com sucesso!");
+                
              
             limpaVenda();
             venda = new Venda();
@@ -485,7 +491,7 @@ public class JVendas2 extends javax.swing.JInternalFrame {
         ftxtValorTotal.setValue(null);
         tblItensVenda.setModel(new ItemVendaTableModel());
         spnQuantidade.setValue(1);
-        //ftxtCliente.setValue(null);
+        ftxtCliente.setValue(null);
         ftxtProduto.setValue(null);
         ftxtPreco.setValue(null);
     }
