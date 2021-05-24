@@ -390,7 +390,12 @@ public class JVendas2 extends javax.swing.JInternalFrame {
 
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
         ItemVenda iv = new ItemVenda();
-
+        
+        if (ftxtProduto.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Selecione um produto", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         Produto prod = (Produto) ftxtProduto.getValue();        
         if (prod.getQuantidade() > 0) {
             iv.setProduto((Produto) ftxtProduto.getValue());
@@ -429,22 +434,29 @@ public class JVendas2 extends javax.swing.JInternalFrame {
 
         int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente finalizar a venda?");
         if (opcao == 0) {
+        
+        if (ftxtCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Obrigatório selecionar um cliente", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if (ftxtValorTotal.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Adicione o(s) produto(s) na venda", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+ 
             venda.setCliente(venda.getCliente());
             venda.setDataVenda(dataVenda);
             venda.setValorTotal(venda.calculaValorTotal());
-            
-            if (venda.getValorTotal() != 0.0) {
-                try {
-                    vdao.inserirVenda(venda);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Erro ao inserir a venda.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                JOptionPane.showMessageDialog(this, "Venda cadastrada com sucesso!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Selecione os produtos da venda");
-            }
 
+            try {
+                vdao.inserirVenda(venda);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao inserir a venda.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+                JOptionPane.showMessageDialog(this, "Venda cadastrada com sucesso!");
+             
             limpaVenda();
             venda = new Venda();
         }
