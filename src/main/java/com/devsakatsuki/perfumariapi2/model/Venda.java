@@ -12,16 +12,14 @@ public class Venda {
     private Date dataVenda;
     private Double valorTotal;
     private List<ItemVenda> itens;
-    private List<ItemVenda> itensRemover;
+    
 
     public Venda() {
         this.id = 0;
         this.cliente = new Cliente();
         this.dataVenda = new Date();
         this.valorTotal = 0.0;
-        this.itens = new ArrayList<>();
-        this.itensRemover = new ArrayList<>();
-        
+        this.itens = new ArrayList<>();   
     }
 
     public Venda(int id) {
@@ -30,7 +28,7 @@ public class Venda {
         this.dataVenda = new Date();
         this.valorTotal = 0.0;
         this.itens = new ArrayList<>();
-        this.itensRemover = new ArrayList<>();
+      
     }
 
     public Venda(int id, Cliente cliente, Date dataVenda, Double valorTotal) {
@@ -91,11 +89,7 @@ public class Venda {
     public void setItens(List<ItemVenda> itens) {
         this.itens = itens;
     }
-    
 
-    public List<ItemVenda> getItensRemover() {
-        return itensRemover;
-    }
     
     public void addItem(ItemVenda itemVenda) {
         itens.add(itemVenda);
@@ -103,9 +97,6 @@ public class Venda {
 
     public void removeItem(ItemVenda itemVenda) {
         itens.remove(itemVenda);
-        if (itemVenda.getId()!= 0) {
-            itensRemover.add(itemVenda);
-        }
     }
 
     public int quantidadeItens() {
